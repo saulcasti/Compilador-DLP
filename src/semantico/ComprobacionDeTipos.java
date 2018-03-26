@@ -95,10 +95,13 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 		
 		//class Return
 		public Object visit(Return node, Object param) {
-			if(param != null && node.getExpresion().getTipo() !=null)
+			super.visit(node, param);
+			if(param != null && node.getExpresion() !=null)
 				predicado(node.getExpresion().getTipo().getClass() != param.getClass(), "Return - Retorno de la función no es igual que retorno de cuerpo",node.getStart());
-
-			
+			else if(node.getExpresion() == null)
+				predicado(param == null, "Return - No debe tener expresión en funciones void",node.getStart());
+			else
+				predicado(node.getExpresion().getTipo() == param, "Return - Retorno de la función no es igual que retorno de cuerpo",node.getStart());
 			return null;
 		}
 	/*
