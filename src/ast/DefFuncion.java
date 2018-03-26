@@ -1,0 +1,71 @@
+/**
+ * @generated VGen 1.3.3
+ */
+
+package ast;
+
+import java.util.*;
+import visitor.*;
+
+//	defFuncion:definicion -> nombre:String  parametros:defParametro*  retorno:retorno  cuerpo:cuerpo
+
+public class DefFuncion extends AbstractDefinicion {
+
+	public DefFuncion(String nombre, List<DefParametro> parametros, Retorno retorno, Cuerpo cuerpo) {
+		this.nombre = nombre;
+		this.parametros = parametros;
+		this.retorno = retorno;
+		this.cuerpo = cuerpo;
+
+		searchForPositions(parametros, retorno, cuerpo);	// Obtener linea/columna a partir de los hijos
+	}
+
+	@SuppressWarnings("unchecked")
+	public DefFuncion(Object nombre, Object parametros, Object retorno, Object cuerpo) {
+		this.nombre = (nombre instanceof Token) ? ((Token)nombre).getLexeme() : (String) nombre;
+		this.parametros = (List<DefParametro>) parametros;
+		this.retorno = (Retorno) retorno;
+		this.cuerpo = (Cuerpo) cuerpo;
+
+		searchForPositions(nombre, parametros, retorno, cuerpo);	// Obtener linea/columna a partir de los hijos
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public List<DefParametro> getParametros() {
+		return parametros;
+	}
+	public void setParametros(List<DefParametro> parametros) {
+		this.parametros = parametros;
+	}
+
+	public Retorno getRetorno() {
+		return retorno;
+	}
+	public void setRetorno(Retorno retorno) {
+		this.retorno = retorno;
+	}
+
+	public Cuerpo getCuerpo() {
+		return cuerpo;
+	}
+	public void setCuerpo(Cuerpo cuerpo) {
+		this.cuerpo = cuerpo;
+	}
+
+	@Override
+	public Object accept(Visitor v, Object param) { 
+		return v.visit(this, param);
+	}
+
+	private String nombre;
+	private List<DefParametro> parametros;
+	private Retorno retorno;
+	private Cuerpo cuerpo;
+}
+
