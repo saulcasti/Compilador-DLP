@@ -18,16 +18,61 @@ NOTA: Es posible que el alumno deba adaptar ligeramente la sintaxis del lenguaje
 con la del lenguaje que le corresponde.
 */
 
-//f(a:[10] int) {	// Los parámetros deben de ser tipos primitivos
-//	return 25;	// El return no debe tener expresión en funciones void
-//}
+struct Persona {
+	edad:int;
+	meses:[12] int;
+};
 
-h():int {
-	return 5.6;	// Tipo de retorno no coincide
-}
+var juan:Persona;
+var anton:Persona;
+
 
 j(a:int, b:float):float {
 	h(2);	// Numero de argumentos incorrecto
 	return; // Debe haber un valor de retorno
 }
+
+main() {
+	var i:int;
+	var f:float;
+	var v:[10]int;
+
+	if(2.5) { }	// La condicion debe ser de tipo entero
+	if (i) { }
+	
+	while(juan) { }	// La condicion debe ser de tipo entero
+	while (i) {}
+	
+	juan = anton; // Valor de la izquierda debe ser simple
+
+	read juan;	// Debe ser un tipo simple
+	read 35;	// Debe ser modificable
+	read i;
+	
+	print juan; // Debe ser tipo simple
+	print f / 2.5;
+	
+	j(12, 12.5);
+	j(12, 12); // Tipo de los parámetros no coincide
+	j(12);		// Número de argumentos no coincide
+	j(12, 12.5, 4); // Número de argumentos no coincide
+	
+	print main();	// No tiene tipo de retorno
+	print j(12, 12.5);
+	print j(12, 12); // Tipo de los parámetros no coincide
+	print j(12);		// Número de argumentos no coincide
+	print j(12, 12.5, 4); // Número de argumentos no coincide
+
+	print juan + anton;	// Deben ser tipos simples
+	print 2.5 * 2;		// Deben ser del mismo tipo
+	print i - 2;
+
+	print 2.5 && f;	// Deben ser tipo entero
+	print 2 || i;
+	
+	print juan > anton;	// Deben ser tipos simples
+	
+	
+}
+
 

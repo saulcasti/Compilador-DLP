@@ -75,9 +75,7 @@ public class Identificacion extends DefaultVisitor {
 	public Object visit(Invocacion node, Object param) {
 		DefFuncion definicion = funciones.get(node.getNombre());
 		predicado(definicion != null,"Funcion no definida: " + node.getNombre(), node.getStart());
-		if(definicion != null)
-			predicado(definicion.getParametros().size() == node.getArgumentos().size(),"Error. Parametros de función incorrectos " + node.getNombre(), node.getStart());
-
+		
 		node.setDefFuncion(definicion); // Enlazar referencia con definición
 
 		return super.visit(node, param);
@@ -87,9 +85,6 @@ public class Identificacion extends DefaultVisitor {
 	public Object visit(LlamadaFuncionSentencia node, Object param) {
 		DefFuncion definicion = funciones.get(node.getNombre());
 		predicado(definicion != null,"Funcion no definida: " + node.getNombre(), node.getStart());
-		if(definicion != null)
-			predicado(definicion.getParametros().size() == node.getArgumentos().size(),"Error. Parametros de función incorrectos " + node.getNombre(), node.getStart());
-		
 
 		node.setDefFuncion(definicion); // Enlazar referencia con definición
 		return super.visit(node, param);

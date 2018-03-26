@@ -1,5 +1,7 @@
 package semantico;
 
+import java.util.List;
+
 import ast.*;
 import main.*;
 import visitor.*;
@@ -13,15 +15,17 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 	// class Asigna { Expresion left; Expresion right; }
 		public Object visit(Asigna node, Object param) {
 			super.visit(node, param);
-			predicado(mismoTipo(node.getLeft(), node.getRight()), "Asignación - Los operandos deben ser del mismo tipo", node.getStart());
-			predicado(node.getLeft().isModificable(), "Asignación - Se requiere expresión modificable", node.getLeft().getStart());
+			predicado(mismoTipo(node.getLeft(), node.getRight()), "Error. Asignación - Los operandos deben ser del mismo tipo", node.getStart());
+			predicado(node.getLeft().isModificable(), "Error. Asignación - Se requiere expresión modificable", node.getLeft().getStart());
+			predicado(node.getLeft().getTipo().getClass() != IdentType.class, "Error. Asignación - El valor de la izquierda debe ser simple", node.getLeft().getStart());
+			
 			return null;
 		}
 
 		// class ExpresionBinaria { Expresion left; String operador; Expresion right; }
 		public Object visit(ExpresionBinaria node, Object param) {
 			super.visit(node, param);
-			predicado(mismoTipo(node.getLeft(), node.getRight()), "Expresion binaria - Los operandos deben ser del mismo tipo", node.getStart());
+			predicado(mismoTipo(node.getLeft(), node.getRight()), "Error. Expresion binaria - Los operandos deben ser del mismo tipo", node.getStart());
 
 			node.setTipo(node.getLeft().getTipo());
 			node.setModificable(false);
@@ -35,7 +39,7 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 			node.setTipo(node.getDefinicion().getTipo());
 			node.setModificable(true);
 
-			if(param != null) {
+			if(param != null && node.getTipo().getClass() == IdentType.class) {
 				IdentType struct= (IdentType) node.getTipo();
 				DefEstructura defS= struct.getDefinicion();
 
@@ -44,7 +48,7 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 					if(dC.getNombre().equals((String)param)) {
 						i= true;
 					}
-				}predicado(i,"Estructura - El campo al que se hace referencia no existe en la estructura " 
+				}predicado(i,"Error. Estructura - El campo al que se hace referencia no existe en la estructura " 
 						+ defS.getNombre(), node.getStart());
 			}
 
@@ -77,11 +81,11 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 			super.visit(node, param);
 
 			predicado(node.getPosicion().getTipo().getClass() == IntType.class, 
-					"Variable array - la posición se indica mediante un entero",node.getStart());
+					"Error. Variable array - la posición se indica mediante un entero",node.getStart());
 			
 			if(node.getPosicion().getTipo().getClass() == IntType.class )
 				predicado(node.getIdentificacion().getTipo().getClass() == ArrayType.class, 
-						"Variable array - el tipo de la variable debe ser array",node.getStart());
+						"Error. Variable array - el tipo de la variable debe ser array",node.getStart());
 
 
 			node.setTipo((Tipo)node.getIdentificacion().getTipo());
@@ -105,7 +109,7 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 		//class Retorno { Tipo tipo; }
 		public Object visit(Retorno node, Object param) {
 			if(node.getTipo() != null) {
-				predicado(node.getTipo().getClass() != IdentType.class, "Retorno - No es de tipo simple",node.getStart());
+				predicado(node.getTipo().getClass() != IdentType.class, "Error. Retorno - No es de tipo simple",node.getStart());
 
 			}
 			return null;
@@ -123,13 +127,16 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 			super.visit(node, param);
 			if(param != null && node.getExpresion() !=null)
 				predicado(node.getExpresion().getTipo().getClass() == param.getClass(), 
-					"Return - Retorno de la función no es igual que retorno de cuerpo",node.getStart());
+					"Error. Return - Retorno de la función no es igual que retorno de cuerpo",node.getStart());
 			else if(param == null )
 				predicado(node.getExpresion() == null, 
-					"Return - No debe tener expresión en funciones void",node.getStart());
-			else if(node.getExpresion() == null)
+					"Error. Return - No debe tener expresión en funciones void",node.getStart());
+			else if(node.getExpresion() == null) 
 				predicado(param ==null, 
-					"Return - Debería retornar algún valor",node.getStart());
+					"Error. Return - Debería retornar algún valor",node.getStart());
+			
+
+			
 			return null;
 		}
 		
@@ -138,13 +145,13 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 			super.visit(node, param);
 			
 			predicado(node.getTipo().getClass() !=  IdentType.class && node.getExpresion().getClass() !=  IdentType.class, 
-					"Cast - Solo se puede hacer cast de los tipos simples",node.getStart());
+					"Error. Cast - Solo se puede hacer cast de los tipos simples",node.getStart());
 			
 			predicado(node.getExpresion().getTipo().getClass() !=  IdentType.class, 
-					"Cast - Solo se puede hacer cast a expresiones de tipo simple",node.getStart());
+					"Error. Cast - Solo se puede hacer cast a expresiones de tipo simple",node.getStart());
 			
 			predicado(node.getTipo().getClass() !=  node.getExpresion().getTipo().getClass(), 
-					"Cast - Los tipos del cast y la expresión deben ser distintos",node.getStart());
+					"Error. Cast - Los tipos del cast y la expresión deben ser distintos",node.getStart());
 			
 			
 			return null;
@@ -155,7 +162,7 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 			super.visit(node, node.getNombre());
 //			node.getExpresion().accept(this, node.getNombre());
 			predicado(node.getExpresion().getTipo().getClass() ==  IdentType.class, 
-					"Navegación - La expresión de comienzo de navegación debe ser tipo struct",node.getStart());
+					"Error. Navegación - La expresión de comienzo de navegación debe ser tipo struct",node.getStart());
 			
 			
 			return null;
@@ -166,17 +173,139 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 		public Object visit(DefParametro node, Object param) {
 			super.visit(node, param);
 			predicado(node.getTipo().getClass() !=  ArrayType.class, 
-					"Definición de función - Los parametros han de ser de tipos simples",node.getStart());
+					"Error. Definición de función - Los parametros han de ser de tipos simples",node.getStart());
 			return null;
 		}
 		
-		
-	/*
-	 * Poner aquí los visit necesarios.
-	 * Si se ha usado VGen solo hay que copiarlos de la clase 'visitor/_PlantillaParaVisitors.txt'.
-	 */
+		//	class While { Expresion condicion;  List<Sentencia> cierto; }
+		public Object visit(While node, Object param) {
+			super.visit(node, param);
+			predicado(node.getCondicion().getTipo().getClass() == IntType.class, 
+					"Error. Condición en while - La condición debe de ser de tipo entero",node.getStart());
 
-	// public Object visit(Programa prog, Object param) {
+			return null;
+		}
+
+		//	class If { Expresion condicion;  List<Sentencia> cierto; }
+		public Object visit(If node, Object param) {
+			super.visit(node, param);
+			predicado(node.getCondicion().getTipo().getClass() == IntType.class, 
+					"Error. Condición en if - La condición debe de ser de tipo entero",node.getStart());
+
+			return null;
+		}
+
+		//	class IfElse { Expresion condicion;  List<Sentencia> cierto;  List<Sentencia> falso; }
+		public Object visit(IfElse node, Object param) {
+			predicado(node.getCondicion().getTipo().getClass() == IntType.class, 
+					"Error. Condición en if/else - La condición debe de ser de tipo entero",node.getStart());
+
+			return null;
+		}
+
+		//	class Read { Expresion expresion; }
+		public Object visit(Read node, Object param) {
+			super.visit(node, param);
+
+			predicado(node.getExpresion().getTipo().getClass() != IdentType.class, 
+					"Error. Read - La expresión debe ser de tipo simple",node.getStart());
+			predicado(node.getExpresion().isModificable(), 
+					"Error. Read - La expresión debe ser modificable",node.getStart());
+
+			return null;
+		}
+
+		//		class Print { Expresion expresion; }
+		public Object visit(Print node, Object param) {
+			super.visit(node, param);
+			predicado(node.getExpresion().getTipo() != null, 
+					"Error. Print - La expresión debe devolver algo",node.getStart());
+			if(node.getExpresion().getTipo() != null)
+				predicado(node.getExpresion().getTipo().getClass() != IdentType.class, 
+				"Error. Print - La expresión debe ser de tipo simple",node.getStart());
+
+			return null;
+		}
+
+		//	class Println { Expresion expresion; }
+		public Object visit(Println node, Object param) {
+			super.visit(node, param);
+
+			predicado(node.getExpresion().getTipo() != null, 
+					"Error. Print - La expresión debe devolver algo",node.getStart());
+			if(node.getExpresion().getTipo() != null)
+				predicado(node.getExpresion().getTipo().getClass() != IdentType.class, 
+				"Error. Println - La expresión debe ser de tipo simple",node.getStart());
+
+			return null;
+		}
+
+		//	class Printsp { Expresion expresion; }
+		public Object visit(Printsp node, Object param) {
+			super.visit(node, param);
+
+			predicado(node.getExpresion().getTipo() != null, 
+					"Error. Print - La expresión debe devolver algo",node.getStart());
+			if(node.getExpresion().getTipo() != null)
+				predicado(node.getExpresion().getTipo().getClass() != IdentType.class, 
+				"Error. Printsp - La expresión debe ser de tipo simple",node.getStart());
+
+			return null;
+		}
+
+
+		//	class Invocacion { String nombre;  List<Expresion> argumentos; }
+		public Object visit(Invocacion node, Object param) {
+			super.visit(node, param);
+
+			node.setTipo(node.getDefFuncion().getRetorno().getTipo());
+
+			List<DefParametro> parametros = node.getDefFuncion().getParametros();
+			if(parametros.size() != node.getArgumentos().size()) {
+				predicado(parametros.size() == node.getArgumentos().size(), 
+						"Error. Invocación - El número de argumentos es incorrecto",node.getStart());
+			}
+			else {
+				boolean parametrosOK=true;
+				for(int i=0; i<parametros.size();i++) {
+					if(parametros.get(i).getTipo().getClass() != node.getArgumentos().get(i).getTipo().getClass())
+						parametrosOK = false;
+				}
+				predicado(parametrosOK, 
+						"Error. Invocación - El tipo de algún argumento es incorrecto",node.getStart());
+
+			}
+			return null;
+		}
+
+		//	class LlamadaFuncionSentencia { String nombre;  List<Expresion> argumentos; }
+		public Object visit(LlamadaFuncionSentencia node, Object param) {
+			super.visit(node, param);
+			if(node.getDefFuncion() !=null) {
+				List<DefParametro> parametros = node.getDefFuncion().getParametros();
+				if(parametros.size() != node.getArgumentos().size()) {
+					predicado(parametros.size() == node.getArgumentos().size(), 
+							"Error. Invocación Sentencia - El número de argumentos es incorrecto",node.getStart());
+				}
+				else {
+					boolean parametrosOK=true;
+					for(int i=0; i<parametros.size();i++) {
+						if(parametros.get(i).getTipo().getClass() != node.getArgumentos().get(i).getTipo().getClass())
+							parametrosOK = false;
+					}
+					predicado(parametrosOK, 
+							"Error. Invocación Sentencia - El tipo de algún argumento es incorrecto",node.getStart());
+
+				}}
+			return null;
+		}
+
+		/*
+		 * Poner aquí los visit necesarios.
+		 * Si se ha usado VGen solo hay que copiarlos de la clase 'visitor/_PlantillaParaVisitors.txt'.
+		 */
+
+		// public Object visit(Programa prog, Object param) {
 	// ...
 	// }
 
