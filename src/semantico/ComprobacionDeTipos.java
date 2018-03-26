@@ -27,6 +27,16 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 			super.visit(node, param);
 			predicado(mismoTipo(node.getLeft(), node.getRight()), "Error. Expresion binaria - Los operandos deben ser del mismo tipo", node.getStart());
 
+			if(node.getOperador() == "AND" || node.getOperador() == "OR" 
+					|| node.getOperador() == "IGUAL" || node.getOperador() == "MAYORIGUAL"
+					|| node.getOperador() == "DISTINTO" || node.getOperador() == "MENORIGUAL") {
+				
+			predicado(mismoTipo(node.getLeft(), node.getRight()) && node.getLeft().getTipo().getClass() == IntType.class, 
+						"Error. Expresión Binaria - Boolean debe de ser de tipo entero",node.getStart());
+
+				
+			}
+			
 			node.setTipo(node.getLeft().getTipo());
 			node.setModificable(false);
 			return null;
