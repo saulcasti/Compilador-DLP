@@ -10,7 +10,6 @@ import visitor.*;
 public class Identificacion extends DefaultVisitor {
 
 	private GestorErrores gestorErrores;
-//	private Map<String, DefVariable> variables = new HashMap<String, DefVariable>();
 	private Map<String, DefFuncion> funciones = new HashMap<String, DefFuncion>();
 	private ContextMap<String, DefVariable> variables = new ContextMap<String, DefVariable>();
 	private Map<String, DefEstructura> estructuras = new HashMap<String, DefEstructura>();
@@ -35,6 +34,8 @@ public class Identificacion extends DefaultVisitor {
 		DefVariable definicion = variables.getFromTop(node.getNombre());
 		predicado(definicion != null,"Variable no definida: " + node.getNombre(), node.getStart());
 		node.setDefinicion(definicion); // Enlazar referencia con definición
+		
+		
 		
 		return super.visit(node, param);
 	}

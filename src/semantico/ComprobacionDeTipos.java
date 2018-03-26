@@ -30,10 +30,25 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 
 		// class Variable { String nombre; }
 		public Object visit(Variable node, Object param) {
-			super.visit(node, param);
+			super.visit(node, param); // ¿Hace falta?
+			
 			node.setTipo(node.getDefinicion().getTipo());
 			node.setModificable(true);
-			return node.getTipo();
+
+			if(param != null) {
+				IdentType struct= (IdentType) node.getTipo();
+				DefEstructura defS= struct.getDefinicion();
+
+				boolean i=false;
+				for(DefCampo dC :defS.getDefcampo()) {
+					if(dC.getNombre().equals((String)param)) {
+						i= true;
+					}
+				}predicado(i,"Estructura - El campo al que se hace referencia no existe en la estructura " 
+						+ defS.getNombre(), node.getStart());
+			}
+
+			return null;
 		}
 
 		// class LiteralInt { String valor; }
@@ -59,7 +74,17 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 		
 		//	class VarArray { Expresion identificacion;  Expresion posicion; }
 		public Object visit(VarArray node, Object param) {
-			node.setTipo((Tipo)node.getIdentificacion().getTipo().accept(this, param));
+			super.visit(node, param);
+
+			predicado(node.getPosicion().getTipo().getClass() == IntType.class, 
+					"Variable array - la posición se indica mediante un entero",node.getStart());
+			
+			if(node.getPosicion().getTipo().getClass() == IntType.class )
+				predicado(node.getIdentificacion().getTipo().getClass() == ArrayType.class, 
+						"Variable array - el tipo de la variable debe ser array",node.getStart());
+
+
+			node.setTipo((Tipo)node.getIdentificacion().getTipo());
 			node.setModificable(true);
 			return null;
 		}
@@ -78,9 +103,9 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 		}
 
 		// class Retorno
-		public Object visit(Retorno retorno, Object param) {
-			if(retorno.getTipo() != null) {
-				predicado(retorno.getTipo().getClass() != IdentType.class, "Retorno - No es de tipo simple",retorno.getStart());
+		public Object visit(Retorno node, Object param) {
+			if(node.getTipo() != null) {
+				predicado(node.getTipo().getClass() != IdentType.class, "Retorno - No es de tipo simple",node.getStart());
 
 			}
 			return null;
@@ -97,13 +122,47 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 		public Object visit(Return node, Object param) {
 			super.visit(node, param);
 			if(param != null && node.getExpresion() !=null)
-				predicado(node.getExpresion().getTipo().getClass() != param.getClass(), "Return - Retorno de la función no es igual que retorno de cuerpo",node.getStart());
+				predicado(node.getExpresion().getTipo().getClass() != param.getClass(), 
+					"Return - Retorno de la función no es igual que retorno de cuerpo",node.getStart());
 			else if(node.getExpresion() == null)
-				predicado(param == null, "Return - No debe tener expresión en funciones void",node.getStart());
+				predicado(param == null, 
+					"Return - No debe tener expresión en funciones void",node.getStart());
 			else
-				predicado(node.getExpresion().getTipo() == param, "Return - Retorno de la función no es igual que retorno de cuerpo",node.getStart());
+				predicado(node.getExpresion().getTipo() == param, 
+					"Return - Retorno de la función no es igual que retorno de cuerpo",node.getStart());
 			return null;
 		}
+		
+		//class Cast { Tipo tipo;  Expresion expresion; }
+		public Object visit(Cast node, Object param) {
+			super.visit(node, param);
+			
+			predicado(node.getTipo().getClass() !=  IdentType.class && node.getExpresion().getClass() !=  IdentType.class, 
+					"Cast - Solo se puede hacer cast de los tipos simples",node.getStart());
+			
+			predicado(node.getExpresion().getTipo().getClass() !=  IdentType.class, 
+					"Cast - Solo se puede hacer cast a expresiones de tipo simple",node.getStart());
+			
+			predicado(node.getTipo().getClass() !=  node.getExpresion().getTipo().getClass(), 
+					"Cast - Los tipos del cast y la expresión deben ser distintos",node.getStart());
+			
+			
+			return null;
+		}
+		
+		//class Navega { Expresion expresion;  String nombre; }
+		public Object visit(Navega node, Object param) {
+			super.visit(node, node.getNombre());
+//			node.getExpresion().accept(this, node.getNombre());
+			predicado(node.getExpresion().getTipo().getClass() ==  IdentType.class, 
+					"Navegación - La expresión de comienzo de navegación debe ser tipo struct",node.getStart());
+			
+			
+			return null;
+		}
+		
+		
+		
 	/*
 	 * Poner aquí los visit necesarios.
 	 * Si se ha usado VGen solo hay que copiarlos de la clase 'visitor/_PlantillaParaVisitors.txt'.
