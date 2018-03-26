@@ -89,7 +89,7 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 			return null;
 		}
 		
-		// class ArrayType
+		//	class ArrayType { LiteralInt dimension;  Tipo tipo; }
 		public Object visit(ArrayType node, Object param) {
 			
 			return node.getTipo();
@@ -102,7 +102,7 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 			return null;
 		}
 
-		// class Retorno
+		//class Retorno { Tipo tipo; }
 		public Object visit(Retorno node, Object param) {
 			if(node.getTipo() != null) {
 				predicado(node.getTipo().getClass() != IdentType.class, "Retorno - No es de tipo simple",node.getStart());
@@ -112,28 +112,28 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 		}
 		
 		
-		// class Cuerpo
+		//	class Cuerpo { List<DefVariable> defvariable;  List<Sentencia> sentencia; }
 		public Object visit (Cuerpo node, Object param) {
 			super.visit(node, param);
 			return null;
 		}
 		
-		//class Return
+		//	class Return { Expresion expresion; }
 		public Object visit(Return node, Object param) {
 			super.visit(node, param);
 			if(param != null && node.getExpresion() !=null)
-				predicado(node.getExpresion().getTipo().getClass() != param.getClass(), 
+				predicado(node.getExpresion().getTipo().getClass() == param.getClass(), 
 					"Return - Retorno de la función no es igual que retorno de cuerpo",node.getStart());
-			else if(node.getExpresion() == null)
-				predicado(param == null, 
+			else if(param == null )
+				predicado(node.getExpresion() == null, 
 					"Return - No debe tener expresión en funciones void",node.getStart());
-			else
-				predicado(node.getExpresion().getTipo() == param, 
-					"Return - Retorno de la función no es igual que retorno de cuerpo",node.getStart());
+			else if(node.getExpresion() == null)
+				predicado(param ==null, 
+					"Return - Debería retornar algún valor",node.getStart());
 			return null;
 		}
 		
-		//class Cast { Tipo tipo;  Expresion expresion; }
+		//	class Cast { Tipo tipo;  Expresion expresion; }
 		public Object visit(Cast node, Object param) {
 			super.visit(node, param);
 			
@@ -161,6 +161,14 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 			return null;
 		}
 		
+		
+		//	class DefParametro { String nombre;  Tipo tipo; }
+		public Object visit(DefParametro node, Object param) {
+			super.visit(node, param);
+			predicado(node.getTipo().getClass() !=  ArrayType.class, 
+					"Definición de función - Los parametros han de ser de tipos simples",node.getStart());
+			return null;
+		}
 		
 		
 	/*

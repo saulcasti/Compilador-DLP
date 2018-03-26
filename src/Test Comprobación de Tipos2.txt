@@ -18,16 +18,16 @@ NOTA: Es posible que el alumno deba adaptar ligeramente la sintaxis del lenguaje
 con la del lenguaje que le corresponde.
 */
 
-struct Persona {
-	edad:int;
-	meses:[12] int;
-};
+//f(a:[10] int) {	// Los parámetros deben de ser tipos primitivos
+//	return 25;	// El return no debe tener expresión en funciones void
+//}
 
-var juan:Persona;
+h():int {
+	return 5.6;	// Tipo de retorno no coincide
+}
 
-main() {
-	
-	print juan.nombre; // Campo no definido
-	
+j(a:int, b:float):float {
+	h(2);	// Numero de argumentos incorrecto
+	return; // Debe haber un valor de retorno
 }
 
