@@ -62,6 +62,7 @@ public class Identificacion extends DefaultVisitor {
 		return super.visit(node, param);
 	}
 	
+	//	class DefParametro { String nombre;  Tipo tipo; }
 	public Object visit(DefParametro node, Object param) {
 		node.getTipo().accept(this, param); // No es necesario realmente
 		
