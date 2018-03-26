@@ -13,7 +13,17 @@ En este repositorio se guarda el proyecto final de la asignatura de Diseño de L
 
 ### Características del lenguaje
 
+#### Aspectos léxicos
 
+	• Deberá permitir constantes literales de tipo entero y real. Los literales de tipo real, además de una parte entera, deben tener obligatoriamente algún digito decimal.
+	• Deberá permitir constantes de tipo carácter (se usarán comillas simples). Se debe admitir la secuencia de escape ‘\n’ para representar al carácter de salto de línea.
+	• El lenguaje debe tener los comentarios de C/C++: /**/ y //.
+
+   ##### Tipos simples o primitivos
+   
+	• Entero, float y char/byte (estos dos últimos son sinónimos; se debe elegir uno de los dos nombres)
+
+. . .
 
 ### Detalles Especificos
 
