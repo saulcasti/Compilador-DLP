@@ -240,9 +240,7 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 		//	class Println { Expresion expresion; }
 		public Object visit(Println node, Object param) {
 			super.visit(node, param);
-
-			predicado(node.getExpresion().getTipo() != null, 
-					"Error. Print - La expresión debe devolver algo",node.getStart());
+			//Este print puede no llevar nada
 			if(node.getExpresion().getTipo() != null)
 				predicado(node.getExpresion().getTipo().getClass() != IdentType.class, 
 				"Error. Println - La expresión debe ser de tipo simple",node.getStart());
