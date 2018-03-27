@@ -6,9 +6,9 @@ En este repositorio se guarda el proyecto final de la asignatura de Diseño de L
 - [Introducción al proyecto](#lenguaje-dlp)
 - [Características del lenguaje](#características-del-lenguaje)
 - [Detalles Especificos](#detalles-especificos)
-  - [Léxico](#léxico)
-  - [Sintáctico](#sintáctico)
-  - [Gramática Abstracta](#gramática-abstracto)
+	- [Léxico](#léxico)
+	- [Sintáctico](#sintáctico)
+	- [Gramática Abstracta](#gramática-abstracta)
 - [Autor](#autor)	
 
 ### Características del lenguaje
