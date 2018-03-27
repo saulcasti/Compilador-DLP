@@ -893,7 +893,7 @@ case 32:
 break;
 case 33:
 //#line 101 "sintac.y"
-{ yyval = new Return(null); }
+{ yyval = new Return(null).setPositions(val_peek(1)); }
 break;
 case 34:
 //#line 102 "sintac.y"
