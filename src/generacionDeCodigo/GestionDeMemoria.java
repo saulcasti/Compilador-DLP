@@ -10,19 +10,20 @@ public class GestionDeMemoria extends DefaultVisitor {
 
 		//	class Programa { List<Definicion> definicion; }
 		public Object visit(Programa node, Object param) {
-
-			int sumaTamañoVariables = 0;
-
-			for (Definicion child : node.getDefinicion()) {
-				sumaTamañoVariables += (Integer)super.visit(node, sumaTamañoVariables);
-			}
+			super.visit(node, 0);
+			
 			return null;
 		}
 
 		//	class DefVariable { String nombre;  Tipo tipo; }
 		public Object visit(DefVariable node, Object param) {
-			node.setDireccion((Integer)param);
-			return node.getTipo().getSize();
+			int a = (Integer)param + node.getTipo().getSize();
+			node.setDireccion(a);
+			return (Integer)super.visit(node, a);
 		}
 
+		// class DefFuncion { String nombre;  List<DefParametro> parametros;  Retorno retorno;  Cuerpo cuerpo; }
+		public Object visit(DefFuncion node, Object param) {
+			return (Integer)super.visit(node, param);
+		}
 }

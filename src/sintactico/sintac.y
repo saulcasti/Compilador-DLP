@@ -34,7 +34,10 @@ definicion: definicionVariable	{ $$ = $1; }
 	;
 
 
-definicionVariable: 'VAR' 'IDENT' ':' tipo ';'	{ $$ = new DefVariable($2,$4); }
+definicionVariable: 'VAR' 'IDENT' ':' tipo ';'	{ $$ = new DefVariable($2,$4,true); }
+	;
+	
+definicionVariableLocal: 'VAR' 'IDENT' ':' tipo ';'	{ $$ = new DefVariable($2,$4,false); }
 	;
 
 
@@ -85,8 +88,8 @@ cuerpo: definicionVariablesFuncion sentencias	{ $$ = new Cuerpo($1, $2); }
 	;
 
 
-definicionVariablesFuncion:								{ $$ = new ArrayList(); }
-	|	definicionVariablesFuncion	definicionVariable	{ $$ = $1; ((List)$1).add($2); }
+definicionVariablesFuncion:									{ $$ = new ArrayList(); }
+	|	definicionVariablesFuncion	definicionVariableLocal	{ $$ = $1; ((List)$1).add($2); }
 	;
  
  
