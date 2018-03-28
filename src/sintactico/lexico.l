@@ -43,16 +43,15 @@ import ast.Position;
 
 int		{ return Parser.INT; }
 float	{ return Parser.REAL; }
-char	{ return Parser.CHARACTER; }
+char		{ return Parser.CHARACTER; }
 struct 	{return Parser.STRUCT; }
 return	{ return Parser.RETURN; }
-read	{ return Parser.READ; }
-cast	{ return Parser.CAST; }
+read		{ return Parser.READ; }
+cast		{ return Parser.CAST; }
 
 print	{ return Parser.PRINT; }
 printsp	{ return Parser.PRINTSP; }
 println	{ return Parser.PRINTLN; }
-null 	{ return Paser.NULL; }
 
 "&&"		{ return Parser.AND; }
 "||"		{ return Parser.OR; }

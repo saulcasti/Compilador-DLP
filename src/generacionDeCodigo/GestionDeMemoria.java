@@ -8,16 +8,21 @@ import visitor.*;
  */
 public class GestionDeMemoria extends DefaultVisitor {
 
-	/*
-	 * Poner aquí los visit necesarios.
-	 * Si se ha usado VGen solo hay que copiarlos de la clase 'visitor/_PlantillaParaVisitors.txt'.
-	 */
+		//	class Programa { List<Definicion> definicion; }
+		public Object visit(Programa node, Object param) {
 
-	// public Object visit(Programa prog, Object param) {
-	// ...
-	// }
+			int sumaTamañoVariables = 0;
 
+			for (Definicion child : node.getDefinicion()) {
+				sumaTamañoVariables += (Integer)super.visit(node, sumaTamañoVariables);
+			}
+			return null;
+		}
 
-
+		//	class DefVariable { String nombre;  Tipo tipo; }
+		public Object visit(DefVariable node, Object param) {
+			node.setDireccion((Integer)param);
+			return node.getTipo().getSize();
+		}
 
 }
