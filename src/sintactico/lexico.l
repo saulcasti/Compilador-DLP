@@ -52,6 +52,7 @@ cast	{ return Parser.CAST; }
 print	{ return Parser.PRINT; }
 printsp	{ return Parser.PRINTSP; }
 println	{ return Parser.PRINTLN; }
+null 	{ return Paser.NULL; }
 
 "&&"		{ return Parser.AND; }
 "||"		{ return Parser.OR; }

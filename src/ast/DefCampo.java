@@ -42,9 +42,17 @@ public class DefCampo extends AbstractTraceable implements AST {
 	public Object accept(Visitor v, Object param) { 
 		return v.visit(this, param);
 	}
+	public int getDireccion() {
+		return direccion;
+	}
+
+	public void setDireccion(int direccion) {
+		this.direccion = direccion;
+	}
 
 	private String nombre;
 	private Tipo tipo;
+	private int direccion;
 
 	public int getSize() {
 		return tipo.getSize();
