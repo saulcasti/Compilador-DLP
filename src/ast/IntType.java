@@ -15,5 +15,11 @@ public class IntType extends AbstractTipo {
 		return v.visit(this, param);
 	}
 
+	@Override
+	public int getSize() {
+		// TODO Auto-generated method stub
+		return 2;
+	}
+
 }
 

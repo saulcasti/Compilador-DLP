@@ -15,5 +15,10 @@ public class CharType extends AbstractTipo {
 		return v.visit(this, param);
 	}
 
+	@Override
+	public int getSize() {
+		return 1;
+	}
+
 }
 

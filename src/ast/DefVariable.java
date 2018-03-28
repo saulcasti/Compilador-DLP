@@ -45,5 +45,18 @@ public class DefVariable extends AbstractDefinicion {
 
 	private String nombre;
 	private Tipo tipo;
+	private Boolean ambito; // true global, false local
+	
+	
+	public Boolean getAmbito() {
+		return ambito;
+	}
+
+	public void setAmbito(Boolean ambito) {
+		this.ambito = ambito;
+	}
+	
+	
+	
 }
 

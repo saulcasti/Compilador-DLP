@@ -46,5 +46,8 @@ public class DefCampo extends AbstractTraceable implements AST {
 	private String nombre;
 	private Tipo tipo;
 
+	public int getSize() {
+		return tipo.getSize();
+	}
 }
 

@@ -47,5 +47,13 @@ public class DefEstructura extends AbstractDefinicion {
 
 	private String nombre;
 	private List<DefCampo> defcampo;
+	
+	public int getSize() {
+		int suma = 0;
+		for (DefCampo defCam:defcampo) {
+			suma += defCam.getSize();
+		}
+		return suma;
+	}
 }
 

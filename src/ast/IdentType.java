@@ -43,5 +43,10 @@ public class IdentType extends AbstractTipo {
 	public DefEstructura getDefinicion() {
 		return definicion;
 	}
+
+	@Override
+	public int getSize() {
+		return definicion.getSize();
+	}
 }
 

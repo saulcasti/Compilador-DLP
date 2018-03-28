@@ -1,78 +1,41 @@
 /*
-Test para probar la Fase de Comprobación de Tipos
+Test para probar la Fase de Gestión de Memoria.
 
-COMPROBACION: El compilador del alumno debe detectar todos los errores indicados en los comentarios.
+COMPROBACION: Las direcciones asignadas a cada nodo deben coincidir con la dirección del comentario de cada definición.
 
-ADVERTENCIA: Hay algunos errores que producen otros errores derivados.
+CONSEJO: Para poder validar más cómodamente este ejercicio se aconseja añadir a 'visitor/ASTPrinter.java' la siguiente sentencia:
 
-Por ejemplo:
+	print(indent + 1, "direccion", "int", node.getDireccion());
 
-	print juan + anton;	// suma de dos estructuras 
-
-Lo anterior produce el error de que se están sumando dos expresiones de tipos no simples y además
-puede producir el error de que la expresión a imprimir tampoco es de tipo simple (al no quedar
-un tipo simple asociado a la suma al no haberse podido calcular su tipo).
-Estos errores derivados son normales y no es necesario intentar suprimirlos. 
+Esta llamada deberá añadirse en los métodos visit de los nodos a los que se les haya asignado un atributo 'direccion' (habitualmente aquellos que representen definiciones de variables globales, locales, parámetros y/o campos de estructuras)
 
 NOTA: Es posible que el alumno deba adaptar ligeramente la sintaxis del lenguaje si no coincide
 con la del lenguaje que le corresponde.
 */
 
+var a:char;	// Dir 0
+ 
 struct Persona {
-	edad:int;
-	meses:[12] int;
+	edad:int;	// Dir 0 
+	meses:[12] int;	// Dir 2 
+	a:float;	// Dir 26 
 };
 
-var juan:Persona;
-var anton:Persona;
+var b:float;	// Dir 1 
 
+struct Prueba {
+	campo1: int; // Dir 0 
+	campo2: int; // Dir 2 
+};
 
-j(a:int, b:float):float {
-	h(2);	// Numero de argumentos incorrecto
-	return; // Debe haber un valor de retorno
-}
+var c:[2]Persona;	// Dir 5 
+var d:int;		// Dir 65 
 
-main() {
-	var i:int;
-	var f:float;
-	var v:[10]int;
-
-	if(2.5) { }	// La condicion debe ser de tipo entero
-	if (i) { }
-	
-	while(juan) { }	// La condicion debe ser de tipo entero
-	while (i) {}
-	
-	juan = anton; // Valor de la izquierda debe ser simple
-
-	read juan;	// Debe ser un tipo simple
-	read 35;	// Debe ser modificable
-	read i;
-	
-	print juan; // Debe ser tipo simple
-	print f / 2.5;
-	
-	j(12, 12.5);
-	j(12, 12); // Tipo de los parámetros no coincide
-	j(12);		// Número de argumentos no coincide
-	j(12, 12.5, 4); // Número de argumentos no coincide
-	
-	print main();	// No tiene tipo de retorno
-	print j(12, 12.5);
-	print j(12, 12); // Tipo de los parámetros no coincide
-	print j(12);		// Número de argumentos no coincide
-	print j(12, 12.5, 4); // Número de argumentos no coincide
-
-	print juan + anton;	// Deben ser tipos simples
-	print 2.5 * 2;		// Deben ser del mismo tipo
-	print i - 2;
-
-	print 2.5 && f;	// Deben ser tipo entero
-	print 2 || i;
-	
-	print juan > anton;	// Deben ser tipos simples
-	
-	
+f(a:int, b:float, h:char) { // a = BP+9, b = BP+5, h = BP+4 
+	var c:char;	// BP-1 
+	var d:int;	// BP-3 
+	var e:[2]Persona; // BP-63 
+	var f:float; 	// BP-67 
 }
 
 

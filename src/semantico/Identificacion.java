@@ -49,17 +49,10 @@ public class Identificacion extends DefaultVisitor {
 		funciones.put(node.getNombre(), node);
 		
 		variables.set();
-		for(int i=0;i<node.getParametros().size();i++) {
-			this.visit(node.getParametros().get(i), param);
-		}
-		
-		for(int i=0;i<node.getCuerpo().getDefvariable().size();i++) {
-			this.visit(node.getCuerpo().getDefvariable().get(i), param);
-		}
-		
+		super.visit(node, param);
 		variables.reset();
 		
-		return super.visit(node, param);
+		return null;
 	}
 	
 	//	class DefParametro { String nombre;  Tipo tipo; }
