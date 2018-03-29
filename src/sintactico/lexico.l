@@ -67,7 +67,7 @@ if		{ return Parser.IF; }
 else	{ return Parser.ELSE; }
 while	{ return Parser.WHILE; }
 
-
+null		{return Parser.NULL; }
 
 
 

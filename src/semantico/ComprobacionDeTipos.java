@@ -57,6 +57,14 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 				for(DefCampo dC :defS.getDefcampo()) {
 					if(dC.getNombre().equals((String)param)) {
 						i= true;
+						Tipo tipo = dC.getTipo();
+						if(dC.getTipo().getClass() == ArrayType.class) {
+							node.setTipo(((ArrayType)tipo).getTipo());
+						}
+						else
+							node.setTipo(dC.getTipo());
+						
+						 break;
 					}
 				}predicado(i,"Error. Estructura - El campo al que se hace referencia no existe en la estructura " 
 						+ defS.getNombre(), node.getStart());
@@ -173,6 +181,7 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 //			node.getExpresion().accept(this, node.getNombre());
 			predicado(node.getExpresion().getTipo().getClass() ==  IdentType.class, 
 					"Error. Navegación - La expresión de comienzo de navegación debe ser tipo struct",node.getStart());
+			node.setTipo(node.getExpresion().getTipo());
 			
 			
 			return null;
@@ -241,7 +250,7 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 		public Object visit(Println node, Object param) {
 			super.visit(node, param);
 			//Este print puede no llevar nada
-			if(node.getExpresion().getTipo() != null)
+			if(node.getExpresion() != null)
 				predicado(node.getExpresion().getTipo().getClass() != IdentType.class, 
 				"Error. Println - La expresión debe ser de tipo simple",node.getStart());
 
