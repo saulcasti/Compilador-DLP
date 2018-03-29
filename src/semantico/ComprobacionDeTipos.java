@@ -93,24 +93,25 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 			node.setModificable(false);
 			return null;
 		}
-		
+
 		//	class VarArray { Expresion identificacion;  Expresion posicion; }
 		public Object visit(VarArray node, Object param) {
 			super.visit(node, param);
 
 			predicado(node.getPosicion().getTipo().getClass() == IntType.class, 
 					"Error. Variable array - la posición se indica mediante un entero",node.getStart());
-			
-			if(node.getPosicion().getTipo().getClass() == IntType.class )
+
+			if(node.getPosicion().getTipo().getClass() == IntType.class ) {
 				predicado(node.getIdentificacion().getTipo().getClass() == ArrayType.class, 
 						"Error. Variable array - el tipo de la variable debe ser array",node.getStart());
 
-
-			node.setTipo((Tipo)node.getIdentificacion().getTipo());
-			node.setModificable(true);
+			}
+				node.setTipo(((ArrayType)node.getIdentificacion().getTipo()).getTipo());
+				node.setModificable(true);
+			
 			return null;
 		}
-		
+
 		//	class ArrayType { LiteralInt dimension;  Tipo tipo; }
 		public Object visit(ArrayType node, Object param) {
 			
@@ -181,8 +182,19 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 //			node.getExpresion().accept(this, node.getNombre());
 			predicado(node.getExpresion().getTipo().getClass() ==  IdentType.class, 
 					"Error. Navegación - La expresión de comienzo de navegación debe ser tipo struct",node.getStart());
-			node.setTipo(node.getExpresion().getTipo());
 			
+			if(node.getExpresion().getTipo().getClass() == IdentType.class) {
+				DefEstructura defS= ((IdentType) node.getExpresion().getTipo()).getDefinicion();
+				for(DefCampo dC :defS.getDefcampo()) {
+					if(dC.getNombre().equals(node.getNombre())) {
+							node.setTipo(dC.getTipo());
+						 break;
+					}
+				}
+				
+			}else
+			node.setTipo(node.getExpresion().getTipo());
+			node.setModificable(true);
 			
 			return null;
 		}
@@ -216,6 +228,7 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 
 		//	class IfElse { Expresion condicion;  List<Sentencia> cierto;  List<Sentencia> falso; }
 		public Object visit(IfElse node, Object param) {
+			super.visit(node, param);
 			predicado(node.getCondicion().getTipo().getClass() == IntType.class, 
 					"Error. Condición en if/else - La condición debe de ser de tipo entero",node.getStart());
 

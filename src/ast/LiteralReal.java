@@ -16,7 +16,7 @@ public class LiteralReal extends AbstractExpresion {
 
 	public LiteralReal(Object valor) {
 		this.valor = (valor instanceof Token) ? ((Token)valor).getLexeme() : (String) valor;
-
+		
 		searchForPositions(valor);	// Obtener linea/columna a partir de los hijos
 	}
 

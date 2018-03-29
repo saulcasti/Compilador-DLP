@@ -16,7 +16,7 @@ public class LiteralChar extends AbstractExpresion {
 
 	public LiteralChar(Object valor) {
 		this.valor = (valor instanceof Token) ? ((Token)valor).getLexeme() : (String) valor;
-
+		
 		searchForPositions(valor);	// Obtener linea/columna a partir de los hijos
 	}
 
@@ -32,6 +32,10 @@ public class LiteralChar extends AbstractExpresion {
 		return v.visit(this, param);
 	}
 
+	@Override
+	public Tipo getTipo() {
+		return new CharType();
+	}
 	private String valor;
 }
 

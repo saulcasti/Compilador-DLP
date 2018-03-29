@@ -71,10 +71,10 @@ null		{return Parser.NULL; }
 
 
 
-
+\'(.|\\n)\'				{ return Parser.LITERALCHAR; }
 [0-9]+     				{ return Parser.LITERALINT; }
 [0-9]+\.[0-9]*			{ return Parser.LITERALREAL; }
-'(.|\\n)'				{ return Parser.LITERALCHAR; }
+
 
 [a-zA-ZÒ—][Ò—a-zA-Z0-9_]*	{ return Parser.IDENT; }
 
