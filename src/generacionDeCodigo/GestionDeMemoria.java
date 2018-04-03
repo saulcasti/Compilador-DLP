@@ -8,16 +8,51 @@ import visitor.*;
  */
 public class GestionDeMemoria extends DefaultVisitor {
 
-		private int sumaDirecciones = 0;
-		
+		private int sumaDireccionesGlobales = 0;
+		private static final int  BP = 0;
+		private int sumaDireccionesLocales = 0;
 
 		//	class DefVariable { String nombre;  Tipo tipo; }
 		public Object visit(DefVariable node, Object param) {
 			super.visit(node, param);
-			node.setDireccion(sumaDirecciones);
-			sumaDirecciones += node.getTipo().getSize();
-			
+			if (node.getAmbito()) {  //Global
+				node.setDireccion(sumaDireccionesGlobales);
+				sumaDireccionesGlobales += node.getTipo().getSize();
+			}
+			else {
+				sumaDireccionesLocales += BP - node.getTipo().getSize();
+				node.setDireccion(sumaDireccionesLocales);
+			}
 			return null;
 		}
 
+		//	class DefFuncion { String nombre;  List<DefParametro> parametros;  Retorno retorno;  Cuerpo cuerpo; }
+		public Object visit(DefFuncion node, Object param) {
+			super.visit(node, param);
+			
+			sumaDireccionesLocales = 0;
+			int direccionesParam = 4;
+			for(int i=node.getParametros().size()-1;i>=0;i--) {
+				node.getParametros().get(i).setDireccion(direccionesParam);
+				direccionesParam += BP + node.getParametros().get(i).getTipo().getSize();
+			}
+			
+			
+			return null;
+		}
+		
+		//	class DefEstructura { String nombre;  List<DefCampo> defcampo; }
+		public Object visit(DefEstructura node, Object param) {
+			super.visit(node, param);
+			
+			int sumaDireccionesCampos=0;
+			
+			for(int i=0;i<node.getDefcampo().size();i++ ) {
+				node.getDefcampo().get(i).setDireccion(sumaDireccionesCampos);
+				sumaDireccionesCampos += node.getDefcampo().get(i).getTipo().getSize();
+			}
+			
+			return null;
+		}
+		
 }
