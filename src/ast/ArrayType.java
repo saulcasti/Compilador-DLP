@@ -52,5 +52,16 @@ public class ArrayType extends AbstractTipo {
 		
 		return tipo.getSize() * Integer.parseInt(dimension.getValor());
 	}
+	
+	
+	@Override
+	public String getNombreMAPL() {
+		return dimension.getValor()+" * "+tipo.getNombreMAPL();
+	}
+
+	@Override
+	public char getSufijo() {
+		return 'a';
+	}
 }
 

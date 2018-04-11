@@ -1,0 +1,37 @@
+/*
+Test para probar la Fase de Comprobación de Tipos
+
+COMPROBACION: El compilador del alumno debe detectar todos los errores indicados en los comentarios.
+
+ADVERTENCIA: Hay algunos errores que producen otros errores derivados.
+
+Por ejemplo:
+
+	print juan + anton;	// suma de dos estructuras 
+
+Lo anterior produce el error de que se están sumando dos expresiones de tipos no simples y además
+puede producir el error de que la expresión a imprimir tampoco es de tipo simple (al no quedar
+un tipo simple asociado a la suma al no haberse podido calcular su tipo).
+Estos errores derivados son normales y no es necesario intentar suprimirlos. 
+
+NOTA: Es posible que el alumno deba adaptar ligeramente la sintaxis del lenguaje si no coincide
+con la del lenguaje que le corresponde.
+*/
+
+struct Persona {
+	edad:int;
+	meses:[12] int;
+};
+
+struct Perro {
+	owner:Persona;
+	edad:int;
+};
+
+var juan:Persona;
+var tobi:Perro;
+
+main() {
+	tobi.edad = 1;
+	print tobi.owner.edad;
+}

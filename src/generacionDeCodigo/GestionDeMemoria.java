@@ -9,7 +9,6 @@ import visitor.*;
 public class GestionDeMemoria extends DefaultVisitor {
 
 		private int sumaDireccionesGlobales = 0;
-		private static final int  BP = 0;
 		private int sumaDireccionesLocales = 0;
 
 		//	class DefVariable { String nombre;  Tipo tipo; }
@@ -20,7 +19,7 @@ public class GestionDeMemoria extends DefaultVisitor {
 				sumaDireccionesGlobales += node.getTipo().getSize();
 			}
 			else {
-				sumaDireccionesLocales += BP - node.getTipo().getSize();
+				sumaDireccionesLocales += node.getTipo().getSize();
 				node.setDireccion(sumaDireccionesLocales);
 			}
 			return null;
@@ -34,7 +33,7 @@ public class GestionDeMemoria extends DefaultVisitor {
 			int direccionesParam = 4;
 			for(int i=node.getParametros().size()-1;i>=0;i--) {
 				node.getParametros().get(i).setDireccion(direccionesParam);
-				direccionesParam += BP + node.getParametros().get(i).getTipo().getSize();
+				direccionesParam += node.getParametros().get(i).getTipo().getSize();
 			}
 			
 			

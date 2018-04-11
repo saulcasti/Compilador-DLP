@@ -20,5 +20,16 @@ public class CharType extends AbstractTipo {
 		return 1;
 	}
 
+	
+	@Override
+	public String getNombreMAPL() {
+		return "char";
+	}
+
+	@Override
+	public char getSufijo() {
+		return 'c';
+	}
+	
 }
 

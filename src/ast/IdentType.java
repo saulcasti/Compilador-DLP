@@ -48,5 +48,15 @@ public class IdentType extends AbstractTipo {
 	public int getSize() {
 		return definicion.getSize();
 	}
+
+	@Override
+	public char getSufijo() {
+		return 'v';
+	}
+
+	@Override
+	public String getNombreMAPL() {
+		return definicion.getNombre();
+	}
 }
 
