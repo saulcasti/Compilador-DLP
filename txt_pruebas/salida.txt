@@ -10,24 +10,38 @@
 #line 26
 pusha 0
 push 1111
+storei
 #line 27
 pusha 2
 pushf 2222.2
+storef
 #line 28
 pusha 6
 push 3
 push 3333
+storei
 #line 29
 pusha 16
 pushf 4444.4
+storef
 #line 31
 pusha 0
+loadi
+outi
 #line 32
 pusha 2
+loadf
 pusha 16
+loadv
+addf
+outf
 #line 33
 pusha 6
+loada
 push 3
+outi
 #line 36
 pusha 2
+loadf
+outi
 halt

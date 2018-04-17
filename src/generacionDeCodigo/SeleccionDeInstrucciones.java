@@ -14,6 +14,8 @@ public class SeleccionDeInstrucciones extends DefaultVisitor {
 	private PrintWriter writer;
 	private String sourceFile;
 	
+	private Map<String, String> instruccion = new HashMap<String, String>();
+	
 	public SeleccionDeInstrucciones(Writer writer, String sourceFile) {
 		
 		this.writer = new PrintWriter(writer);
@@ -84,7 +86,13 @@ public class SeleccionDeInstrucciones extends DefaultVisitor {
 			genera("load", node.getTipo());
 		} else { // Funcion.DIRECCION
 			assert (param == Funcion.DIRECCION);
-			genera("pusha " + node.getDefinicion().getDireccion());
+			if(node.getDefinicion().getAmbito()) {
+				genera("pusha " + node.getDefinicion().getDireccion());
+			}
+			else {
+				genera("pusha BP");
+				genera("push " + node.getDefinicion().getDireccion());
+			}
 		}
 		return null;
 	}
@@ -103,7 +111,16 @@ public class SeleccionDeInstrucciones extends DefaultVisitor {
 		return null;
 	}
 
-	private Map<String, String> instruccion = new HashMap<String, String>();
+	
+	//	class LiteralChar { String valor; }
+	public Object visit(LiteralChar node, Object param) {
+		assert (param == Funcion.VALOR);
+		genera("push " + node.getValor());
+		return null;
+	}
+	
+	
+	
 
 	
 	// Método auxiliar recomendado -------------
@@ -112,7 +129,7 @@ public class SeleccionDeInstrucciones extends DefaultVisitor {
 	}
 
 	private void genera(String instruccion, Tipo tipo) {
-//		genera(instruccion + tipo.getSufijo());
+		genera(instruccion + tipo.getSufijo());
 	}
 
 
