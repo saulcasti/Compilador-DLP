@@ -25,6 +25,15 @@ public class SeleccionDeInstrucciones extends DefaultVisitor {
 		instruccion.put("-", "sub");
 		instruccion.put("*", "mul");
 		instruccion.put("/", "div");
+		instruccion.put("<", "lt");
+		instruccion.put(">", "gt");
+		instruccion.put("AND", "and");
+		instruccion.put("OR", "or");
+		instruccion.put("IGUAL", "eq");
+		instruccion.put("DISTINTO", "ne");
+		instruccion.put("MAYORIGUAL", "ge");
+		instruccion.put("MENORIGUAL", "le");
+		
 	}
 
 	//	class Programa { List<Definicion> definicion; }
@@ -125,7 +134,10 @@ public class SeleccionDeInstrucciones extends DefaultVisitor {
 		assert (param == Funcion.VALOR);
 		node.getLeft().accept(this, Funcion.VALOR);
 		node.getRight().accept(this, Funcion.VALOR);
-		genera(instruccion.get(node.getOperador()), node.getTipo());
+		if(node.getOperador() == "AND" || node.getOperador() == "OR")
+			genera(instruccion.get(node.getOperador()));
+		else
+			genera(instruccion.get(node.getOperador()), node.getRight().getTipo());
 		return null;
 	}
 
@@ -227,6 +239,13 @@ public class SeleccionDeInstrucciones extends DefaultVisitor {
 		return null;
 	}
 	
+//	class Read { Expresion expresion; }
+	public Object visit(Read node, Object param) {
+		node.getExpresion().accept(this, Funcion.DIRECCION);
+		genera("in", node.getExpresion().getTipo());
+		genera("store", node.getExpresion().getTipo());
+		return null;
+	}
 
 	
 	// Método auxiliar recomendado -------------

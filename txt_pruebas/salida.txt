@@ -58,12 +58,12 @@ outi
 pusha 0
 loadi
 push 0
-nulli
+gti
 pusha 2
 loadf
 pushf 3333.3
-nulli
-nulli
+ltf
+and
 outi
 #line 36
 pusha 2
