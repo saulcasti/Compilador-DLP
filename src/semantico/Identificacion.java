@@ -59,12 +59,16 @@ public class Identificacion extends DefaultVisitor {
 		funciones.put(node.getNombre(), node);
 		
 		variables.set();
-		super.visit(node, param);
+		super.visit(node, funciones.get(node.getNombre()));
 		variables.reset();
 		
+		return super.visit(node, funciones.get(node.getNombre()));
+	}
+//	class Return { Expresion expresion; }
+	public Object visit(Return node, Object param) {
+		node.setFuncion((DefFuncion) param);
 		return null;
 	}
-	
 	
 	//	class Invocacion { String nombre;  List<Expresion> argumentos; }
 	public Object visit(Invocacion node, Object param) {

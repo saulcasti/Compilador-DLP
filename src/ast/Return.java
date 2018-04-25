@@ -34,6 +34,19 @@ public class Return extends AbstractSentencia {
 		return v.visit(this, param);
 	}
 
+	
+	
+	public DefFuncion getFuncion() {
+		return funcion;
+	}
+
+	public void setFuncion(DefFuncion funcion) {
+		this.funcion = funcion;
+	}
+
+
+
 	private Expresion expresion;
+	private DefFuncion funcion;
 }
 

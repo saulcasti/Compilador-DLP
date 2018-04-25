@@ -61,7 +61,7 @@ public class ArrayType extends AbstractTipo {
 
 	@Override
 	public char getSufijo() {
-		return 'a';
+		return tipo.getSufijo();
 	}
 }
 

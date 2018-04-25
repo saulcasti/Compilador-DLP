@@ -30,8 +30,9 @@ public class SeleccionDeInstrucciones extends DefaultVisitor {
 	//	class Programa { List<Definicion> definicion; }
 	public Object visit(Programa node, Object param) {
 		genera("#source \"" + sourceFile + "\"");
-		visitChildren(node.getDefinicion(), param);
+		genera("call main");
 		genera("halt");
+		visitChildren(node.getDefinicion(), param);
 		return null;
 	}
 
@@ -50,6 +51,55 @@ public class SeleccionDeInstrucciones extends DefaultVisitor {
 		genera(salida +"\n}");
 		return null;
 	}
+	
+//	class DefFuncion { String nombre;  List<DefParametro> parametros;  Retorno retorno;  Cuerpo cuerpo; }
+	public Object visit(DefFuncion node, Object param) {
+		genera(node.getNombre() +":");
+		super.visit(node, param);
+		if(node.getRetorno().getTipo() == null) {
+			int sumaVariables=getSizeVariables(node.getCuerpo().getDefvariable());
+			int sumaParametros=getSizeParam(node.getParametros());
+			
+			genera("ret "+0 +","+sumaVariables+","+sumaParametros);
+		}
+		
+		return null;
+	}
+	
+	private int getSizeVariables(List<DefVariable> definiciones) {
+		int suma=0;
+		for(DefVariable def:definiciones) {
+			suma += def.getTipo().getSize();
+		}
+		return suma;
+	}
+	
+	private int getSizeParam(List<DefParametro> definiciones) {
+		int suma=0;
+		for(DefParametro def:definiciones) {
+			suma += def.getTipo().getSize();
+		}
+		return suma;
+	}
+	
+//	class Cuerpo { List<DefVariable> defvariable;  List<Sentencia> sentencia; }
+	public Object visit(Cuerpo node, Object param) {
+		int sumaVariablesLocales = getSizeVariables(node.getDefvariable());
+		genera("enter " + sumaVariablesLocales);
+		super.visit(node, param);
+		return null;
+	}
+	
+//	class Return { Expresion expresion; }
+	public Object visit(Return node, Object param) {
+		int sumaVariablesLocales = getSizeVariables(node.getFuncion().getCuerpo().getDefvariable());
+		int sumaParametros=getSizeParam(node.getFuncion().getParametros());
+		int tamanioReturn=node.getExpresion().getTipo().getSize();
+		genera("#line " + node.getEnd().getLine());
+		genera("ret "+tamanioReturn +","+sumaVariablesLocales+","+sumaParametros);
+		return null;
+	}
+	
 	
 	//	class Print { Expresion expresion; }
 	public Object visit(Print node, Object param) {
@@ -92,6 +142,41 @@ public class SeleccionDeInstrucciones extends DefaultVisitor {
 			else {
 				genera("pusha BP");
 				genera("push " + node.getDefinicion().getDireccion());
+				genera("add");
+			}
+		}
+		return null;
+	}
+	
+	//	class VarArray { Expresion identificacion;  Expresion posicion; }
+	public Object visit(VarArray node, Object param) {
+			node.getIdentificacion().accept(this, Funcion.DIRECCION);
+			node.getPosicion().accept(this, Funcion.VALOR);
+			genera("push "+ ((ArrayType) node.getIdentificacion().getTipo()).getTipo().getSize());
+			genera("mul");
+			genera("add");
+			if(param == Funcion.VALOR) {
+				genera("load", node.getTipo());
+			}
+		
+		return null;
+	}
+
+	//class Navega { Expresion expresion;  String nombre; }
+	public Object visit(Navega node, Object param) {
+		
+		super.visit(node, Funcion.DIRECCION);
+		if(node.getExpresion().getTipo().getClass() == IdentType.class) {
+			DefEstructura defS= ((IdentType) node.getExpresion().getTipo()).getDefinicion();
+			for(DefCampo dC :defS.getDefcampo()) {
+				if(dC.getNombre().equals(node.getNombre())) {
+					genera("push " + dC.getDireccion());
+					genera("add");
+					break;
+				}
+			}
+			if(param == Funcion.VALOR) {
+				genera("load", node.getTipo());
 			}
 		}
 		return null;
@@ -115,11 +200,32 @@ public class SeleccionDeInstrucciones extends DefaultVisitor {
 	//	class LiteralChar { String valor; }
 	public Object visit(LiteralChar node, Object param) {
 		assert (param == Funcion.VALOR);
-		genera("push " + node.getValor());
+		genera("pushb " + node.getValor());
 		return null;
 	}
 	
+	//	class LlamadaFuncionSentencia { String nombre;  List<Expresion> argumentos; }
+	public Object visit(LlamadaFuncionSentencia node, Object param) {
+		genera("#line " + node.getEnd().getLine());
+		genera("call " + node.getNombre());
+		if(node.getDefFuncion().getRetorno() != null) {
+			genera("pop");
+		}
+		return null;
+	}
 	
+	//	class Invocacion { String nombre;  List<Expresion> argumentos; }
+	public Object visit(Invocacion node, Object param) {
+		genera("call " + node.getNombre());
+		return null;
+	}
+
+//	class Cast { Tipo tipo;  Expresion expresion; }
+	public Object visit(Cast node, Object param) {
+		node.getExpresion().accept(this, Funcion.VALOR);
+		genera(node.getExpresion().getTipo().getSufijo()+"2"+node.getTipo().getSufijo());
+		return null;
+	}
 	
 
 	

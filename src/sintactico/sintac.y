@@ -11,8 +11,11 @@ import main.*;
 %}
 
 /* Precedencias aquí --------------------------------------- */
-%left	'<' '>' 'IGUAL' 'DISTINTO' 'MENORIGUAL' 'MAYORIGUAL'  'OR' 'AND' '!'
-%left '+' '-'
+%left 'OR'
+%left 'AND' 
+%left 'IGUAL' 'DISTINTO'
+%left	'<' '>'  'MENORIGUAL' 'MAYORIGUAL' 
+%left '+' '-' '!'
 %left '*' '/'
 %left '[' ']' '.' ':' ',' ';'
 %nonassoc '(' ')'
