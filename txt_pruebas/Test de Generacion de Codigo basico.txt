@@ -23,6 +23,7 @@ var v:[5]int;
 var p:Punto;
 
 main() {
+
 	a = 1111;
 	b = 2222.2;
 	v[3] = 3333;
@@ -33,5 +34,20 @@ main() {
 	print v[3];		// 3333
 
 	print a > 0 && b < 3333.3;	// 1
+	
 	print cast<int>(b);			// 2222
+	
+	if(a > 0 && b > 3333.3){
+		print 999;		// 999
+	}else{
+		print 666;
+	}
+	
+	a=2;
+	while(a>0){
+		print 8;
+		a = a - 1;
+	}
+	
+	
 }

@@ -13,6 +13,8 @@ public class SeleccionDeInstrucciones extends DefaultVisitor {
 
 	private PrintWriter writer;
 	private String sourceFile;
+	private int contadorWhile = 0;
+	private int contadorIfs = 0;
 	
 	private Map<String, String> instruccion = new HashMap<String, String>();
 	
@@ -95,7 +97,8 @@ public class SeleccionDeInstrucciones extends DefaultVisitor {
 	public Object visit(Cuerpo node, Object param) {
 		int sumaVariablesLocales = getSizeVariables(node.getDefvariable());
 		genera("enter " + sumaVariablesLocales);
-		super.visit(node, param);
+		visitChildren(node.getDefvariable(), param);
+		visitChildren(node.getSentencia(), param);
 		return null;
 	}
 	
@@ -247,6 +250,44 @@ public class SeleccionDeInstrucciones extends DefaultVisitor {
 		return null;
 	}
 
+	
+//	class While { Expresion condicion;  List<Sentencia> cierto; }
+	public Object visit(While node, Object param) {
+		contadorWhile++;
+		genera("while"+contadorWhile+":");
+		node.getCondicion().accept(this, Funcion.VALOR);
+		genera("jz finWhile"+ contadorWhile);
+		visitChildren(node.getCierto(), param);
+		genera("jmp while"+contadorWhile);
+		genera("finWhile"+contadorWhile+":");
+		return null;
+	}
+
+	//	class If { Expresion condicion;  List<Sentencia> cierto; }
+	public Object visit(If node, Object param) {
+		contadorIfs++;
+		node.getCondicion().accept(this, Funcion.VALOR);
+		genera("jz else"+ contadorIfs);
+		visitChildren(node.getCierto(), param);
+		genera("jmp finIf"+contadorIfs);
+		genera("else"+contadorIfs+":");
+		genera("finIf"+contadorIfs+":");
+		return null;
+	}
+
+	//	class IfElse { Expresion condicion;  List<Sentencia> cierto;  List<Sentencia> falso; }
+	public Object visit(IfElse node, Object param) {
+		contadorIfs++;
+		node.getCondicion().accept(this, Funcion.VALOR);
+		genera("jz else"+ contadorIfs);
+		visitChildren(node.getCierto(), param);
+		genera("jmp finIf"+contadorIfs);
+		genera("else"+contadorIfs+":");
+		visitChildren(node.getFalso(), param);
+		genera("finIf"+contadorIfs+":");
+		return null;
+	}
+	
 	
 	// Método auxiliar recomendado -------------
 	private void genera(String instruccion) {

@@ -11,15 +11,15 @@ halt
 #GLOBAL p:Punto
 main:
 enter 0
-#line 26
+#line 27
 pusha 0
 push 1111
 storei
-#line 27
+#line 28
 pusha 2
 pushf 2222.2
 storef
-#line 28
+#line 29
 pusha 6
 push 3
 push 2
@@ -27,17 +27,17 @@ mul
 add
 push 3333
 storei
-#line 29
+#line 30
 pusha 16
 push 4
 add
 pushf 4444.4
 storef
-#line 31
+#line 32
 pusha 0
 loadi
 outi
-#line 32
+#line 33
 pusha 2
 loadf
 pusha 16
@@ -46,7 +46,7 @@ add
 loadf
 addf
 outf
-#line 33
+#line 34
 pusha 6
 push 3
 push 2
@@ -54,7 +54,7 @@ mul
 add
 loadi
 outi
-#line 35
+#line 36
 pusha 0
 loadi
 push 0
@@ -65,9 +65,50 @@ pushf 3333.3
 ltf
 and
 outi
-#line 36
+#line 38
 pusha 2
 loadf
 f2i
 outi
+pusha 0
+loadi
+push 0
+gti
+pusha 2
+loadf
+pushf 3333.3
+gtf
+and
+jz else1
+#line 41
+push 999
+outi
+jmp finIf1
+else1:
+#line 43
+push 666
+outi
+finIf1:
+#line 46
+pusha 0
+push 2
+storei
+while1:
+pusha 0
+loadi
+push 0
+gti
+jz finWhile1
+#line 48
+push 8
+outi
+#line 49
+pusha 0
+pusha 0
+loadi
+push 1
+subi
+storei
+jmp while1
+finWhile1:
 ret 0,0,0
