@@ -18,7 +18,7 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 			predicado(mismoTipo(node.getLeft(), node.getRight()), "Error. Asignación - Los operandos deben ser del mismo tipo", node.getStart());
 			predicado(node.getLeft().isModificable(), "Error. Asignación - Se requiere expresión modificable", node.getLeft().getStart());
 			predicado(node.getLeft().getTipo().getClass() != IdentType.class, "Error. Asignación - El valor de la izquierda debe ser simple", node.getLeft().getStart());
-			
+
 			return null;
 		}
 
@@ -29,15 +29,16 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 
 			if(node.getOperador() == "AND" || node.getOperador() == "OR" 
 					|| node.getOperador() == "IGUAL" || node.getOperador() == "MAYORIGUAL"
-					|| node.getOperador() == "DISTINTO" || node.getOperador() == "MENORIGUAL") {
-				
-			predicado(mismoTipo(node.getLeft(), node.getRight()) && node.getLeft().getTipo().getClass() == IntType.class, 
-						"Error. Expresión Binaria - Boolean debe de ser de tipo entero",node.getStart());
+					|| node.getOperador() == "DISTINTO" || node.getOperador() == "MENORIGUAL"
+					|| node.getOperador() == ">" || node.getOperador() == "<") {
 
-				
+				if(node.getOperador() == "AND" || node.getOperador() == "OR")
+					predicado(mismoTipo(node.getLeft(), node.getRight()) && node.getLeft().getTipo().getClass() == IntType.class, 
+					"Error. Expresión Binaria - Boolean debe de ser de tipo entero",node.getStart());
+				node.setTipo(new IntType());
 			}
-			
-			node.setTipo(node.getLeft().getTipo());
+
+			else node.setTipo(node.getLeft().getTipo());
 			node.setModificable(false);
 			return null;
 		}
@@ -45,7 +46,7 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 		// class Variable { String nombre; }
 		public Object visit(Variable node, Object param) {
 			super.visit(node, param); // ¿Hace falta?
-			
+
 			node.setTipo(node.getDefinicion().getTipo());
 			node.setModificable(true);
 
@@ -63,8 +64,8 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 						}
 						else
 							node.setTipo(dC.getTipo());
-						
-						 break;
+
+						break;
 					}
 				}predicado(i,"Error. Estructura - El campo al que se hace referencia no existe en la estructura " 
 						+ defS.getNombre(), node.getStart());
