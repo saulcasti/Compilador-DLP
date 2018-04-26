@@ -35,12 +35,12 @@ main() {
 
 	print a > 0 && b < 3333.3;	// 1
 	
-	print cast<int>(b);			// 2222
+	println cast<int>(b);			// 2222
 	
 	if(a > 0 && b > 3333.3){
-		print 999;		// 999
+		printsp 999;		// 999
 	}else{
-		print 666;
+		printsp 666;
 	}
 	
 	a=2;

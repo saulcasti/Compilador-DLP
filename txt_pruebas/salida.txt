@@ -70,6 +70,8 @@ pusha 2
 loadf
 f2i
 outi
+pushb 10
+outb
 pusha 0
 loadi
 push 0
@@ -83,11 +85,15 @@ jz else1
 #line 41
 push 999
 outi
+pushb 32
+outb
 jmp finIf1
 else1:
 #line 43
 push 666
 outi
+pushb 32
+outb
 finIf1:
 #line 46
 pusha 0

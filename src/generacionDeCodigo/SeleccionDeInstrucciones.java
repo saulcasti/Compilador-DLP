@@ -288,6 +288,25 @@ public class SeleccionDeInstrucciones extends DefaultVisitor {
 		return null;
 	}
 	
+	//	class Println { Expresion expresion; }
+	public Object visit(Println node, Object param) {
+		genera("#line " + node.getEnd().getLine());
+		node.getExpresion().accept(this, Funcion.VALOR);
+		genera("out", node.getExpresion().getTipo());
+		genera("pushb 10");
+		genera("outb");
+		return null;
+	}
+
+	//	class Printsp { Expresion expresion; }
+	public Object visit(Printsp node, Object param) {
+		genera("#line " + node.getEnd().getLine());
+		node.getExpresion().accept(this, Funcion.VALOR);
+		genera("out", node.getExpresion().getTipo());
+		genera("pushb 32");
+		genera("outb");
+		return null;
+	}
 	
 	// Método auxiliar recomendado -------------
 	private void genera(String instruccion) {
