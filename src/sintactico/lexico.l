@@ -43,6 +43,7 @@ import ast.Position;
 
 int		{ return Parser.INT; }
 float	{ return Parser.REAL; }
+real	{ return Parser.REAL; }
 char		{ return Parser.CHARACTER; }
 struct 	{return Parser.STRUCT; }
 return	{ return Parser.RETURN; }

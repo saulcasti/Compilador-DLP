@@ -19,7 +19,7 @@ var fibonacci:[8][3]int;
 
 //-------------------------------
 
-p() {}
+//p() {}
 
 
 f(paramReal:real, paramInt:int):int {
