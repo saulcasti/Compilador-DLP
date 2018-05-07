@@ -62,7 +62,7 @@ public class Identificacion extends DefaultVisitor {
 		super.visit(node, funciones.get(node.getNombre()));
 		variables.reset();
 		
-		return super.visit(node, funciones.get(node.getNombre()));
+		return null;
 	}
 //	class Return { Expresion expresion; }
 	public Object visit(Return node, Object param) {
