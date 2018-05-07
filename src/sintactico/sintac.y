@@ -87,16 +87,17 @@ definicionparametroFuncion: 'IDENT' ':' tipo 	{ $$ = new DefParametro($1, $3); }
 	;
 
 
-cuerpo: definicionVariablesFuncion sentencias	{ $$ = new Cuerpo($1, $2); }
+cuerpo: 
+	|	definicionVariablesFuncion sentencias	{ $$ = new Cuerpo($1, $2); }
 	;
 
 
-definicionVariablesFuncion:									{ $$ = new ArrayList(); }
+definicionVariablesFuncion:	definicionVariableLocal			{ $$ = new ArrayList(); $$ = $1;  }
 	|	definicionVariablesFuncion	definicionVariableLocal	{ $$ = $1; ((List)$1).add($2); }
 	;
  
  
-sentencias:				{ $$ = new ArrayList();}
+sentencias:	sentencia			{ $$ = new ArrayList(); $$ = $1;  }
 	|	sentencias	sentencia	{ $$ = $1; ((List)$1).add($2); }
 	;
 
