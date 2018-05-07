@@ -47,7 +47,7 @@ public class Identificacion extends DefaultVisitor {
 		
 		
 		
-		return super.visit(node, param);
+		return null;
 	}
 
 
@@ -67,7 +67,7 @@ public class Identificacion extends DefaultVisitor {
 //	class Return { Expresion expresion; }
 	public Object visit(Return node, Object param) {
 		node.setFuncion((DefFuncion) param);
-		return null;
+		return super.visit(node, param);
 	}
 	
 	//	class Invocacion { String nombre;  List<Expresion> argumentos; }

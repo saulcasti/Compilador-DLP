@@ -20,8 +20,31 @@
 
 <body><pre>
 [ASTPrinter] -------------------------------- line:col  line:col
-raiz == null
 
+<span class="dots"></span>Programa &rarr;                                                  <span class="pos">3:1  7:18    </span><span class="sourceText"></span><span class="posText">f(paramReal:real, paramInt:int):int {</span><span class="sourceText"> ... </span><span class="posText">return resultado</span><span class="sourceText">;</span>
+<span class="dots">·  </span>definicion  <span class="type">List&lt;Definicion&gt;</span> = 
+<span class="dots">·  ·  </span>DefFuncion &rarr;                                          <span class="pos">3:1  7:18    </span><span class="sourceText"></span><span class="posText">f(paramReal:real, paramInt:int):int {</span><span class="sourceText"> ... </span><span class="posText">return resultado</span><span class="sourceText">;</span>
+<span class="dots">·  ·  |  </span>"<span class="value">f</span>"  
+<span class="dots">·  ·  |  </span>parametros  <span class="type">List&lt;DefParametro&gt;</span> = 
+<span class="dots">·  ·  |  ·  </span>DefParametro &rarr;                                  <span class="pos">3:3  3:11    </span><span class="sourceText">f(</span><span class="posText">paramReal</span><span class="sourceText">:real, paramInt:int):int {</span>
+<span class="dots">·  ·  |  ·  |  </span>"<span class="value">paramReal</span>"  
+<span class="dots">·  ·  |  ·  |  </span><span class="value">RealType</span> &rarr;                                   <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
+<span class="dots">·  ·  |  ·  |  </span><span class="value">6</span>  <span class="type">int</span>
+<span class="dots">·  ·  |  ·  </span>DefParametro &rarr;                                  <span class="pos">3:19  3:26   </span><span class="sourceText">f(paramReal:real, </span><span class="posText">paramInt</span><span class="sourceText">:int):int {</span>
+<span class="dots">·  ·  |  ·  |  </span>"<span class="value">paramInt</span>"  
+<span class="dots">·  ·  |  ·  |  </span><span class="value">IntType</span> &rarr;                                    <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
+<span class="dots">·  ·  |  ·  |  </span><span class="value">4</span>  <span class="type">int</span>
+<span class="dots">·  ·  |  </span>Retorno &rarr;                                          <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
+<span class="dots">·  ·  |  ·  </span><span class="value">IntType</span> &rarr;                                       <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
+<span class="dots">·  ·  |  </span>Cuerpo &rarr;                                           <span class="pos">5:7  7:18    </span><span class="sourceText">var </span><span class="posText">resultado:int;</span><span class="sourceText"> ... </span><span class="posText">return resultado</span><span class="sourceText">;</span>
+<span class="dots">·  ·  |  ·  </span>defvariable  <span class="type">List&lt;DefVariable&gt;</span> = 
+<span class="dots">·  ·  |  ·  |  </span>DefVariable &rarr;                                <span class="pos">5:7  5:15    </span><span class="sourceText">var </span><span class="posText">resultado</span><span class="sourceText">:int;</span>
+<span class="dots">·  ·  |  ·  |  ·  </span>"<span class="value">resultado</span>"  
+<span class="dots">·  ·  |  ·  |  ·  </span><span class="value">IntType</span> &rarr;                                 <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
+<span class="dots">·  ·  |  ·  |  ·  </span><span class="value">2</span>  <span class="type">int</span>
+<span class="dots">·  ·  |  ·  </span>sentencia  <span class="type">List&lt;Sentencia&gt;</span> = 
+<span class="dots">·  ·  |  ·  |  </span>Return &rarr;                                     <span class="pos">7:10  7:18   </span><span class="sourceText">return </span><span class="posText">resultado</span><span class="sourceText">;</span>
+<span class="dots">·  ·  |  ·  |  ·  </span>"resultado"  <span class="type">Variable.nombre</span>              <span class="pos">7:10  7:18   </span><span class="sourceText">return </span><span class="posText">resultado</span><span class="sourceText">;</span>
 
 [ASTPrinter] --------------------------------
 </pre>
