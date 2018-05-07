@@ -1,1 +1,8 @@
 /bin/
+.classpath
+src/semantico/ContextMap.java:Zone.Identifier:$DATA
+.project
+src/semantico/ContextMap.java:Zone.Identifier:$DATA
+*.Identifier:$DATA
+*.Identifier:$DATA
+src/semantico/ContextMap.java:Zone.Identifier:$DATA
