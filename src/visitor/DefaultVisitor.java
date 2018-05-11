@@ -183,6 +183,15 @@ public class DefaultVisitor implements Visitor {
 			node.getRight().accept(this, param);
 		return null;
 	}
+	
+	//	class ExpresionBinaria { Expresion left;  String operador;  Expresion right; }
+	public Object visit(ExpresionBooleana node, Object param) {
+		if (node.getLeft() != null)
+			node.getLeft().accept(this, param);
+		if (node.getRight() != null)
+			node.getRight().accept(this, param);
+		return null;
+	}
 
 	//	class Invocacion { String nombre;  List<Expresion> argumentos; }
 	public Object visit(Invocacion node, Object param) {
