@@ -175,18 +175,18 @@ public final static short LITERALREAL=280;
 public final static short LITERALCHAR=281;
 public final static short YYERRCODE=256;
 final static short yylhs[] = {                           -1,
-    0,    1,    1,    2,    2,    2,    3,    7,    6,    6,
-    6,    6,    6,    5,    8,    8,    9,    4,   11,   11,
-   10,   10,   13,   13,   14,   12,   15,   15,   16,   16,
+    0,    1,    1,    2,    2,    2,    3,    7,    8,    6,
+    6,    6,    6,    6,    5,    9,    9,   10,    4,   12,
+   12,   11,   11,   14,   14,   13,   15,   15,   16,   16,
    17,   17,   17,   17,   17,   17,   17,   17,   17,   17,
    17,   17,   17,   18,   18,   18,   18,   18,   18,   18,
    18,   18,   18,   18,   18,   18,   18,   18,   18,   18,
    18,   18,   18,   18,   18,   19,   19,   20,   20,
 };
 final static short yylen[] = {                            2,
-    1,    0,    2,    1,    1,    1,    5,    5,    1,    1,
-    1,    1,    4,    6,    0,    2,    4,    8,    0,    2,
-    0,    1,    1,    3,    3,    2,    0,    2,    0,    2,
+    1,    0,    2,    1,    1,    1,    5,    5,    3,    1,
+    1,    1,    1,    4,    6,    0,    2,    4,    8,    0,
+    2,    0,    1,    1,    3,    2,    0,    2,    0,    2,
     7,    7,   11,    2,    3,    3,    3,    3,    3,    3,
     2,    5,    4,    3,    3,    3,    3,    3,    3,    3,
     3,    3,    3,    3,    3,    3,    7,    1,    1,    1,
@@ -194,11 +194,11 @@ final static short yylen[] = {                            2,
 };
 final static short yydefred[] = {                         2,
     0,    0,    0,    0,    0,    3,    4,    5,    6,    0,
-    0,    0,    0,    0,    0,    0,   23,   15,    0,   12,
-    9,   10,   11,    0,    0,    0,    0,    0,    0,    7,
-   25,    0,    0,   24,    0,    0,   16,    0,   20,   27,
-    0,   14,   13,    0,    0,    0,   18,    0,   28,    0,
-   17,    0,    0,    0,    0,   58,    0,    0,    0,    0,
+    0,    0,    0,    0,   24,    0,    0,   16,    0,   13,
+   10,   11,   12,    0,    0,    0,    0,    0,    0,    7,
+    9,    0,    0,   25,    0,    0,   17,    0,   21,   27,
+    0,   15,   14,    0,    0,    0,   19,    0,   28,    0,
+   18,    0,    0,    0,    0,   58,    0,    0,    0,    0,
     0,    0,    0,    0,   59,   60,   30,    0,    0,    0,
     0,    0,    0,    0,    0,   34,    0,    0,    0,    0,
     0,   41,    0,    0,    0,    0,    0,    0,    0,    0,
@@ -211,12 +211,12 @@ final static short yydefred[] = {                         2,
     0,   29,    0,   33,
 };
 final static short yydgoto[] = {                          1,
-    2,    6,    7,    8,    9,   24,   49,   28,   37,   15,
-   33,   44,   16,   17,   45,   50,   67,   68,  104,  105,
+    2,    6,    7,    8,    9,   24,   49,   15,   28,   37,
+   16,   33,   44,   17,   45,   50,   67,   68,  104,  105,
 };
 final static short yysindex[] = {                         0,
     0, -217, -258,  -23, -256,    0,    0,    0,    0,  -27,
- -238,  -90,  -51,  -13,    9,   12,    0,    0, -206,    0,
+ -238,  -90,  -51,  -13,    0,    9,   12,    0, -206,    0,
     0,    0,    0,    4,  -51,    6, -238, -123,  -28,    0,
     0,  -51,  -57,    0,   10,    8,    0,  -51,    0,    0,
   -51,    0,    0,  -56, -193,   15,    0, -191,    0,   57,
@@ -234,7 +234,7 @@ final static short yysindex[] = {                         0,
 };
 final static short yyrindex[] = {                         0,
     0,  100,    0,    0,    0,    0,    0,    0,    0,    0,
-   60,    0,    0,    0,    0,   61,    0,    0,    0,    0,
+   60,    0,    0,    0,    0,    0,   61,    0,    0,    0,
     0,    0,    0,    0,    0,  -20,    0,    0,    0,    0,
     0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
     0,    0,    0,    0,   21,    0,    0,    0,    0,  -21,
@@ -251,8 +251,8 @@ final static short yyrindex[] = {                         0,
     0,    0,    0,    0,
 };
 final static short yygindex[] = {                         0,
-    0,    0,    0,    0,    0,   -9,    0,    0,    0,    0,
-    0,    0,    0,   80,    0, -101,    0,  849,   11,    0,
+    0,    0,    0,    0,    0,   -9,    0,   80,    0,    0,
+    0,    0,    0,    0,    0, -101,    0,  849,   11,    0,
 };
 final static int YYTABLESIZE=1094;
 static short yytable[];
@@ -269,7 +269,7 @@ yytable = new short[]{                         53,
    69,   32,   52,   51,  114,   73,   74,   75,   32,   84,
   101,  108,   97,  128,  130,  132,  133,  139,  136,   53,
   140,  148,   97,  142,  144,  151,   54,  143,  152,    1,
-   21,   22,   19,   26,   66,   67,   34,   53,    0,  149,
+   22,   23,   20,   26,   66,   67,   34,   53,    0,  149,
    53,  131,    0,    0,   54,   53,    0,   54,    0,    0,
     0,    0,   54,    0,    0,    0,    0,  154,    0,    0,
     0,    0,    0,   76,    0,    0,   82,    0,    0,    0,
@@ -522,6 +522,7 @@ final static String yyrule[] = {
 "definicion : definicionEstructura",
 "definicionVariable : \"VAR\" \"IDENT\" ':' tipo ';'",
 "definicionVariableLocal : \"VAR\" \"IDENT\" ':' tipo ';'",
+"definicionparametroFuncion : \"IDENT\" ':' tipo",
 "tipo : \"INT\"",
 "tipo : \"REAL\"",
 "tipo : \"CHARACTER\"",
@@ -538,7 +539,6 @@ final static String yyrule[] = {
 "parametrosFuncion : parametroFuncion",
 "parametroFuncion : definicionparametroFuncion",
 "parametroFuncion : parametroFuncion ',' definicionparametroFuncion",
-"definicionparametroFuncion : \"IDENT\" ':' tipo",
 "cuerpo : definicionVariablesFuncion sentencias",
 "definicionVariablesFuncion :",
 "definicionVariablesFuncion : definicionVariablesFuncion definicionVariableLocal",
@@ -803,72 +803,72 @@ case 8:
 { yyval = new DefVariable(val_peek(3),val_peek(1),1); }
 break;
 case 9:
-//#line 47 "sintac.y"
-{ yyval = new IntType(); }
+//#line 46 "sintac.y"
+{ yyval = new DefVariable(val_peek(2), val_peek(0), 2); }
 break;
 case 10:
-//#line 48 "sintac.y"
-{ yyval = new RealType(); }
+//#line 50 "sintac.y"
+{ yyval = new IntType(); }
 break;
 case 11:
-//#line 49 "sintac.y"
-{ yyval = new CharType(); }
+//#line 51 "sintac.y"
+{ yyval = new RealType(); }
 break;
 case 12:
-//#line 50 "sintac.y"
-{ yyval = new IdentType(val_peek(0)); }
+//#line 52 "sintac.y"
+{ yyval = new CharType(); }
 break;
 case 13:
-//#line 51 "sintac.y"
-{ yyval = new ArrayType(new LiteralInt(val_peek(2)), val_peek(0)); }
+//#line 53 "sintac.y"
+{ yyval = new IdentType(val_peek(0)); }
 break;
 case 14:
-//#line 55 "sintac.y"
-{ yyval = new DefEstructura(val_peek(4), val_peek(2)); }
+//#line 54 "sintac.y"
+{ yyval = new ArrayType(new LiteralInt(val_peek(2)), val_peek(0)); }
 break;
 case 15:
-//#line 59 "sintac.y"
-{ yyval = new ArrayList(); }
+//#line 58 "sintac.y"
+{ yyval = new DefEstructura(val_peek(4), val_peek(2)); }
 break;
 case 16:
-//#line 60 "sintac.y"
-{ yyval = val_peek(1); ((List)val_peek(1)).add(val_peek(0)); }
+//#line 62 "sintac.y"
+{ yyval = new ArrayList(); }
 break;
 case 17:
 //#line 63 "sintac.y"
-{ yyval = new DefCampo(val_peek(3), val_peek(1)); }
+{ yyval = val_peek(1); ((List)val_peek(1)).add(val_peek(0)); }
 break;
 case 18:
-//#line 67 "sintac.y"
-{ yyval = new DefFuncion(val_peek(7), val_peek(5), val_peek(3), val_peek(1)); }
+//#line 66 "sintac.y"
+{ yyval = new DefCampo(val_peek(3), val_peek(1)); }
 break;
 case 19:
-//#line 71 "sintac.y"
-{ yyval = new Retorno(null); }
+//#line 70 "sintac.y"
+{ yyval = new DefFuncion(val_peek(7), val_peek(5), val_peek(3), val_peek(1)); }
 break;
 case 20:
-//#line 72 "sintac.y"
-{ yyval = new Retorno(val_peek(0)); }
+//#line 74 "sintac.y"
+{ yyval = new Retorno(null); }
 break;
 case 21:
-//#line 76 "sintac.y"
-{ yyval = new ArrayList(); }
+//#line 75 "sintac.y"
+{ yyval = new Retorno(val_peek(0)); }
 break;
 case 22:
-//#line 77 "sintac.y"
-{ yyval = val_peek(0); }
+//#line 79 "sintac.y"
+{ yyval = new ArrayList(); }
 break;
 case 23:
-//#line 81 "sintac.y"
-{yyval = new ArrayList(); ((List)yyval).add(val_peek(0));}
+//#line 80 "sintac.y"
+{ yyval = val_peek(0); }
 break;
 case 24:
-//#line 82 "sintac.y"
-{ yyval = val_peek(2); ((List)val_peek(2)).add(val_peek(0)); }
+//#line 84 "sintac.y"
+{yyval = new ArrayList(); ((List)yyval).add(val_peek(0));}
 break;
 case 25:
-//#line 86 "sintac.y"
-{ yyval = new DefParametro(val_peek(2), val_peek(0)); }
+//#line 85 "sintac.y"
+{ yyval = val_peek(2); ((List)val_peek(2)).add(val_peek(0)); }
 break;
 case 26:
 //#line 90 "sintac.y"

@@ -154,17 +154,6 @@ public class ASTPrinter extends DefaultVisitor {
 		return null;
 	}
 
-	//	class DefParametro { String nombre;  Tipo tipo; }
-	public Object visit(DefParametro node, Object param) {
-		int indent = ((Integer)param).intValue();
-
-		printName(indent, "DefParametro", node, false);
-
-		print(indent + 1, "nombre", "String", node.getNombre());
-		visit(indent + 1, "tipo", "Tipo",node.getTipo());
-		print(indent + 1, "direccion", "int", node.getDireccion());
-		return null;
-	}
 
 	//	class IntType {  }
 	public Object visit(IntType node, Object param) {
@@ -341,11 +330,22 @@ public class ASTPrinter extends DefaultVisitor {
 		return null;
 	}
 
-	//	class ExpresionBinaria { Expresion left;  String operador;  Expresion right; }
+	//	class ExpresionAritmetica { Expresion left;  String operador;  Expresion right; }
 	public Object visit(ExpresionAritmetica node, Object param) {
 		int indent = ((Integer)param).intValue();
 
-		printName(indent, "ExpresionBinaria", node, false);
+		printName(indent, "ExpresionAritmetica", node, false);
+
+		visit(indent + 1, "left", "Expresion",node.getLeft());
+		print(indent + 1, "operador", "String", node.getOperador());
+		visit(indent + 1, "right", "Expresion",node.getRight());
+		return null;
+	}
+	//	class ExpresionBooleana { Expresion left;  String operador;  Expresion right; }
+	public Object visit(ExpresionBooleana node, Object param) {
+		int indent = ((Integer)param).intValue();
+
+		printName(indent, "ExpresionBooleana", node, false);
 
 		visit(indent + 1, "left", "Expresion",node.getLeft());
 		print(indent + 1, "operador", "String", node.getOperador());

@@ -67,10 +67,10 @@ public class SeleccionDeInstrucciones extends DefaultVisitor {
 		return null;
 	}
 	
-//	class DefFuncion { String nombre;  List<DefParametro> parametros;  Retorno retorno;  Cuerpo cuerpo; }
+//	class DefFuncion { String nombre;  List<DefVariable> parametros;  Retorno retorno;  Cuerpo cuerpo; }
 	public Object visit(DefFuncion node, Object param) {
 		genera("#FUNC "+ node.getNombre());
-		for(DefParametro def: node.getParametros()) {
+		for(DefVariable def: node.getParametros()) {
 			genera("#PARAM "+ def.getNombre() + ":" + def.getTipo().getNombreMAPL());
 		}
 		
@@ -83,7 +83,7 @@ public class SeleccionDeInstrucciones extends DefaultVisitor {
 		
 		if(node.getRetorno().getTipo() == null) {
 			int sumaVariables=getSizeVariables(node.getCuerpo().getDefvariable());
-			int sumaParametros=getSizeParam(node.getParametros());
+			int sumaParametros=getSizeVariables(node.getParametros());
 			
 			genera("ret "+0 +","+sumaVariables+","+sumaParametros);
 		}
@@ -99,13 +99,6 @@ public class SeleccionDeInstrucciones extends DefaultVisitor {
 		return suma;
 	}
 	
-	private int getSizeParam(List<DefParametro> definiciones) {
-		int suma=0;
-		for(DefParametro def:definiciones) {
-			suma += def.getTipo().getSize();
-		}
-		return suma;
-	}
 	
 //	class Cuerpo { List<DefVariable> defvariable;  List<Sentencia> sentencia; }
 	public Object visit(Cuerpo node, Object param) {
@@ -128,7 +121,7 @@ public class SeleccionDeInstrucciones extends DefaultVisitor {
 	public Object visit(Return node, Object param) {
 
 		int sumaVariablesLocales = getSizeVariables(node.getFuncion().getCuerpo().getDefvariable());
-		int sumaParametros=getSizeParam(node.getFuncion().getParametros());
+		int sumaParametros=getSizeVariables(node.getFuncion().getParametros());
 		int tamanioReturn=node.getExpresion().getTipo().getSize();
 		genera("#line " + node.getEnd().getLine());
 		genera("ret "+tamanioReturn +","+sumaVariablesLocales+","+sumaParametros);

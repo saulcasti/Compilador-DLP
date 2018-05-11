@@ -43,6 +43,9 @@ definicionVariable: 'VAR' 'IDENT' ':' tipo ';'	{ $$ = new DefVariable($2,$4,0); 
 definicionVariableLocal: 'VAR' 'IDENT' ':' tipo ';'	{ $$ = new DefVariable($2,$4,1); }
 	;
 
+definicionparametroFuncion: 'IDENT' ':' tipo 	{ $$ = new DefVariable($1, $3, 2); } 
+	;
+	
 
 tipo: 'INT'							{ $$ = new IntType(); }
 	|	'REAL'						{ $$ = new RealType(); }
@@ -83,9 +86,6 @@ parametroFuncion: definicionparametroFuncion 				{$$ = new ArrayList(); ((List)$
 	;
 	
 	
-definicionparametroFuncion: 'IDENT' ':' tipo 	{ $$ = new DefParametro($1, $3); } 
-	;
-
 
 cuerpo: definicionVariablesFuncion sentencias	{ $$ = new Cuerpo($1, $2); }
 	;

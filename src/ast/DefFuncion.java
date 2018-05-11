@@ -7,11 +7,11 @@ package ast;
 import java.util.*;
 import visitor.*;
 
-//	defFuncion:definicion -> nombre:String  parametros:defParametro*  retorno:retorno  cuerpo:cuerpo
+//	defFuncion:definicion -> nombre:String  parametros:defaVariable*  retorno:retorno  cuerpo:cuerpo
 
 public class DefFuncion extends AbstractDefinicion {
 
-	public DefFuncion(String nombre, List<DefParametro> parametros, Retorno retorno, Cuerpo cuerpo) {
+	public DefFuncion(String nombre, List<DefVariable> parametros, Retorno retorno, Cuerpo cuerpo) {
 		this.nombre = nombre;
 		this.parametros = parametros;
 		this.retorno = retorno;
@@ -23,7 +23,7 @@ public class DefFuncion extends AbstractDefinicion {
 	@SuppressWarnings("unchecked")
 	public DefFuncion(Object nombre, Object parametros, Object retorno, Object cuerpo) {
 		this.nombre = (nombre instanceof Token) ? ((Token)nombre).getLexeme() : (String) nombre;
-		this.parametros = (List<DefParametro>) parametros;
+		this.parametros = (List<DefVariable>) parametros;
 		this.retorno = (Retorno) retorno;
 		this.cuerpo = (Cuerpo) cuerpo;
 
@@ -37,10 +37,10 @@ public class DefFuncion extends AbstractDefinicion {
 		this.nombre = nombre;
 	}
 
-	public List<DefParametro> getParametros() {
+	public List<DefVariable> getParametros() {
 		return parametros;
 	}
-	public void setParametros(List<DefParametro> parametros) {
+	public void setParametros(List<DefVariable> parametros) {
 		this.parametros = parametros;
 	}
 
@@ -64,7 +64,7 @@ public class DefFuncion extends AbstractDefinicion {
 	}
 
 	private String nombre;
-	private List<DefParametro> parametros;
+	private List<DefVariable> parametros;
 	private Retorno retorno;
 	private Cuerpo cuerpo;
 }

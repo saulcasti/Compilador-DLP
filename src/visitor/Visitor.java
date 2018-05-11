@@ -12,7 +12,6 @@ public interface Visitor {
 	public Object visit(DefFuncion node, Object param);
 	public Object visit(Retorno node, Object param);
 	public Object visit(Cuerpo node, Object param);
-	public Object visit(DefParametro node, Object param);
 	public Object visit(IntType node, Object param);
 	public Object visit(RealType node, Object param);
 	public Object visit(CharType node, Object param);

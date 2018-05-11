@@ -51,12 +51,6 @@ public class DefaultVisitor implements Visitor {
 		return null;
 	}
 
-	//	class DefParametro { String nombre;  Tipo tipo; }
-	public Object visit(DefParametro node, Object param) {
-		if (node.getTipo() != null)
-			node.getTipo().accept(this, param);
-		return null;
-	}
 
 	//	class IntType {  }
 	public Object visit(IntType node, Object param) {

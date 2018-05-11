@@ -28,16 +28,7 @@ public class Identificacion extends DefaultVisitor {
 		variables.put(node.getNombre(), node);
 		return super.visit(node, param);
 	}
-	
-	//	class DefParametro { String nombre;  Tipo tipo; }
-	public Object visit(DefParametro node, Object param) {
-		
-		DefVariable definicion = variables.getFromTop(node.getNombre());
-		predicado(definicion == null, "Variable ya definida: " + node.getNombre(), node.getStart());
-		
-		variables.put(node.getNombre(), new DefVariable(node.getNombre(), node.getTipo(), 1)); // false == local
-		return super.visit(node, param);
-	}
+
 	
 //	class Variable { String nombre; }
 	public Object visit(Variable node, Object param) {

@@ -205,11 +205,13 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 		}
 		
 		
-		//	class DefParametro { String nombre;  Tipo tipo; }
-		public Object visit(DefParametro node, Object param) {
-			super.visit(node, param);
-			predicado(node.getTipo().getClass() !=  ArrayType.class, 
-					"Error. Definición de función - Los parametros han de ser de tipos simples",node.getStart());
+		//	class DefVariable { String nombre;  Tipo tipo; }
+		public Object visit(DefVariable node, Object param) {
+			if(node.getAmbito() == 3) {
+				super.visit(node, param);
+				predicado(node.getTipo().getClass() !=  ArrayType.class, 
+						"Error. Definición de función - Los parametros han de ser de tipos simples",node.getStart());
+			}
 			return null;
 		}
 		
@@ -295,7 +297,7 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 
 			node.setTipo(node.getDefFuncion().getRetorno().getTipo());
 
-			List<DefParametro> parametros = node.getDefFuncion().getParametros();
+			List<DefVariable> parametros = node.getDefFuncion().getParametros();
 			if(parametros.size() != node.getArgumentos().size()) {
 				predicado(parametros.size() == node.getArgumentos().size(), 
 						"Error. Invocación - El número de argumentos es incorrecto",node.getStart());
@@ -317,7 +319,7 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 		public Object visit(LlamadaFuncionSentencia node, Object param) {
 			super.visit(node, param);
 			if(node.getDefFuncion() !=null) {
-				List<DefParametro> parametros = node.getDefFuncion().getParametros();
+				List<DefVariable> parametros = node.getDefFuncion().getParametros();
 				if(parametros.size() != node.getArgumentos().size()) {
 					predicado(parametros.size() == node.getArgumentos().size(), 
 							"Error. Invocación Sentencia - El número de argumentos es incorrecto",node.getStart());

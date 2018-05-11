@@ -5,11 +5,10 @@ NODES
 programa -> definicion* ;
 
 defVariable:definicion -> nombre:string tipo ambito:int;
-defFuncion:definicion -> nombre:string parametros:defParametro* retorno cuerpo;
+defFuncion:definicion -> nombre:string parametros:defVariable* retorno cuerpo;
 
 retorno -> tipo ;
 cuerpo -> defVariable* sentencia* ;
-defParametro -> nombre:string tipo ;
 
 intType:tipo -> ;
 realType:tipo -> ;

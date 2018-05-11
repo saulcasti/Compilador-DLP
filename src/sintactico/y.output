@@ -13,31 +13,31 @@
 
    8  definicionVariableLocal : "VAR" "IDENT" ':' tipo ';'
 
-   9  tipo : "INT"
-  10       | "REAL"
-  11       | "CHARACTER"
-  12       | "IDENT"
-  13       | '[' "LITERALINT" ']' tipo
+   9  definicionparametroFuncion : "IDENT" ':' tipo
 
-  14  definicionEstructura : "STRUCT" "IDENT" '{' definicionCampos '}' ';'
+  10  tipo : "INT"
+  11       | "REAL"
+  12       | "CHARACTER"
+  13       | "IDENT"
+  14       | '[' "LITERALINT" ']' tipo
 
-  15  definicionCampos :
-  16                   | definicionCampos definicionCampo
+  15  definicionEstructura : "STRUCT" "IDENT" '{' definicionCampos '}' ';'
 
-  17  definicionCampo : "IDENT" ':' tipo ';'
+  16  definicionCampos :
+  17                   | definicionCampos definicionCampo
 
-  18  definicionFuncion : "IDENT" '(' parametrosFuncion ')' retorno '{' cuerpo '}'
+  18  definicionCampo : "IDENT" ':' tipo ';'
 
-  19  retorno :
-  20          | ':' tipo
+  19  definicionFuncion : "IDENT" '(' parametrosFuncion ')' retorno '{' cuerpo '}'
 
-  21  parametrosFuncion :
-  22                    | parametroFuncion
+  20  retorno :
+  21          | ':' tipo
 
-  23  parametroFuncion : definicionparametroFuncion
-  24                   | parametroFuncion ',' definicionparametroFuncion
+  22  parametrosFuncion :
+  23                    | parametroFuncion
 
-  25  definicionparametroFuncion : "IDENT" ':' tipo
+  24  parametroFuncion : definicionparametroFuncion
+  25                   | parametroFuncion ',' definicionparametroFuncion
 
   26  cuerpo : definicionVariablesFuncion sentencias
 
@@ -129,14 +129,14 @@ state 3
 
 
 state 4
-	definicionFuncion : "IDENT" . '(' parametrosFuncion ')' retorno '{' cuerpo '}'  (18)
+	definicionFuncion : "IDENT" . '(' parametrosFuncion ')' retorno '{' cuerpo '}'  (19)
 
 	'('  shift 11
 	.  error
 
 
 state 5
-	definicionEstructura : "STRUCT" . "IDENT" '{' definicionCampos '}' ';'  (14)
+	definicionEstructura : "STRUCT" . "IDENT" '{' definicionCampos '}' ';'  (15)
 
 	"IDENT"  shift 12
 	.  error
@@ -174,19 +174,19 @@ state 10
 
 
 state 11
-	definicionFuncion : "IDENT" '(' . parametrosFuncion ')' retorno '{' cuerpo '}'  (18)
-	parametrosFuncion : .  (21)
+	definicionFuncion : "IDENT" '(' . parametrosFuncion ')' retorno '{' cuerpo '}'  (19)
+	parametrosFuncion : .  (22)
 
 	"IDENT"  shift 14
-	')'  reduce 21
+	')'  reduce 22
 
-	parametrosFuncion  goto 15
-	parametroFuncion  goto 16
-	definicionparametroFuncion  goto 17
+	definicionparametroFuncion  goto 15
+	parametrosFuncion  goto 16
+	parametroFuncion  goto 17
 
 
 state 12
-	definicionEstructura : "STRUCT" "IDENT" . '{' definicionCampos '}' ';'  (14)
+	definicionEstructura : "STRUCT" "IDENT" . '{' definicionCampos '}' ';'  (15)
 
 	'{'  shift 18
 	.  error
@@ -206,71 +206,71 @@ state 13
 
 
 state 14
-	definicionparametroFuncion : "IDENT" . ':' tipo  (25)
+	definicionparametroFuncion : "IDENT" . ':' tipo  (9)
 
 	':'  shift 25
 	.  error
 
 
 state 15
-	definicionFuncion : "IDENT" '(' parametrosFuncion . ')' retorno '{' cuerpo '}'  (18)
+	parametroFuncion : definicionparametroFuncion .  (24)
+
+	.  reduce 24
+
+
+state 16
+	definicionFuncion : "IDENT" '(' parametrosFuncion . ')' retorno '{' cuerpo '}'  (19)
 
 	')'  shift 26
 	.  error
 
 
-state 16
-	parametrosFuncion : parametroFuncion .  (22)
-	parametroFuncion : parametroFuncion . ',' definicionparametroFuncion  (24)
+state 17
+	parametrosFuncion : parametroFuncion .  (23)
+	parametroFuncion : parametroFuncion . ',' definicionparametroFuncion  (25)
 
 	','  shift 27
-	')'  reduce 22
-
-
-state 17
-	parametroFuncion : definicionparametroFuncion .  (23)
-
-	.  reduce 23
+	')'  reduce 23
 
 
 state 18
-	definicionEstructura : "STRUCT" "IDENT" '{' . definicionCampos '}' ';'  (14)
-	definicionCampos : .  (15)
+	definicionEstructura : "STRUCT" "IDENT" '{' . definicionCampos '}' ';'  (15)
+	definicionCampos : .  (16)
 
-	.  reduce 15
+	.  reduce 16
 
 	definicionCampos  goto 28
 
 
 state 19
-	tipo : '[' . "LITERALINT" ']' tipo  (13)
+	tipo : '[' . "LITERALINT" ']' tipo  (14)
 
 	"LITERALINT"  shift 29
 	.  error
 
 
 state 20
-	tipo : "IDENT" .  (12)
+	tipo : "IDENT" .  (13)
 
-	.  reduce 12
+	.  reduce 13
 
 
 state 21
-	tipo : "INT" .  (9)
-
-	.  reduce 9
-
-
-state 22
-	tipo : "REAL" .  (10)
+	tipo : "INT" .  (10)
 
 	.  reduce 10
 
 
-state 23
-	tipo : "CHARACTER" .  (11)
+state 22
+	tipo : "REAL" .  (11)
 
 	.  reduce 11
+
+
+state 23
+	tipo : "CHARACTER" .  (12)
+
+	.  reduce 12
 
 
 state 24
@@ -281,7 +281,7 @@ state 24
 
 
 state 25
-	definicionparametroFuncion : "IDENT" ':' . tipo  (25)
+	definicionparametroFuncion : "IDENT" ':' . tipo  (9)
 
 	'['  shift 19
 	"IDENT"  shift 20
@@ -294,17 +294,17 @@ state 25
 
 
 state 26
-	definicionFuncion : "IDENT" '(' parametrosFuncion ')' . retorno '{' cuerpo '}'  (18)
-	retorno : .  (19)
+	definicionFuncion : "IDENT" '(' parametrosFuncion ')' . retorno '{' cuerpo '}'  (19)
+	retorno : .  (20)
 
 	':'  shift 32
-	'{'  reduce 19
+	'{'  reduce 20
 
 	retorno  goto 33
 
 
 state 27
-	parametroFuncion : parametroFuncion ',' . definicionparametroFuncion  (24)
+	parametroFuncion : parametroFuncion ',' . definicionparametroFuncion  (25)
 
 	"IDENT"  shift 14
 	.  error
@@ -313,8 +313,8 @@ state 27
 
 
 state 28
-	definicionEstructura : "STRUCT" "IDENT" '{' definicionCampos . '}' ';'  (14)
-	definicionCampos : definicionCampos . definicionCampo  (16)
+	definicionEstructura : "STRUCT" "IDENT" '{' definicionCampos . '}' ';'  (15)
+	definicionCampos : definicionCampos . definicionCampo  (17)
 
 	"IDENT"  shift 35
 	'}'  shift 36
@@ -324,7 +324,7 @@ state 28
 
 
 state 29
-	tipo : '[' "LITERALINT" . ']' tipo  (13)
+	tipo : '[' "LITERALINT" . ']' tipo  (14)
 
 	']'  shift 38
 	.  error
@@ -337,13 +337,13 @@ state 30
 
 
 state 31
-	definicionparametroFuncion : "IDENT" ':' tipo .  (25)
+	definicionparametroFuncion : "IDENT" ':' tipo .  (9)
 
-	.  reduce 25
+	.  reduce 9
 
 
 state 32
-	retorno : ':' . tipo  (20)
+	retorno : ':' . tipo  (21)
 
 	'['  shift 19
 	"IDENT"  shift 20
@@ -356,40 +356,40 @@ state 32
 
 
 state 33
-	definicionFuncion : "IDENT" '(' parametrosFuncion ')' retorno . '{' cuerpo '}'  (18)
+	definicionFuncion : "IDENT" '(' parametrosFuncion ')' retorno . '{' cuerpo '}'  (19)
 
 	'{'  shift 40
 	.  error
 
 
 state 34
-	parametroFuncion : parametroFuncion ',' definicionparametroFuncion .  (24)
+	parametroFuncion : parametroFuncion ',' definicionparametroFuncion .  (25)
 
-	.  reduce 24
+	.  reduce 25
 
 
 state 35
-	definicionCampo : "IDENT" . ':' tipo ';'  (17)
+	definicionCampo : "IDENT" . ':' tipo ';'  (18)
 
 	':'  shift 41
 	.  error
 
 
 state 36
-	definicionEstructura : "STRUCT" "IDENT" '{' definicionCampos '}' . ';'  (14)
+	definicionEstructura : "STRUCT" "IDENT" '{' definicionCampos '}' . ';'  (15)
 
 	';'  shift 42
 	.  error
 
 
 state 37
-	definicionCampos : definicionCampos definicionCampo .  (16)
+	definicionCampos : definicionCampos definicionCampo .  (17)
 
-	.  reduce 16
+	.  reduce 17
 
 
 state 38
-	tipo : '[' "LITERALINT" ']' . tipo  (13)
+	tipo : '[' "LITERALINT" ']' . tipo  (14)
 
 	'['  shift 19
 	"IDENT"  shift 20
@@ -402,13 +402,13 @@ state 38
 
 
 state 39
-	retorno : ':' tipo .  (20)
+	retorno : ':' tipo .  (21)
 
-	.  reduce 20
+	.  reduce 21
 
 
 state 40
-	definicionFuncion : "IDENT" '(' parametrosFuncion ')' retorno '{' . cuerpo '}'  (18)
+	definicionFuncion : "IDENT" '(' parametrosFuncion ')' retorno '{' . cuerpo '}'  (19)
 	definicionVariablesFuncion : .  (27)
 
 	.  reduce 27
@@ -418,7 +418,7 @@ state 40
 
 
 state 41
-	definicionCampo : "IDENT" ':' . tipo ';'  (17)
+	definicionCampo : "IDENT" ':' . tipo ';'  (18)
 
 	'['  shift 19
 	"IDENT"  shift 20
@@ -431,19 +431,19 @@ state 41
 
 
 state 42
-	definicionEstructura : "STRUCT" "IDENT" '{' definicionCampos '}' ';' .  (14)
+	definicionEstructura : "STRUCT" "IDENT" '{' definicionCampos '}' ';' .  (15)
+
+	.  reduce 15
+
+
+state 43
+	tipo : '[' "LITERALINT" ']' tipo .  (14)
 
 	.  reduce 14
 
 
-state 43
-	tipo : '[' "LITERALINT" ']' tipo .  (13)
-
-	.  reduce 13
-
-
 state 44
-	definicionFuncion : "IDENT" '(' parametrosFuncion ')' retorno '{' cuerpo . '}'  (18)
+	definicionFuncion : "IDENT" '(' parametrosFuncion ')' retorno '{' cuerpo . '}'  (19)
 
 	'}'  shift 47
 	.  error
@@ -476,16 +476,16 @@ state 45
 
 
 state 46
-	definicionCampo : "IDENT" ':' tipo . ';'  (17)
+	definicionCampo : "IDENT" ':' tipo . ';'  (18)
 
 	';'  shift 51
 	.  error
 
 
 state 47
-	definicionFuncion : "IDENT" '(' parametrosFuncion ')' retorno '{' cuerpo '}' .  (18)
+	definicionFuncion : "IDENT" '(' parametrosFuncion ')' retorno '{' cuerpo '}' .  (19)
 
-	.  reduce 18
+	.  reduce 19
 
 
 state 48
@@ -526,9 +526,9 @@ state 50
 
 
 state 51
-	definicionCampo : "IDENT" ':' tipo ';' .  (17)
+	definicionCampo : "IDENT" ':' tipo ';' .  (18)
 
-	.  reduce 17
+	.  reduce 18
 
 
 state 52
