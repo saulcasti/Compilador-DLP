@@ -184,7 +184,7 @@ public class DefaultVisitor implements Visitor {
 		return null;
 	}
 	
-	//	class ExpresionBinaria { Expresion left;  String operador;  Expresion right; }
+	//	class ExpresionBooleana{ Expresion left;  String operador;  Expresion right; }
 	public Object visit(ExpresionBooleana node, Object param) {
 		if (node.getLeft() != null)
 			node.getLeft().accept(this, param);

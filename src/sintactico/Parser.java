@@ -964,35 +964,35 @@ case 48:
 break;
 case 49:
 //#line 125 "sintac.y"
-{ yyval = new ExpresionBinaria(val_peek(2), ">", val_peek(0)); }
+{ yyval = new ExpresionBooleana(val_peek(2), ">", val_peek(0)); }
 break;
 case 50:
 //#line 126 "sintac.y"
-{ yyval = new ExpresionBinaria(val_peek(2), "<", val_peek(0)); }
+{ yyval = new ExpresionBooleana(val_peek(2), "<", val_peek(0)); }
 break;
 case 51:
 //#line 127 "sintac.y"
-{ yyval = new ExpresionBinaria(val_peek(2), "IGUAL", val_peek(0)); }
+{ yyval = new ExpresionBooleana(val_peek(2), "IGUAL", val_peek(0)); }
 break;
 case 52:
 //#line 128 "sintac.y"
-{ yyval = new ExpresionBinaria(val_peek(2), "AND", val_peek(0)); }
+{ yyval = new ExpresionBooleana(val_peek(2), "AND", val_peek(0)); }
 break;
 case 53:
 //#line 129 "sintac.y"
-{ yyval = new ExpresionBinaria(val_peek(2), "OR", val_peek(0)); }
+{ yyval = new ExpresionBooleana(val_peek(2), "OR", val_peek(0)); }
 break;
 case 54:
 //#line 130 "sintac.y"
-{ yyval = new ExpresionBinaria(val_peek(2), "MAYORIGUAL", val_peek(0)); }
+{ yyval = new ExpresionBooleana(val_peek(2), "MAYORIGUAL", val_peek(0)); }
 break;
 case 55:
 //#line 131 "sintac.y"
-{ yyval = new ExpresionBinaria(val_peek(2), "DISTINTO", val_peek(0)); }
+{ yyval = new ExpresionBooleana(val_peek(2), "DISTINTO", val_peek(0)); }
 break;
 case 56:
 //#line 132 "sintac.y"
-{ yyval = new ExpresionBinaria(val_peek(2), "MENORIGUAL", val_peek(0)); }
+{ yyval = new ExpresionBooleana(val_peek(2), "MENORIGUAL", val_peek(0)); }
 break;
 case 57:
 //#line 133 "sintac.y"
