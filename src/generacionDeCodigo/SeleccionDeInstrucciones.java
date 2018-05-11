@@ -51,17 +51,11 @@ public class SeleccionDeInstrucciones extends DefaultVisitor {
 	public Object visit(DefVariable node, Object param) {
 		if(node.getAmbito() == true)
 			genera("#GLOBAL " + node.getNombre() + ":" + node.getTipo().getNombreMAPL());
-		else
-			genera("#LOCAL " + node.getNombre() + ":" + node.getTipo().getNombreMAPL());
-		return null;
-	}
-	
-	//	class DefParametro { String nombre;  Tipo tipo; }
-	public Object visit(DefParametro node, Object param) {
-		genera("#PARAM " + node.getNombre() + ":" + node.getTipo().getNombreMAPL());
 		
 		return null;
 	}
+	
+
 
 	//	class DefEstructura { String nombre;  List<DefCampo> defcampo; }
 	public Object visit(DefEstructura node, Object param) {
@@ -75,8 +69,18 @@ public class SeleccionDeInstrucciones extends DefaultVisitor {
 	
 //	class DefFuncion { String nombre;  List<DefParametro> parametros;  Retorno retorno;  Cuerpo cuerpo; }
 	public Object visit(DefFuncion node, Object param) {
-		genera("#FUNC "+node.getNombre() +":");
-		super.visit(node, param);
+		genera("#FUNC "+ node.getNombre());
+		for(DefParametro def: node.getParametros()) {
+			genera("#PARAM "+ def.getNombre() + ":" + def.getTipo().getNombreMAPL());
+		}
+		
+		genera("#RET " + ((node.getRetorno().getTipo()==null)? "VOID": node.getRetorno().getTipo().getNombreMAPL()));
+		
+		super.visit(node, true); //Para imprimir directivas opcionales que son de mucha ayuda a la hora de comprobar si un fichero de salida tiene errores.
+		
+		genera(node.getNombre() +":");
+		super.visit(node, false);
+		
 		if(node.getRetorno().getTipo() == null) {
 			int sumaVariables=getSizeVariables(node.getCuerpo().getDefvariable());
 			int sumaParametros=getSizeParam(node.getParametros());
@@ -105,23 +109,33 @@ public class SeleccionDeInstrucciones extends DefaultVisitor {
 	
 //	class Cuerpo { List<DefVariable> defvariable;  List<Sentencia> sentencia; }
 	public Object visit(Cuerpo node, Object param) {
-		int sumaVariablesLocales = getSizeVariables(node.getDefvariable());
-		genera("enter " + sumaVariablesLocales);
-		visitChildren(node.getDefvariable(), param);
-		visitChildren(node.getSentencia(), param);
+		if((Boolean)param ==false) {
+			int sumaVariablesLocales = getSizeVariables(node.getDefvariable());
+			genera("enter " + sumaVariablesLocales);
+			visitChildren(node.getDefvariable(), param);
+			visitChildren(node.getSentencia(), param);
+		}
+		else {
+			for (DefVariable def: node.getDefvariable()) {
+				genera("#LOCAL " + def.getNombre() + ":" + def.getTipo().getNombreMAPL());
+			}
+			
+		}
 		return null;
 	}
-	
-//	class Return { Expresion expresion; }
+
+	//	class Return { Expresion expresion; }
 	public Object visit(Return node, Object param) {
+
 		int sumaVariablesLocales = getSizeVariables(node.getFuncion().getCuerpo().getDefvariable());
 		int sumaParametros=getSizeParam(node.getFuncion().getParametros());
 		int tamanioReturn=node.getExpresion().getTipo().getSize();
 		genera("#line " + node.getEnd().getLine());
 		genera("ret "+tamanioReturn +","+sumaVariablesLocales+","+sumaParametros);
+
 		return null;
 	}
-	
+
 	
 	//	class Print { Expresion expresion; }
 	public Object visit(Print node, Object param) {

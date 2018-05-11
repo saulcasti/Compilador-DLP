@@ -14,16 +14,20 @@ halt
 }
 #GLOBAL acme:2 * Empresa
 #GLOBAL fibonacci:8 * 3 * int
-#FUNC p:
+#FUNC p
+#RET VOID
+p:
 enter 0
 ret 0,0,0
-#FUNC f:
+#FUNC f
 #PARAM paramReal:float
 #PARAM paramInt:int
-enter 7
+#RET int
 #LOCAL localReal:float
 #LOCAL digito:char
 #LOCAL resultado:int
+f:
+enter 7
 #line 30
 pusha BP
 push 4
@@ -83,9 +87,11 @@ storei
 finIf1:
 #line 39
 ret 2,7,6
-#FUNC inicializa:
-enter 2
+#FUNC inicializa
+#RET VOID
 #LOCAL i:int
+inicializa:
+enter 2
 #line 46
 pusha 11
 push 0
@@ -249,10 +255,12 @@ storei
 jmp while1
 finWhile1:
 ret 0,2,0
-#FUNC main:
-enter 4
+#FUNC main
+#RET VOID
 #LOCAL i:int
 #LOCAL j:int
+main:
+enter 4
 #line 64
 call p
 pop
