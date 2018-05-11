@@ -43,7 +43,7 @@ storef
 pusha BP
 push 5
 add
-pushb '0'
+pushb 48
 storeb
 pusha BP
 push 0
@@ -274,20 +274,20 @@ storei
 pusha 0
 push 2
 add
-pushb '0'
+pushb 48
 storeb
 #line 68
 pusha 0
 push 0
 add
-pushb '0'
+pushb 48
 b2i
 storei
 #line 70
 call f
 outi
 #line 71
-pushb '\n'
+pushb 12
 outb
 #line 72
 call f
@@ -310,7 +310,7 @@ push 8
 lti
 jz finWhile2
 #line 77
-pushb '('
+pushb 40
 outb
 #line 78
 pusha BP
@@ -321,10 +321,10 @@ push 1
 addi
 outi
 #line 79
-pushb ')'
+pushb 41
 outb
 #line 80
-pushb ' '
+pushb 32
 outb
 #line 81
 pusha 11
@@ -342,7 +342,7 @@ add
 loadi
 outi
 #line 82
-pushb '+'
+pushb 43
 outb
 #line 83
 pusha 11
@@ -360,7 +360,7 @@ add
 loadi
 outi
 #line 84
-pushb '='
+pushb 61
 outb
 #line 85
 pusha 11
@@ -378,7 +378,7 @@ add
 loadi
 outi
 #line 86
-pushb '\n'
+pushb 12
 outb
 #line 87
 pusha BP
@@ -426,7 +426,7 @@ add
 loadi
 outi
 #line 92
-pushb '\n'
+pushb 12
 outb
 #line 94
 pusha BP
@@ -510,8 +510,8 @@ loadi
 push 1
 addi
 storei
-jmp while4
-finWhile4:
+jmp while3
+finWhile3:
 #line 105
 pusha BP
 push 2
@@ -563,7 +563,7 @@ add
 loadi
 outi
 #line 110
-pushb ' '
+pushb 32
 outb
 #line 111
 pusha BP
@@ -589,6 +589,6 @@ loadi
 push 1
 addi
 storei
-jmp while6
-finWhile6:
+jmp while5
+finWhile5:
 ret 0,4,0

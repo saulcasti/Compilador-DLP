@@ -239,7 +239,9 @@ public class SeleccionDeInstrucciones extends DefaultVisitor {
 	//	class LiteralChar { String valor; }
 	public Object visit(LiteralChar node, Object param) {
 		assert (param == Funcion.VALOR);
-		genera("pushb " + node.getValor());
+		String valor = node.getValor().split("'")[1];
+		if(valor.equalsIgnoreCase("\\n")) genera("pushb 12"); //Darle una vuelta a esto
+		else genera("pushb " + valor.hashCode());
 		return null;
 	}
 	
@@ -279,11 +281,12 @@ public class SeleccionDeInstrucciones extends DefaultVisitor {
 	public Object visit(While node, Object param) {
 		contadorWhile++;
 		genera("while"+contadorWhile+":");
+		int conAux = contadorWhile;
 		node.getCondicion().accept(this, Funcion.VALOR);
-		genera("jz finWhile"+ contadorWhile);
+		genera("jz finWhile"+ conAux);
 		visitChildren(node.getCierto(), param);
-		genera("jmp while"+contadorWhile);
-		genera("finWhile"+contadorWhile+":");
+		genera("jmp while"+conAux);
+		genera("finWhile"+conAux+":");
 		return null;
 	}
 
