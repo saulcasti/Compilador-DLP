@@ -118,10 +118,10 @@ sentencia:'WHILE' '(' expresion ')'  '{' sentencias '}'							{ $$ = new While($
 
 
 expresion:	'(' expresion ')'						{ $$ = $2; }
-	|	expresion	'+' expresion					{ $$ = new ExpresionBinaria($1, "+", $3); }
-	|	expresion	'-'	expresion					{ $$ = new ExpresionBinaria($1, "-", $3); }
-	|	expresion	'*'	expresion					{ $$ = new ExpresionBinaria($1, "*", $3); }
-	|	expresion	'/'	expresion					{ $$ = new ExpresionBinaria($1, "/", $3); }
+	|	expresion	'+' expresion					{ $$ = new ExpresionAritmetica($1, "+", $3); }
+	|	expresion	'-'	expresion					{ $$ = new ExpresionAritmetica($1, "-", $3); }
+	|	expresion	'*'	expresion					{ $$ = new ExpresionAritmetica($1, "*", $3); }
+	|	expresion	'/'	expresion					{ $$ = new ExpresionAritmetica($1, "/", $3); }
 	|	expresion	'>'	expresion					{ $$ = new ExpresionBooleana($1, ">", $3); }
 	|	expresion	'<'	expresion					{ $$ = new ExpresionBooleana($1, "<", $3); }
 	|	expresion	'IGUAL'	expresion				{ $$ = new ExpresionBooleana($1, "IGUAL", $3); }

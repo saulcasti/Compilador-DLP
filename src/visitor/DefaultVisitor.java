@@ -176,7 +176,7 @@ public class DefaultVisitor implements Visitor {
 	}
 
 	//	class ExpresionBinaria { Expresion left;  String operador;  Expresion right; }
-	public Object visit(ExpresionBinaria node, Object param) {
+	public Object visit(ExpresionAritmetica node, Object param) {
 		if (node.getLeft() != null)
 			node.getLeft().accept(this, param);
 		if (node.getRight() != null)

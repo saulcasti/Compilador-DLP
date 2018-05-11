@@ -342,7 +342,7 @@ public class ASTPrinter extends DefaultVisitor {
 	}
 
 	//	class ExpresionBinaria { Expresion left;  String operador;  Expresion right; }
-	public Object visit(ExpresionBinaria node, Object param) {
+	public Object visit(ExpresionAritmetica node, Object param) {
 		int indent = ((Integer)param).intValue();
 
 		printName(indent, "ExpresionBinaria", node, false);

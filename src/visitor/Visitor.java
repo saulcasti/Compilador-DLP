@@ -30,7 +30,7 @@ public interface Visitor {
 	public Object visit(Read node, Object param);
 	public Object visit(Asigna node, Object param);
 	public Object visit(LlamadaFuncionSentencia node, Object param);
-	public Object visit(ExpresionBinaria node, Object param);
+	public Object visit(ExpresionAritmetica node, Object param);
 	public Object visit(ExpresionBooleana node, Object param);
 	public Object visit(Invocacion node, Object param);
 	public Object visit(Variable node, Object param);

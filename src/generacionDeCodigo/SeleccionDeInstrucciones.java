@@ -157,7 +157,7 @@ public class SeleccionDeInstrucciones extends DefaultVisitor {
 	}
 
 	//	class ExpresionBinaria { Expresion left;  String operador;  Expresion right; }
-	public Object visit(ExpresionBinaria node, Object param) {
+	public Object visit(ExpresionAritmetica node, Object param) {
 		assert (param == Funcion.VALOR);
 		node.getLeft().accept(this, Funcion.VALOR);
 		node.getRight().accept(this, Funcion.VALOR);

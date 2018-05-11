@@ -8,9 +8,9 @@ import visitor.*;
 
 //	expresionBinaria:expresion -> left:expresion  operador:String  right:expresion
 
-public class ExpresionBinaria extends AbstractExpresion {
+public class ExpresionAritmetica extends AbstractExpresion {
 
-	public ExpresionBinaria(Expresion left, String operador, Expresion right) {
+	public ExpresionAritmetica(Expresion left, String operador, Expresion right) {
 		this.left = left;
 		this.operador = operador;
 		this.right = right;
@@ -18,7 +18,7 @@ public class ExpresionBinaria extends AbstractExpresion {
 		searchForPositions(left, right);	// Obtener linea/columna a partir de los hijos
 	}
 
-	public ExpresionBinaria(Object left, Object operador, Object right) {
+	public ExpresionAritmetica(Object left, Object operador, Object right) {
 		this.left = (Expresion) left;
 		this.operador = (operador instanceof Token) ? ((Token)operador).getLexeme() : (String) operador;
 		this.right = (Expresion) right;

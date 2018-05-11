@@ -948,19 +948,19 @@ case 44:
 break;
 case 45:
 //#line 121 "sintac.y"
-{ yyval = new ExpresionBinaria(val_peek(2), "+", val_peek(0)); }
+{ yyval = new ExpresionAritmetica(val_peek(2), "+", val_peek(0)); }
 break;
 case 46:
 //#line 122 "sintac.y"
-{ yyval = new ExpresionBinaria(val_peek(2), "-", val_peek(0)); }
+{ yyval = new ExpresionAritmetica(val_peek(2), "-", val_peek(0)); }
 break;
 case 47:
 //#line 123 "sintac.y"
-{ yyval = new ExpresionBinaria(val_peek(2), "*", val_peek(0)); }
+{ yyval = new ExpresionAritmetica(val_peek(2), "*", val_peek(0)); }
 break;
 case 48:
 //#line 124 "sintac.y"
-{ yyval = new ExpresionBinaria(val_peek(2), "/", val_peek(0)); }
+{ yyval = new ExpresionAritmetica(val_peek(2), "/", val_peek(0)); }
 break;
 case 49:
 //#line 125 "sintac.y"

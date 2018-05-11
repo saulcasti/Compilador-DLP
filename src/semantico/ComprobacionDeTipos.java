@@ -23,7 +23,7 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 		}
 
 		// class ExpresionBinaria { Expresion left; String operador; Expresion right; }
-		public Object visit(ExpresionBinaria node, Object param) {
+		public Object visit(ExpresionAritmetica node, Object param) {
 			super.visit(node, param);
 			predicado(mismoTipo(node.getLeft(), node.getRight()), "Error. Expresion binaria - Los operandos deben ser del mismo tipo", node.getStart());
 
