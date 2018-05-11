@@ -49,7 +49,7 @@ public class SeleccionDeInstrucciones extends DefaultVisitor {
 
 	// class DefVariable { Tipo tipo; String nombre; }
 	public Object visit(DefVariable node, Object param) {
-		if(node.getAmbito() == true)
+		if(node.getAmbito() == 0)
 			genera("#GLOBAL " + node.getNombre() + ":" + node.getTipo().getNombreMAPL());
 		
 		return null;
@@ -175,7 +175,7 @@ public class SeleccionDeInstrucciones extends DefaultVisitor {
 			genera("load", node.getTipo());
 		} else { // Funcion.DIRECCION
 			assert (param == Funcion.DIRECCION);
-			if(node.getDefinicion().getAmbito()) {
+			if(node.getDefinicion().getAmbito() == 0) {
 				genera("pusha " + node.getDefinicion().getDireccion());
 			}
 			else {

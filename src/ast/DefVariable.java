@@ -17,7 +17,7 @@ public class DefVariable extends AbstractDefinicion {
 		searchForPositions(tipo);	// Obtener linea/columna a partir de los hijos
 	}
 
-	public DefVariable(Object nombre, Object tipo, Boolean ambito) {
+	public DefVariable(Object nombre, Object tipo, int ambito) {
 		this.nombre = (nombre instanceof Token) ? ((Token)nombre).getLexeme() : (String) nombre;
 		this.tipo = (Tipo) tipo;
 		this.ambito = ambito;
@@ -56,15 +56,15 @@ public class DefVariable extends AbstractDefinicion {
 	
 	private String nombre;
 	private Tipo tipo;
-	private Boolean ambito; // true global, false local
+	private int ambito; // 0 global, 1 local, 2 parámetro
 	private int direccion;
 	
 	
-	public Boolean getAmbito() {
+	public int getAmbito() {
 		return ambito;
 	}
 
-	public void setAmbito(Boolean ambito) {
+	public void setAmbito(int ambito) {
 		this.ambito = ambito;
 	}
 	

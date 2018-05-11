@@ -796,11 +796,11 @@ case 6:
 break;
 case 7:
 //#line 40 "sintac.y"
-{ yyval = new DefVariable(val_peek(3),val_peek(1),true); }
+{ yyval = new DefVariable(val_peek(3),val_peek(1),0); }
 break;
 case 8:
 //#line 43 "sintac.y"
-{ yyval = new DefVariable(val_peek(3),val_peek(1),false); }
+{ yyval = new DefVariable(val_peek(3),val_peek(1),1); }
 break;
 case 9:
 //#line 47 "sintac.y"

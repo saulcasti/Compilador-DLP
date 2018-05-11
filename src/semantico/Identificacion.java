@@ -35,7 +35,7 @@ public class Identificacion extends DefaultVisitor {
 		DefVariable definicion = variables.getFromTop(node.getNombre());
 		predicado(definicion == null, "Variable ya definida: " + node.getNombre(), node.getStart());
 		
-		variables.put(node.getNombre(), new DefVariable(node.getNombre(), node.getTipo(), false)); // false == local
+		variables.put(node.getNombre(), new DefVariable(node.getNombre(), node.getTipo(), 1)); // false == local
 		return super.visit(node, param);
 	}
 	

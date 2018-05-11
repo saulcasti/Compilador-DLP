@@ -14,7 +14,7 @@ public class GestionDeMemoria extends DefaultVisitor {
 		//	class DefVariable { String nombre;  Tipo tipo; }
 		public Object visit(DefVariable node, Object param) {
 			super.visit(node, param);
-			if (node.getAmbito()) {  //Global
+			if (node.getAmbito()==0) {  //Global
 				node.setDireccion(sumaDireccionesGlobales);
 				sumaDireccionesGlobales += node.getTipo().getSize();
 			}

@@ -37,10 +37,10 @@ definicion: definicionVariable	{ $$ = $1; }
 	;
 
 
-definicionVariable: 'VAR' 'IDENT' ':' tipo ';'	{ $$ = new DefVariable($2,$4,true); }
+definicionVariable: 'VAR' 'IDENT' ':' tipo ';'	{ $$ = new DefVariable($2,$4,0); }
 	;
 	
-definicionVariableLocal: 'VAR' 'IDENT' ':' tipo ';'	{ $$ = new DefVariable($2,$4,false); }
+definicionVariableLocal: 'VAR' 'IDENT' ':' tipo ';'	{ $$ = new DefVariable($2,$4,1); }
 	;
 
 
