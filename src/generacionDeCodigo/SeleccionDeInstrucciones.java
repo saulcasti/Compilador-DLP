@@ -49,7 +49,17 @@ public class SeleccionDeInstrucciones extends DefaultVisitor {
 
 	// class DefVariable { Tipo tipo; String nombre; }
 	public Object visit(DefVariable node, Object param) {
-		genera("#GLOBAL " + node.getNombre() + ":" + node.getTipo().getNombreMAPL());
+		if(node.getAmbito() == true)
+			genera("#GLOBAL " + node.getNombre() + ":" + node.getTipo().getNombreMAPL());
+		else
+			genera("#LOCAL " + node.getNombre() + ":" + node.getTipo().getNombreMAPL());
+		return null;
+	}
+	
+	//	class DefParametro { String nombre;  Tipo tipo; }
+	public Object visit(DefParametro node, Object param) {
+		genera("#PARAM " + node.getNombre() + ":" + node.getTipo().getNombreMAPL());
+		
 		return null;
 	}
 
@@ -65,7 +75,7 @@ public class SeleccionDeInstrucciones extends DefaultVisitor {
 	
 //	class DefFuncion { String nombre;  List<DefParametro> parametros;  Retorno retorno;  Cuerpo cuerpo; }
 	public Object visit(DefFuncion node, Object param) {
-		genera(node.getNombre() +":");
+		genera("#FUNC "+node.getNombre() +":");
 		super.visit(node, param);
 		if(node.getRetorno().getTipo() == null) {
 			int sumaVariables=getSizeVariables(node.getCuerpo().getDefvariable());
