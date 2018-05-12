@@ -30,7 +30,7 @@ read:sentencia -> expresion ;
 asigna:sentencia -> left:expresion right:expresion;
 llamadaFuncionSentencia:sentencia -> nombre:string argumentos:expresion* ;
 
-expresionBinaria:expresion -> left:expresion operador:string right:expresion;
+expresionAritmetica:expresion -> left:expresion operador:string right:expresion;
 expresionBooleana:expresion -> left:expresion operador:string right:expresion;
 invocacion:expresion -> nombre:string argumentos:expresion* ;
 variable:expresion -> nombre:string;

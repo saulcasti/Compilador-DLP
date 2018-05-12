@@ -119,11 +119,17 @@ public class SeleccionDeInstrucciones extends DefaultVisitor {
 
 	//	class Return { Expresion expresion; }
 	public Object visit(Return node, Object param) {
-
+		genera("#line " + node.getEnd().getLine());
+		
+		
+		super.visit(node, param); // Para coger lo que hay dentro del return.
+		
 		int sumaVariablesLocales = getSizeVariables(node.getFuncion().getCuerpo().getDefvariable());
 		int sumaParametros=getSizeVariables(node.getFuncion().getParametros());
-		int tamanioReturn=node.getExpresion().getTipo().getSize();
-		genera("#line " + node.getEnd().getLine());
+		
+		int tamanioReturn =0;
+		if(node.getExpresion() !=null) tamanioReturn=node.getExpresion().getTipo().getSize(); //Por si fuera un return ;
+		
 		genera("ret "+tamanioReturn +","+sumaVariablesLocales+","+sumaParametros);
 
 		return null;
