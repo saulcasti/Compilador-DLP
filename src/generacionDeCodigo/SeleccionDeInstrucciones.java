@@ -76,10 +76,11 @@ public class SeleccionDeInstrucciones extends DefaultVisitor {
 		
 		genera("#RET " + ((node.getRetorno().getTipo()==null)? "VOID": node.getRetorno().getTipo().getNombreMAPL()));
 		
-		super.visit(node, true); //Para imprimir directivas opcionales que son de mucha ayuda a la hora de comprobar si un fichero de salida tiene errores.
-		
+		for (DefVariable def: node.getCuerpo().getDefvariable()) {
+			genera("#LOCAL " + def.getNombre() + ":" + def.getTipo().getNombreMAPL());
+		}
 		genera(node.getNombre() +":");
-		super.visit(node, false);
+		super.visit(node, param);
 		
 		if(node.getRetorno().getTipo() == null) {
 			int sumaVariables=getSizeVariables(node.getCuerpo().getDefvariable());
@@ -102,18 +103,15 @@ public class SeleccionDeInstrucciones extends DefaultVisitor {
 	
 //	class Cuerpo { List<DefVariable> defvariable;  List<Sentencia> sentencia; }
 	public Object visit(Cuerpo node, Object param) {
-		if((Boolean)param ==false) {
+		
 			int sumaVariablesLocales = getSizeVariables(node.getDefvariable());
 			genera("enter " + sumaVariablesLocales);
 			visitChildren(node.getDefvariable(), param);
 			visitChildren(node.getSentencia(), param);
-		}
-		else {
-			for (DefVariable def: node.getDefvariable()) {
-				genera("#LOCAL " + def.getNombre() + ":" + def.getTipo().getNombreMAPL());
-			}
+	
+	
 			
-		}
+		
 		return null;
 	}
 
@@ -122,7 +120,7 @@ public class SeleccionDeInstrucciones extends DefaultVisitor {
 		genera("#line " + node.getEnd().getLine());
 		
 		
-		super.visit(node, param); // Para coger lo que hay dentro del return.
+		super.visit(node, Funcion.VALOR); // Para coger lo que hay dentro del return.
 		
 		int sumaVariablesLocales = getSizeVariables(node.getFuncion().getCuerpo().getDefvariable());
 		int sumaParametros=getSizeVariables(node.getFuncion().getParametros());
@@ -199,15 +197,8 @@ public class SeleccionDeInstrucciones extends DefaultVisitor {
 	//	class VarArray { Expresion identificacion;  Expresion posicion; }
 	public Object visit(VarArray node, Object param) {
 			node.getIdentificacion().accept(this, Funcion.DIRECCION);
-			node.getPosicion().accept(this, Funcion.VALOR);
-			
-			//Para arrays de más dimensiones
-			if(node.getTipo().getClass() == ArrayType.class) {
-				genera("push "+ ((ArrayType) node.getTipo()).getTipo().getSize());
-			}
-			else genera("push "+ ((ArrayType) node.getIdentificacion().getTipo()).getTipo().getSize());
-			
-			
+			node.getPosicion().accept(this, Funcion.VALOR);		
+			genera("push "+ ((ArrayType) node.getIdentificacion().getTipo()).getTipo().getSize());
 			genera("mul");
 			genera("add");
 			if(param == Funcion.VALOR) {
