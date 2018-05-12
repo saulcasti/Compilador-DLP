@@ -1,0 +1,14 @@
+
+var fibonacci:[8][3]int;
+
+
+main(){
+  var i:int;
+  
+  i = 2;
+  
+  fibonacci[i][0] = 10;
+  println fibonacci[i][0];
+  fibonacci[1][0] =  fibonacci[i][0] +1;
+}
+

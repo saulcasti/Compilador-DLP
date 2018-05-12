@@ -184,7 +184,14 @@ public class SeleccionDeInstrucciones extends DefaultVisitor {
 	public Object visit(VarArray node, Object param) {
 			node.getIdentificacion().accept(this, Funcion.DIRECCION);
 			node.getPosicion().accept(this, Funcion.VALOR);
-			genera("push "+ ((ArrayType) node.getIdentificacion().getTipo()).getTipo().getSize());
+			
+			//Para arrays de más dimensiones
+			if(node.getTipo().getClass() == ArrayType.class) {
+				genera("push "+ ((ArrayType) node.getTipo()).getTipo().getSize());
+			}
+			else genera("push "+ ((ArrayType) node.getIdentificacion().getTipo()).getTipo().getSize());
+			
+			
 			genera("mul");
 			genera("add");
 			if(param == Funcion.VALOR) {
@@ -244,7 +251,7 @@ public class SeleccionDeInstrucciones extends DefaultVisitor {
 		
 		genera("#line " + node.getEnd().getLine());
 		genera("call " + node.getNombre());
-		if(node.getDefFuncion().getRetorno() != null) {
+		if(node.getDefFuncion().getRetorno().getTipo() != null) {
 			genera("pop");
 		}
 		return null;
@@ -334,6 +341,7 @@ public class SeleccionDeInstrucciones extends DefaultVisitor {
 	
 	// Método auxiliar recomendado -------------
 	private void genera(String instruccion) {
+		System.out.println(instruccion);
 		writer.println(instruccion);
 	}
 
