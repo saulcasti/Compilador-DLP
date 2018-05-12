@@ -247,7 +247,7 @@ public class SeleccionDeInstrucciones extends DefaultVisitor {
 	public Object visit(LiteralChar node, Object param) {
 		assert (param == Funcion.VALOR);
 		String valor = node.getValor().split("'")[1];
-		if(valor.equalsIgnoreCase("\\n")) genera("pushb 12"); //Darle una vuelta a esto
+		if(valor.equalsIgnoreCase("\\n")) genera("pushb 10"); //Darle una vuelta a esto
 		else genera("pushb " + valor.hashCode());
 		return null;
 	}
