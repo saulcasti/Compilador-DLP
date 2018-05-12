@@ -7,13 +7,13 @@ halt
 #RET int
 doble:
 enter 0
+#line 23
 pusha BP
 push 4
 add
 loadi
 push 2
 muli
-#line 23
 ret 2,0,2
 #FUNC main
 #RET VOID
@@ -33,6 +33,7 @@ storei
 pusha 0
 loadf
 pushf 2.0
+ltf
 jz else1
 #line 33
 push 1

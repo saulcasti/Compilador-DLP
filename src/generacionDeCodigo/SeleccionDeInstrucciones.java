@@ -155,8 +155,18 @@ public class SeleccionDeInstrucciones extends DefaultVisitor {
 		return null;
 	}
 
-	//	class ExpresionBinaria { Expresion left;  String operador;  Expresion right; }
+	//	class ExpresionAritmetica { Expresion left;  String operador;  Expresion right; }
 	public Object visit(ExpresionAritmetica node, Object param) {
+		assert (param == Funcion.VALOR);
+		node.getLeft().accept(this, Funcion.VALOR);
+		node.getRight().accept(this, Funcion.VALOR);
+		
+		genera(instruccion.get(node.getOperador()), node.getRight().getTipo());
+		return null;
+	}
+
+//	class ExpresionBooleana { Expresion left;  String operador;  Expresion right; }
+	public Object visit(ExpresionBooleana node, Object param) {
 		assert (param == Funcion.VALOR);
 		node.getLeft().accept(this, Funcion.VALOR);
 		node.getRight().accept(this, Funcion.VALOR);
@@ -166,7 +176,7 @@ public class SeleccionDeInstrucciones extends DefaultVisitor {
 			genera(instruccion.get(node.getOperador()), node.getRight().getTipo());
 		return null;
 	}
-
+	
 	// class Variable { String nombre; }
 	public Object visit(Variable node, Object param) {
 		if (((Funcion) param) == Funcion.VALOR) {
