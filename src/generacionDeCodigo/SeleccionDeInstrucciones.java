@@ -240,6 +240,8 @@ public class SeleccionDeInstrucciones extends DefaultVisitor {
 	
 	//	class LlamadaFuncionSentencia { String nombre;  List<Expresion> argumentos; }
 	public Object visit(LlamadaFuncionSentencia node, Object param) {
+		super.visit(node, Funcion.VALOR);
+		
 		genera("#line " + node.getEnd().getLine());
 		genera("call " + node.getNombre());
 		if(node.getDefFuncion().getRetorno() != null) {
@@ -250,6 +252,8 @@ public class SeleccionDeInstrucciones extends DefaultVisitor {
 	
 	//	class Invocacion { String nombre;  List<Expresion> argumentos; }
 	public Object visit(Invocacion node, Object param) {
+		super.visit(node, Funcion.VALOR);
+		
 		genera("call " + node.getNombre());
 		return null;
 	}

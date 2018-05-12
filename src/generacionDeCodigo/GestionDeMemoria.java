@@ -18,8 +18,8 @@ public class GestionDeMemoria extends DefaultVisitor {
 				node.setDireccion(sumaDireccionesGlobales);
 				sumaDireccionesGlobales += node.getTipo().getSize();
 			}
-			else {
-				sumaDireccionesLocales += node.getTipo().getSize();
+			else if(node.getAmbito()==1){
+				sumaDireccionesLocales += - node.getTipo().getSize();
 				node.setDireccion(sumaDireccionesLocales);
 			}
 			return null;
