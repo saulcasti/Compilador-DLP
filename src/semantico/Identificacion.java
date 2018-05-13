@@ -34,10 +34,7 @@ public class Identificacion extends DefaultVisitor {
 	public Object visit(Variable node, Object param) {
 		DefVariable definicion = variables.getFromAny(node.getNombre());
 		predicado(definicion != null,"Variable no definida: " + node.getNombre(), node.getStart());
-		node.setDefinicion(definicion); // Enlazar referencia con definición
-		
-		
-		
+		node.setDefinicion(definicion); // Enlazar referencia con definición	
 		return null;
 	}
 

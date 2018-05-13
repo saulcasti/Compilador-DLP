@@ -108,10 +108,7 @@ public class SeleccionDeInstrucciones extends DefaultVisitor {
 			genera("enter " + sumaVariablesLocales);
 			visitChildren(node.getDefvariable(), param);
 			visitChildren(node.getSentencia(), param);
-	
-	
-			
-		
+
 		return null;
 	}
 
