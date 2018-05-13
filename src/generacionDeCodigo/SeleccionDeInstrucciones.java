@@ -176,7 +176,7 @@ public class SeleccionDeInstrucciones extends DefaultVisitor {
 	//	class Negacion { Expresion expresion; }
 	public Object visit(Negacion node, Object param) {
 		super.visit(node, Funcion.VALOR);
-		
+		genera("not"); //Falta añadir la instrucción que se ejecute --->>> BUG
 		return null;
 	}
 	
@@ -253,7 +253,7 @@ public class SeleccionDeInstrucciones extends DefaultVisitor {
 	public Object visit(LiteralChar node, Object param) {
 		assert (param == Funcion.VALOR);
 		String valor = node.getValor().split("'")[1];
-		if(valor.equalsIgnoreCase("\\n")) genera("pushb 10"); //Darle una vuelta a esto
+		if(valor.equalsIgnoreCase("\\n")) genera("pushb 10");  // Caso especial
 		else genera("pushb " + valor.hashCode());
 		return null;
 	}

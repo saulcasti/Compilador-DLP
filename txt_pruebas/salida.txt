@@ -19,6 +19,7 @@ add
 loadi
 push 10
 lti
+not
 jz else1
 #line 11
 pusha BP
