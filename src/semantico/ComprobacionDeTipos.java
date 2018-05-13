@@ -8,6 +8,9 @@ import visitor.*;
 
 public class ComprobacionDeTipos extends DefaultVisitor {
 
+	private GestorErrores gestorErrores;
+	
+	
 	public ComprobacionDeTipos(GestorErrores gestor) {
 		this.gestorErrores = gestor;
 	}
@@ -122,15 +125,15 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 						"Error. Variable array - el tipo de la variable debe ser array",node.getStart());
 
 			}
-				node.setTipo(((ArrayType)node.getIdentificacion().getTipo()).getTipo());
-				node.setModificable(true);
-			
+			node.setTipo(((ArrayType)node.getIdentificacion().getTipo()).getTipo());
+			node.setModificable(true);
+
 			return null;
 		}
 
 		//	class ArrayType { LiteralInt dimension;  Tipo tipo; }
 		public Object visit(ArrayType node, Object param) {
-			
+			// Puede no valor para nada
 			return node.getTipo();
 		}
 		
@@ -195,7 +198,6 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 		//class Navega { Expresion expresion;  String nombre; }
 		public Object visit(Navega node, Object param) {
 			super.visit(node, node.getNombre());
-//			node.getExpresion().accept(this, node.getNombre());
 			predicado(node.getExpresion().getTipo().getClass() ==  IdentType.class, 
 					"Error. Navegación - La expresión de comienzo de navegación debe ser tipo struct",node.getStart());
 			
@@ -288,7 +290,7 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 					"Error. Print - La expresión debe devolver algo",node.getStart());
 			if(node.getExpresion().getTipo() != null)
 				predicado(node.getExpresion().getTipo().getClass() != IdentType.class, 
-				"Error. Printsp - La expresión debe ser de tipo simple",node.getStart());
+					"Error. Printsp - La expresión debe ser de tipo simple",node.getStart());
 
 			return null;
 		}
@@ -299,6 +301,7 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 			super.visit(node, param);
 
 			node.setTipo(node.getDefFuncion().getRetorno().getTipo());
+			node.setModificable(false);
 
 			List<DefVariable> parametros = node.getDefFuncion().getParametros();
 			if(parametros.size() != node.getArgumentos().size()) {
@@ -340,15 +343,7 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 			return null;
 		}
 
-		/*
-		 * Poner aquí los visit necesarios.
-		 * Si se ha usado VGen solo hay que copiarlos de la clase 'visitor/_PlantillaParaVisitors.txt'.
-		 */
-
-		// public Object visit(Programa prog, Object param) {
-	// ...
-	// }
-
+		
 		// --------------------------------------------------------
 		// Funciones auxiliares
 
@@ -378,6 +373,5 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 			gestorErrores.error("Comprobación de tipos", mensajeError, posicionError);
 	}
 	
-	
-	private GestorErrores gestorErrores;
+
 }
