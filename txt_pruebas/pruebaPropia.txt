@@ -7,8 +7,9 @@ main(){
   
   i = 2;
   
-  fibonacci[i][0] = 10;
-  println fibonacci[i][0];
-  fibonacci[1][0] =  fibonacci[i][0] +1;
+	if(!(i<10)){
+		i=3;
+	}
+	print i;
 }
 

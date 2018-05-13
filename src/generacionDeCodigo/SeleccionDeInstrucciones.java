@@ -160,7 +160,7 @@ public class SeleccionDeInstrucciones extends DefaultVisitor {
 		return null;
 	}
 
-//	class ExpresionBooleana { Expresion left;  String operador;  Expresion right; }
+	//	class ExpresionBooleana { Expresion left;  String operador;  Expresion right; }
 	public Object visit(ExpresionBooleana node, Object param) {
 		assert (param == Funcion.VALOR);
 		node.getLeft().accept(this, Funcion.VALOR);
@@ -171,6 +171,15 @@ public class SeleccionDeInstrucciones extends DefaultVisitor {
 			genera(instruccion.get(node.getOperador()), node.getRight().getTipo());
 		return null;
 	}
+	
+	
+	//	class Negacion { Expresion expresion; }
+	public Object visit(Negacion node, Object param) {
+		super.visit(node, Funcion.VALOR);
+		
+		return null;
+	}
+	
 	
 	// class Variable { String nombre; }
 	public Object visit(Variable node, Object param) {

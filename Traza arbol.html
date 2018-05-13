@@ -21,61 +21,44 @@
 <body><pre>
 [ASTPrinter] -------------------------------- line:col  line:col
 
-<span class="dots"></span>Programa &rarr;                                                   <span class="pos">20:5  36:17  </span><span class="sourceText">var </span><span class="posText">global:float;</span><span class="sourceText"> ... </span><span class="posText">print doble(2</span><span class="sourceText">);</span>
+<span class="dots"></span>Programa &rarr;                                                   <span class="pos">2:5  13:11   </span><span class="sourceText">var </span><span class="posText">fibonacci:[8][3]int;</span><span class="sourceText"> ... </span><span class="posText">print i</span><span class="sourceText">;</span>
 <span class="dots">·  </span>definicion  <span class="type">List&lt;Definicion&gt;</span> = 
-<span class="dots">·  ·  </span>DefVariable &rarr;                                          <span class="pos">20:5  20:10  </span><span class="sourceText">var </span><span class="posText">global</span><span class="sourceText">:float;</span>
-<span class="dots">·  ·  |  </span>"<span class="value">global</span>"  
-<span class="dots">·  ·  |  </span><span class="value">RealType</span> &rarr;                                          <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
-<span class="dots">·  ·  |  </span><span class="value">0</span>  <span class="type">int</span>
-<span class="dots">·  ·  </span>DefFuncion &rarr;                                           <span class="pos">22:1  23:20  </span><span class="sourceText"></span><span class="posText">doble(valor:int):int {</span><span class="sourceText"> ... </span><span class="posText">return valor * 2</span><span class="sourceText">;</span>
-<span class="dots">·  ·  |  </span>"<span class="value">doble</span>"  
-<span class="dots">·  ·  |  </span>parametros  <span class="type">List&lt;DefParametro&gt;</span> = 
-<span class="dots">·  ·  |  ·  </span>DefVariable &rarr;                                    <span class="pos">22:7  22:11  </span><span class="sourceText">doble(</span><span class="posText">valor</span><span class="sourceText">:int):int {</span>
-<span class="dots">·  ·  |  ·  |  </span>"<span class="value">valor</span>"  
+<span class="dots">·  ·  </span>DefVariable &rarr;                                          <span class="pos">2:5  2:19    </span><span class="sourceText">var </span><span class="posText">fibonacci:[8][3</span><span class="sourceText">]int;</span>
+<span class="dots">·  ·  |  </span>"<span class="value">fibonacci</span>"  
+<span class="dots">·  ·  |  </span>ArrayType &rarr;                                         <span class="pos">2:16  2:19   </span><span class="sourceText">var fibonacci:[</span><span class="posText">8][3</span><span class="sourceText">]int;</span>
+<span class="dots">·  ·  |  ·  </span>"8"  <span class="type">LiteralInt.valor</span>                            <span class="pos">2:16  2:16   </span><span class="sourceText">var fibonacci:[</span><span class="posText">8</span><span class="sourceText">][3]int;</span>
+<span class="dots">·  ·  |  ·  </span>ArrayType &rarr;                                      <span class="pos">2:19  2:19   </span><span class="sourceText">var fibonacci:[8][</span><span class="posText">3</span><span class="sourceText">]int;</span>
+<span class="dots">·  ·  |  ·  |  </span>"3"  <span class="type">LiteralInt.valor</span>                         <span class="pos">2:19  2:19   </span><span class="sourceText">var fibonacci:[8][</span><span class="posText">3</span><span class="sourceText">]int;</span>
 <span class="dots">·  ·  |  ·  |  </span><span class="value">IntType</span> &rarr;                                     <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
-<span class="dots">·  ·  |  ·  |  </span><span class="value">4</span>  <span class="type">int</span>
-<span class="dots">·  ·  |  </span>Retorno &rarr;                                           <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
-<span class="dots">·  ·  |  ·  </span><span class="value">IntType</span> &rarr;                                        <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
-<span class="dots">·  ·  |  </span>Cuerpo &rarr;                                            <span class="pos">23:12  23:20 </span><span class="sourceText">return </span><span class="posText">valor * 2</span><span class="sourceText">;</span>
-<span class="dots">·  ·  |  ·  </span>defvariable  <span class="type">List&lt;DefVariable&gt;</span> = 
-<span class="dots">·  ·  |  ·  </span>sentencia  <span class="type">List&lt;Sentencia&gt;</span> = 
-<span class="dots">·  ·  |  ·  |  </span>Return &rarr;                                      <span class="pos">23:12  23:20 </span><span class="sourceText">return </span><span class="posText">valor * 2</span><span class="sourceText">;</span>
-<span class="dots">·  ·  |  ·  |  ·  </span>ExpresionAritmetica &rarr;                      <span class="pos">23:12  23:20 </span><span class="sourceText">return </span><span class="posText">valor * 2</span><span class="sourceText">;</span>
-<span class="dots">·  ·  |  ·  |  ·  |  </span>"valor"  <span class="type">Variable.nombre</span>                <span class="pos">23:12  23:16 </span><span class="sourceText">return </span><span class="posText">valor</span><span class="sourceText"> * 2;</span>
-<span class="dots">·  ·  |  ·  |  ·  |  </span>"<span class="value">*</span>"  
-<span class="dots">·  ·  |  ·  |  ·  |  </span>"2"  <span class="type">LiteralInt.valor</span>                   <span class="pos">23:20  23:20 </span><span class="sourceText">return valor * </span><span class="posText">2</span><span class="sourceText">;</span>
-<span class="dots">·  ·  </span>DefFuncion &rarr;                                           <span class="pos">26:1  36:17  </span><span class="sourceText"></span><span class="posText">main() {</span><span class="sourceText"> ... </span><span class="posText">print doble(2</span><span class="sourceText">);</span>
+<span class="dots">·  ·  |  </span><span class="value">0</span>  <span class="type">int</span>
+<span class="dots">·  ·  </span>DefFuncion &rarr;                                           <span class="pos">5:1  13:11   </span><span class="sourceText"></span><span class="posText">main(){</span><span class="sourceText"> ... </span><span class="posText">print i</span><span class="sourceText">;</span>
 <span class="dots">·  ·  |  </span>"<span class="value">main</span>"  
 <span class="dots">·  ·  |  </span>parametros  <span class="type">List&lt;DefParametro&gt;</span> = 
 <span class="dots">·  ·  |  </span>Retorno &rarr;                                           <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
 <span class="dots">·  ·  |  ·  </span><span class="null">null</span>  tipo:<span class="type">Tipo</span>
-<span class="dots">·  ·  |  </span>Cuerpo &rarr;                                            <span class="pos">27:9  36:17  </span><span class="sourceText">var </span><span class="posText">local:int;</span><span class="sourceText"> ... </span><span class="posText">print doble(2</span><span class="sourceText">);</span>
+<span class="dots">·  ·  |  </span>Cuerpo &rarr;                                            <span class="pos">6:7  13:11   </span><span class="sourceText">var </span><span class="posText">i:int;</span><span class="sourceText"> ... </span><span class="posText">print i</span><span class="sourceText">;</span>
 <span class="dots">·  ·  |  ·  </span>defvariable  <span class="type">List&lt;DefVariable&gt;</span> = 
-<span class="dots">·  ·  |  ·  |  </span>DefVariable &rarr;                                 <span class="pos">27:9  27:13  </span><span class="sourceText">var </span><span class="posText">local</span><span class="sourceText">:int;</span>
-<span class="dots">·  ·  |  ·  |  ·  </span>"<span class="value">local</span>"  
+<span class="dots">·  ·  |  ·  |  </span>DefVariable &rarr;                                 <span class="pos">6:7  6:7     </span><span class="sourceText">var </span><span class="posText">i</span><span class="sourceText">:int;</span>
+<span class="dots">·  ·  |  ·  |  ·  </span>"<span class="value">i</span>"  
 <span class="dots">·  ·  |  ·  |  ·  </span><span class="value">IntType</span> &rarr;                                  <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
 <span class="dots">·  ·  |  ·  |  ·  </span><span class="value">-2</span>  <span class="type">int</span>
 <span class="dots">·  ·  |  ·  </span>sentencia  <span class="type">List&lt;Sentencia&gt;</span> = 
-<span class="dots">·  ·  |  ·  |  </span>Asigna &rarr;                                      <span class="pos">29:5  29:16  </span><span class="sourceText"></span><span class="posText">global = 1.0</span><span class="sourceText">;</span>
-<span class="dots">·  ·  |  ·  |  ·  </span>"global"  <span class="type">Variable.nombre</span>                  <span class="pos">29:5  29:10  </span><span class="sourceText"></span><span class="posText">global</span><span class="sourceText"> = 1.0;</span>
-<span class="dots">·  ·  |  ·  |  ·  </span>"1.0"  <span class="type">LiteralReal.valor</span>                   <span class="pos">29:14  29:16 </span><span class="sourceText">global = </span><span class="posText">1.0</span><span class="sourceText">;</span>
-<span class="dots">·  ·  |  ·  |  </span>Asigna &rarr;                                      <span class="pos">30:5  30:13  </span><span class="sourceText"></span><span class="posText">local = 2</span><span class="sourceText">;</span>
-<span class="dots">·  ·  |  ·  |  ·  </span>"local"  <span class="type">Variable.nombre</span>                   <span class="pos">30:5  30:9   </span><span class="sourceText"></span><span class="posText">local</span><span class="sourceText"> = 2;</span>
-<span class="dots">·  ·  |  ·  |  ·  </span>"2"  <span class="type">LiteralInt.valor</span>                      <span class="pos">30:13  30:13 </span><span class="sourceText">local = </span><span class="posText">2</span><span class="sourceText">;</span>
-<span class="dots">·  ·  |  ·  |  </span>IfElse &rarr;                                      <span class="pos">32:9  33:15  </span><span class="sourceText">if (</span><span class="posText">global < 2.0) {</span><span class="sourceText"> ... </span><span class="posText">print 1</span><span class="sourceText">;    </span>
-<span class="dots">·  ·  |  ·  |  ·  </span>ExpresionBooleana &rarr;                        <span class="pos">32:9  32:20  </span><span class="sourceText">if (</span><span class="posText">global < 2.0</span><span class="sourceText">) {</span>
-<span class="dots">·  ·  |  ·  |  ·  |  </span>"global"  <span class="type">Variable.nombre</span>               <span class="pos">32:9  32:14  </span><span class="sourceText">if (</span><span class="posText">global</span><span class="sourceText"> < 2.0) {</span>
-<span class="dots">·  ·  |  ·  |  ·  |  </span>"<span class="value"><</span>"  
-<span class="dots">·  ·  |  ·  |  ·  |  </span>"2.0"  <span class="type">LiteralReal.valor</span>                <span class="pos">32:18  32:20 </span><span class="sourceText">if (global < </span><span class="posText">2.0</span><span class="sourceText">) {</span>
+<span class="dots">·  ·  |  ·  |  </span>Asigna &rarr;                                      <span class="pos">8:3  8:7     </span><span class="sourceText"></span><span class="posText">i = 2</span><span class="sourceText">;</span>
+<span class="dots">·  ·  |  ·  |  ·  </span>"i"  <span class="type">Variable.nombre</span>                       <span class="pos">8:3  8:3     </span><span class="sourceText"></span><span class="posText">i</span><span class="sourceText"> = 2;</span>
+<span class="dots">·  ·  |  ·  |  ·  </span>"2"  <span class="type">LiteralInt.valor</span>                      <span class="pos">8:7  8:7     </span><span class="sourceText">i = </span><span class="posText">2</span><span class="sourceText">;</span>
+<span class="dots">·  ·  |  ·  |  </span>IfElse &rarr;                                      <span class="pos">10:10  11:11 </span><span class="sourceText">if(!(</span><span class="posText">i<10)){</span><span class="sourceText"> ... </span><span class="posText">i=3</span><span class="sourceText">;</span>
+<span class="dots">·  ·  |  ·  |  ·  </span>Negacion &rarr;                                 <span class="pos">10:10  10:13 </span><span class="sourceText">if(!(</span><span class="posText">i<10</span><span class="sourceText">)){</span>
+<span class="dots">·  ·  |  ·  |  ·  |  </span>ExpresionBooleana &rarr;                     <span class="pos">10:10  10:13 </span><span class="sourceText">if(!(</span><span class="posText">i<10</span><span class="sourceText">)){</span>
+<span class="dots">·  ·  |  ·  |  ·  |  ·  </span>"i"  <span class="type">Variable.nombre</span>                 <span class="pos">10:10  10:10 </span><span class="sourceText">if(!(</span><span class="posText">i</span><span class="sourceText"><10)){</span>
+<span class="dots">·  ·  |  ·  |  ·  |  ·  </span>"<span class="value"><</span>"  
+<span class="dots">·  ·  |  ·  |  ·  |  ·  </span>"10"  <span class="type">LiteralInt.valor</span>               <span class="pos">10:12  10:13 </span><span class="sourceText">if(!(i<</span><span class="posText">10</span><span class="sourceText">)){</span>
 <span class="dots">·  ·  |  ·  |  ·  </span>cierto  <span class="type">List&lt;Sentencia&gt;</span> = 
-<span class="dots">·  ·  |  ·  |  ·  |  </span>Print &rarr;                                 <span class="pos">33:15  33:15 </span><span class="sourceText">print </span><span class="posText">1</span><span class="sourceText">;    </span>
-<span class="dots">·  ·  |  ·  |  ·  |  ·  </span>"1"  <span class="type">LiteralInt.valor</span>                <span class="pos">33:15  33:15 </span><span class="sourceText">print </span><span class="posText">1</span><span class="sourceText">;    </span>
+<span class="dots">·  ·  |  ·  |  ·  |  </span>Asigna &rarr;                                <span class="pos">11:9  11:11  </span><span class="sourceText"></span><span class="posText">i=3</span><span class="sourceText">;</span>
+<span class="dots">·  ·  |  ·  |  ·  |  ·  </span>"i"  <span class="type">Variable.nombre</span>                 <span class="pos">11:9  11:9   </span><span class="sourceText"></span><span class="posText">i</span><span class="sourceText">=3;</span>
+<span class="dots">·  ·  |  ·  |  ·  |  ·  </span>"3"  <span class="type">LiteralInt.valor</span>                <span class="pos">11:11  11:11 </span><span class="sourceText">i=</span><span class="posText">3</span><span class="sourceText">;</span>
 <span class="dots">·  ·  |  ·  |  ·  </span>falso  <span class="type">List&lt;Sentencia&gt;</span> = 
-<span class="dots">·  ·  |  ·  |  </span>Print &rarr;                                       <span class="pos">36:11  36:17 </span><span class="sourceText">print </span><span class="posText">doble(2</span><span class="sourceText">);</span>
-<span class="dots">·  ·  |  ·  |  ·  </span>Invocacion &rarr;                               <span class="pos">36:11  36:17 </span><span class="sourceText">print </span><span class="posText">doble(2</span><span class="sourceText">);</span>
-<span class="dots">·  ·  |  ·  |  ·  |  </span>"<span class="value">doble</span>"  
-<span class="dots">·  ·  |  ·  |  ·  |  </span>argumentos  <span class="type">List&lt;Expresion&gt;</span> = 
-<span class="dots">·  ·  |  ·  |  ·  |  ·  </span>"2"  <span class="type">LiteralInt.valor</span>                <span class="pos">36:17  36:17 </span><span class="sourceText">print doble(</span><span class="posText">2</span><span class="sourceText">);</span>
+<span class="dots">·  ·  |  ·  |  </span>Print &rarr;                                       <span class="pos">13:11  13:11 </span><span class="sourceText">print </span><span class="posText">i</span><span class="sourceText">;</span>
+<span class="dots">·  ·  |  ·  |  ·  </span>"i"  <span class="type">Variable.nombre</span>                       <span class="pos">13:11  13:11 </span><span class="sourceText">print </span><span class="posText">i</span><span class="sourceText">;</span>
 
 [ASTPrinter] --------------------------------
 </pre>

@@ -25,21 +25,21 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 		// class ExpresionBinaria { Expresion left; String operador; Expresion right; }
 		public Object visit(ExpresionAritmetica node, Object param) {
 			super.visit(node, param);
-			predicado(mismoTipo(node.getLeft(), node.getRight()), "Error. Expresion binaria - Los operandos deben ser del mismo tipo", node.getStart());
+			predicado(mismoTipo(node.getLeft(), node.getRight()), "Error. Expresion aritmética - Los operandos deben ser del mismo tipo", node.getStart());
 
 			node.setTipo(node.getLeft().getTipo());
 			node.setModificable(false);
 			return null;
 		}
 		
-//		class ExpresionBooleana{ Expresion left;  String operador;  Expresion right; }
+		//	class ExpresionBooleana{ Expresion left;  String operador;  Expresion right; }
 		public Object visit(ExpresionBooleana node, Object param) {
 			super.visit(node, param);
-			predicado(mismoTipo(node.getLeft(), node.getRight()), "Error. Expresion binaria - Los operandos deben ser del mismo tipo", node.getStart());
+			predicado(mismoTipo(node.getLeft(), node.getRight()), "Error. Expresion Booleana - Los operandos deben ser del mismo tipo", node.getStart());
 
 			if(node.getOperador() == "AND" || node.getOperador() == "OR")
 				predicado(mismoTipo(node.getLeft(), node.getRight()) && node.getLeft().getTipo().getClass() == IntType.class, 
-				"Error. Expresión Binaria - Boolean debe de ser de tipo entero",node.getStart());
+				"Error. Expresión Booleana - Boolean debe de ser de tipo entero",node.getStart());
 			
 			node.setTipo(new IntType());
 			node.setModificable(false);
@@ -47,6 +47,17 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 			return null;
 		}
 
+		//	class Negacion { Expresion expresion; }
+		public Object visit(Negacion node, Object param) {
+			super.visit(node, param);
+			predicado(node.getExpresion().getTipo().getClass() == IntType.class, 
+					"Error. Expresión Negación - Boolean debe de ser de tipo entero",node.getStart());
+			
+			node.setTipo(new IntType());
+			node.setModificable(false);
+			return null;
+		}
+		
 		// class Variable { String nombre; }
 		public Object visit(Variable node, Object param) {
 			super.visit(node, param); // ¿Hace falta?

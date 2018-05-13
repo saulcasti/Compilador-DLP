@@ -1,48 +1,38 @@
-#source "Test Generación de Código 1.txt"
+#source "pruebaPropia.txt"
 call main
 halt
-#GLOBAL global:float
-#FUNC doble
-#PARAM valor:int
-#RET int
-doble:
-enter 0
-#line 23
-pusha BP
-push 4
-add
-loadi
-push 2
-muli
-ret 2,0,2
+#GLOBAL fibonacci:8 * 3 * int
 #FUNC main
 #RET VOID
-#LOCAL local:int
+#LOCAL i:int
 main:
 enter 2
-#line 29
-pusha 0
-pushf 1.0
-storef
-#line 30
+#line 8
 pusha BP
 push -2
 add
 push 2
 storei
-pusha 0
-loadf
-pushf 2.0
-ltf
+pusha BP
+push -2
+add
+loadi
+push 10
+lti
 jz else1
-#line 33
-push 1
-outi
+#line 11
+pusha BP
+push -2
+add
+push 3
+storei
 jmp finIf1
 else1:
 finIf1:
-#line 36
-push 2
-call doble
+#line 13
+pusha BP
+push -2
+add
+loadi
 outi
 ret 0,2,0
