@@ -344,6 +344,13 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 		}
 
 		
+		//	class ConParentesis { Expresion expresion; }
+		public Object visit(ConParentesis node, Object param) {
+			super.visit(node, param);
+			node.setTipo(node.getExpresion().getTipo());
+			node.setModificable(node.getExpresion().isModificable());
+			return null;
+		}
 		// --------------------------------------------------------
 		// Funciones auxiliares
 

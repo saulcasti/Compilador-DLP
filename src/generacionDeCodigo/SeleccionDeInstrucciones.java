@@ -175,8 +175,9 @@ public class SeleccionDeInstrucciones extends DefaultVisitor {
 	
 	//	class Negacion { Expresion expresion; }
 	public Object visit(Negacion node, Object param) {
+		assert (param == Funcion.VALOR);
 		super.visit(node, Funcion.VALOR);
-		genera("not"); //Falta añadir la instrucción que se ejecute --->>> BUG
+		genera("not");
 		return null;
 	}
 	
