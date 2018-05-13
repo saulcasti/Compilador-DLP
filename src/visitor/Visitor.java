@@ -20,7 +20,6 @@ public interface Visitor {
 	public Object visit(DefEstructura node, Object param);
 	public Object visit(DefCampo node, Object param);
 	public Object visit(While node, Object param);
-	public Object visit(If node, Object param);
 	public Object visit(IfElse node, Object param);
 	public Object visit(Return node, Object param);
 	public Object visit(Print node, Object param);

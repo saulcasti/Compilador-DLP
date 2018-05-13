@@ -235,16 +235,7 @@ public class ASTPrinter extends DefaultVisitor {
 		return null;
 	}
 
-	//	class If { Expresion condicion;  List<Sentencia> cierto; }
-	public Object visit(If node, Object param) {
-		int indent = ((Integer)param).intValue();
-
-		printName(indent, "If", node, false);
-
-		visit(indent + 1, "condicion", "Expresion",node.getCondicion());
-		visit(indent + 1, "cierto", "List<Sentencia>",node.getCierto());
-		return null;
-	}
+	
 
 	//	class IfElse { Expresion condicion;  List<Sentencia> cierto;  List<Sentencia> falso; }
 	public Object visit(IfElse node, Object param) {

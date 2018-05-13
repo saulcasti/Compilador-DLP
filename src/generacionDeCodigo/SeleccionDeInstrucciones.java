@@ -298,17 +298,6 @@ public class SeleccionDeInstrucciones extends DefaultVisitor {
 		return null;
 	}
 
-	//	class If { Expresion condicion;  List<Sentencia> cierto; }
-	public Object visit(If node, Object param) {
-		contadorIfs++;
-		node.getCondicion().accept(this, Funcion.VALOR);
-		genera("jz else"+ contadorIfs);
-		visitChildren(node.getCierto(), param);
-		genera("jmp finIf"+contadorIfs);
-		genera("else"+contadorIfs+":");
-		genera("finIf"+contadorIfs+":");
-		return null;
-	}
 
 	//	class IfElse { Expresion condicion;  List<Sentencia> cierto;  List<Sentencia> falso; }
 	public Object visit(IfElse node, Object param) {
