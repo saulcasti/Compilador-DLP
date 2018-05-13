@@ -102,9 +102,9 @@ sentencias:						{ $$ = new ArrayList();}
 
 	
 sentencia:'WHILE' '(' expresion ')'  '{' sentencias '}'							{ $$ = new While($3, $6); }
-	|	'IF' '(' expresion ')' '{' sentencias '}'								{ $$ = new If($3, $6); }
+	|	'IF' '(' expresion ')' '{' sentencias '}'								{ $$ = new IfElse($3, $6, new ArrayList()); }
 	|	'IF' '(' expresion ')' '{' sentencias '}' 'ELSE' '{' sentencias '}'		{ $$ = new IfElse($3, $6, $10); }
-	|	'RETURN' ';'																{ $$ = new Return(null).setPositions($1); }
+	|	'RETURN' ';'															{ $$ = new Return(null).setPositions($1); }
 	|	'RETURN' 'NULL' ';'														{ $$ = new Return(null).setPositions($1); }
 	|	'RETURN' expresion ';'													{ $$ = new Return($2); }
 	|	'READ'	expresion	';'													{ $$ = new Read($2); }
@@ -112,7 +112,7 @@ sentencia:'WHILE' '(' expresion ')'  '{' sentencias '}'							{ $$ = new While($
 	|	'PRINTSP' expresion	';'													{ $$ = new Printsp($2); }
 	|	'PRINTLN' expresion	';'													{ $$ = new Println($2); }
 	|	'PRINTLN'	';'															{ $$ = new Println(null).setPositions($1); }
-	|	'IDENT' '(' argumentosLlamadaFuncion ')'	';'								{ $$ = new LlamadaFuncionSentencia($1, $3);}
+	|	'IDENT' '(' argumentosLlamadaFuncion ')'	';'							{ $$ = new LlamadaFuncionSentencia($1, $3);}
 	|	expresion	'=' expresion	';'											{ $$ = new Asigna($1, $3); }
 	;
 

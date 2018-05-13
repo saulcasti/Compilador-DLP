@@ -20,7 +20,6 @@ defEstructura:definicion -> nombre:string defCampo* ;
 defCampo -> nombre:string tipo ;
 
 while:sentencia -> condicion:expresion cierto:sentencia* ;
-if:sentencia -> condicion:expresion cierto:sentencia* ;
 ifElse:sentencia -> condicion:expresion cierto:sentencia* falso:sentencia* ;
 return:sentencia -> expresion ;
 print:sentencia -> expresion ;

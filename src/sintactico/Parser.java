@@ -896,7 +896,7 @@ case 31:
 break;
 case 32:
 //#line 105 "sintac.y"
-{ yyval = new If(val_peek(4), val_peek(1)); }
+{ yyval = new IfElse(val_peek(4), val_peek(1), new ArrayList()); }
 break;
 case 33:
 //#line 106 "sintac.y"

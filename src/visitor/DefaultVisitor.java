@@ -102,13 +102,6 @@ public class DefaultVisitor implements Visitor {
 		return null;
 	}
 
-	//	class If { Expresion condicion;  List<Sentencia> cierto; }
-	public Object visit(If node, Object param) {
-		if (node.getCondicion() != null)
-			node.getCondicion().accept(this, param);
-		visitChildren(node.getCierto(), param);
-		return null;
-	}
 
 	//	class IfElse { Expresion condicion;  List<Sentencia> cierto;  List<Sentencia> falso; }
 	public Object visit(IfElse node, Object param) {

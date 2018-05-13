@@ -224,14 +224,6 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 			return null;
 		}
 
-		//	class If { Expresion condicion;  List<Sentencia> cierto; }
-		public Object visit(If node, Object param) {
-			super.visit(node, param);
-			predicado(node.getCondicion().getTipo().getClass() == IntType.class, 
-					"Error. Condición en if - La condición debe de ser de tipo entero",node.getStart());
-
-			return null;
-		}
 
 		//	class IfElse { Expresion condicion;  List<Sentencia> cierto;  List<Sentencia> falso; }
 		public Object visit(IfElse node, Object param) {
