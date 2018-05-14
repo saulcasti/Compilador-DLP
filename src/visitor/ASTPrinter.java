@@ -439,6 +439,15 @@ public class ASTPrinter extends DefaultVisitor {
 		visit(indent + 1, "expresion", "Expresion",node.getExpresion());
 		return null;
 	}
+	//	class MenosUnario { Expresion expresion; }
+	public Object visit(MenosUnario node, Object param) {
+		int indent = ((Integer)param).intValue();
+
+		printName(indent, "MenosUnario", node, false);
+
+		visit(indent + 1, "expresion", "Expresion",node.getExpresion());
+		return null;
+	}
 
 	// -----------------------------------------------------------------
 	// Métodos invocados desde los métodos visit -----------------------
