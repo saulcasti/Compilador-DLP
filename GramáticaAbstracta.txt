@@ -41,4 +41,4 @@ cast:expresion -> tipo expresion ;
 navega:expresion -> expresion nombre:string ;
 conParentesis:expresion -> expresion ;
 negacion:expresion -> expresion ;
-
+menosUnitario:expresion -> expresion ;
