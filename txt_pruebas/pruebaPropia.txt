@@ -4,12 +4,13 @@ var fibonacci:[8][3]int;
 
 main(){
   var i:int;
+  var a:int;
   
-  i = 2;
+  a = 2;
   
-	if(!(i<10)){
-		i=3;
-	}
-	print i;
+  i = -(4+a);
+  
+  print i;
+  
 }
 

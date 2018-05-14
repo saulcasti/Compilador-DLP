@@ -139,6 +139,7 @@ expresion:	'(' expresion ')'						{ $$ = $2; }
 	|	expresion '['	expresion	']'				{ $$ = new VarArray($1, $3); }
 	|	expresion	'.'	'IDENT'						{ $$ = new Navega($1, $3); }
 	|	'!'	expresion								{ $$ = new Negacion($2); }
+	|	'-' expresion								{ $$ = new MenosUnario($2); }
 	;
 	
 

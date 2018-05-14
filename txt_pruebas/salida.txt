@@ -5,35 +5,32 @@ halt
 #FUNC main
 #RET VOID
 #LOCAL i:int
+#LOCAL a:int
 main:
-enter 2
-#line 8
+enter 4
+#line 9
 pusha BP
-push -2
+push -4
 add
 push 2
 storei
-pusha BP
-push -2
-add
-loadi
-push 10
-lti
-not
-jz else1
 #line 11
 pusha BP
 push -2
 add
-push 3
+pushi 0
+push 4
+pusha BP
+push -4
+add
+loadi
+addi
+sub
 storei
-jmp finIf1
-else1:
-finIf1:
 #line 13
 pusha BP
 push -2
 add
 loadi
 outi
-ret 0,2,0
+ret 0,4,0

@@ -40,4 +40,5 @@ public interface Visitor {
 	public Object visit(Navega node, Object param);
 	public Object visit(ConParentesis node, Object param);
 	public Object visit(Negacion node, Object param);
+	public Object visit(MenosUnario node, Object param);
 }

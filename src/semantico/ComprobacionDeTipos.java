@@ -351,6 +351,14 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 			node.setModificable(node.getExpresion().isModificable());
 			return null;
 		}
+		
+//		class MenosUnario { Expresion expresion; }
+		public Object visit(MenosUnario node, Object param) {
+			super.visit(node, param);
+			node.setTipo(node.getExpresion().getTipo());
+			node.setModificable(node.getExpresion().isModificable());
+			return null;
+		}
 		// --------------------------------------------------------
 		// Funciones auxiliares
 

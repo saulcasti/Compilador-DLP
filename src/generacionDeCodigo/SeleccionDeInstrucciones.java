@@ -342,6 +342,16 @@ public class SeleccionDeInstrucciones extends DefaultVisitor {
 		return null;
 	}
 	
+//	class MenosUnario { Expresion expresion; }
+	public Object visit(MenosUnario node, Object param) {
+		genera("pushi 0");
+		
+		super.visit(node, param);
+		genera("sub");
+		
+		return null;
+	}
+	
 	// Método auxiliar recomendado -------------
 	private void genera(String instruccion) {
 		System.out.println(instruccion);

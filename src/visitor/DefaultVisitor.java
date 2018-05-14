@@ -244,6 +244,12 @@ public class DefaultVisitor implements Visitor {
 			node.getExpresion().accept(this, param);
 		return null;
 	}
+//	class MenosUnario { Expresion expresion; }
+	public Object visit(MenosUnario node, Object param) {
+		if (node.getExpresion() != null)
+			node.getExpresion().accept(this, param);
+		return null;
+	}
 	
 	// Método auxiliar -----------------------------
 	protected void visitChildren(List<? extends AST> children, Object param) {
