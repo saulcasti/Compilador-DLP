@@ -300,31 +300,32 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 		public Object visit(Invocacion node, Object param) {
 			super.visit(node, param);
 
-			node.setTipo(node.getDefFuncion().getRetorno().getTipo());
-			node.setModificable(false);
+			
+				node.setTipo(node.getDefFuncion().getRetorno().getTipo());
+				node.setModificable(false);
 
-			List<DefVariable> parametros = node.getDefFuncion().getParametros();
-			if(parametros.size() != node.getArgumentos().size()) {
-				predicado(parametros.size() == node.getArgumentos().size(), 
-						"Error. Invocación - El número de argumentos es incorrecto",node.getStart());
-			}
-			else {
-				boolean parametrosOK=true;
-				for(int i=0; i<parametros.size();i++) {
-					if(parametros.get(i).getTipo().getClass() != node.getArgumentos().get(i).getTipo().getClass())
-						parametrosOK = false;
+				List<DefVariable> parametros = node.getDefFuncion().getParametros();
+				if(parametros.size() != node.getArgumentos().size()) {
+					predicado(parametros.size() == node.getArgumentos().size(), 
+							"Error. Invocación - El número de argumentos es incorrecto",node.getStart());
 				}
-				predicado(parametrosOK, 
-						"Error. Invocación - El tipo de algún argumento es incorrecto",node.getStart());
+				else {
+					boolean parametrosOK=true;
+					for(int i=0; i<parametros.size();i++) {
+						if(parametros.get(i).getTipo().getClass() != node.getArgumentos().get(i).getTipo().getClass())
+							parametrosOK = false;
+					}
+					predicado(parametrosOK, 
+							"Error. Invocación - El tipo de algún argumento es incorrecto",node.getStart());
 
-			}
+				}
 			return null;
 		}
 
 		//	class LlamadaFuncionSentencia { String nombre;  List<Expresion> argumentos; }
 		public Object visit(LlamadaFuncionSentencia node, Object param) {
 			super.visit(node, param);
-			if(node.getDefFuncion() !=null) {
+			
 				List<DefVariable> parametros = node.getDefFuncion().getParametros();
 				if(parametros.size() != node.getArgumentos().size()) {
 					predicado(parametros.size() == node.getArgumentos().size(), 
@@ -339,7 +340,7 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 					predicado(parametrosOK, 
 							"Error. Invocación Sentencia - El tipo de algún argumento es incorrecto",node.getStart());
 
-				}}
+				}
 			return null;
 		}
 

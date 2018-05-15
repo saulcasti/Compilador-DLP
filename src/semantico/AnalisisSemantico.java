@@ -24,7 +24,8 @@ public class AnalisisSemantico {
 		Identificacion identificacion = new Identificacion(gestorErrores);
 		raiz.accept(identificacion, null);
 
-		
+		if (gestorErrores.hayErrores())
+			return;
 
 		ComprobacionDeTipos comprobación = new ComprobacionDeTipos(gestorErrores);
 		raiz.accept(comprobación, null);

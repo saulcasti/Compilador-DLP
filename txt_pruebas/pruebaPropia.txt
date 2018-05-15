@@ -1,14 +1,22 @@
 
-var fibonacci:[8][3]int;
 
+f():int {
+	return 2;
+}
+
+
+g(paramReal:int, paramInt:int):int{
+	paramInt = paramInt - 1;
+	if(paramInt <= 0){
+		return 1;
+	}
+	return paramReal + g(5, paramInt);
+}
 
 main(){
   var i:int;
-  var a:int;
   
-  a = 2;
-  
-  i = -(4+a);
+  i = g(3,f()); 
   
   print i;
   
