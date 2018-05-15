@@ -127,10 +127,12 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 			if(node.getPosicion().getTipo().getClass() == IntType.class ) {
 				predicado(node.getIdentificacion().getTipo().getClass() == ArrayType.class, 
 						"Error. Variable array - el tipo de la variable debe ser array",node.getStart());
-
+				if(node.getIdentificacion().getTipo().getClass() == ArrayType.class) {
+					node.setTipo(((ArrayType)node.getIdentificacion().getTipo()).getTipo());
+					node.setModificable(true);
+				}
 			}
-			node.setTipo(((ArrayType)node.getIdentificacion().getTipo()).getTipo());
-			node.setModificable(true);
+
 
 			return null;
 		}
