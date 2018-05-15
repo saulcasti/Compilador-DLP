@@ -5,7 +5,11 @@ import java.util.List;
 import ast.*;
 import main.*;
 import visitor.*;
-
+/**
+ * 
+ * @author Saúl Castillo - UO251370
+ * 
+ */
 public class ComprobacionDeTipos extends DefaultVisitor {
 
 	private GestorErrores gestorErrores;

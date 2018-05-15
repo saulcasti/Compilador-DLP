@@ -8,7 +8,11 @@ import visitor.*;
 enum Funcion {
 	DIRECCION, VALOR
 }
-
+/**
+ * 
+ * @author Saúl Castillo - UO251370
+ * 
+ */
 public class SeleccionDeInstrucciones extends DefaultVisitor {
 
 	private PrintWriter writer;

@@ -6,7 +6,11 @@ import ast.*;
 import main.*;
 import visitor.*;
 
-
+/**
+ * 
+ * @author Saúl Castillo - UO251370
+ * 
+ */
 public class Identificacion extends DefaultVisitor {
 
 	private GestorErrores gestorErrores;
