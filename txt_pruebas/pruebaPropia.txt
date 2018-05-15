@@ -8,9 +8,8 @@ f():int {
 g(paramReal:int, paramInt:int):int{
 	paramInt = paramInt - 1;
 	if(paramInt <= 0){
-		return 1;
 	}
-	return paramReal + g(5, paramInt);
+	return paramReal + paramInt;
 }
 
 main(){

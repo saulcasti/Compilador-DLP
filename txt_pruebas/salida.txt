@@ -32,23 +32,18 @@ loadi
 push 0
 lei
 jz else1
-#line 11
-push 1
-ret 2,0,4
 jmp finIf1
 else1:
 finIf1:
-#line 13
+#line 12
 pusha BP
 push 6
 add
 loadi
-push 5
 pusha BP
 push 4
 add
 loadi
-call g
 addi
 ret 2,0,4
 #FUNC main
@@ -56,7 +51,7 @@ ret 2,0,4
 #LOCAL i:int
 main:
 enter 2
-#line 19
+#line 18
 pusha BP
 push -2
 add
@@ -64,7 +59,7 @@ push 3
 call f
 call g
 storei
-#line 21
+#line 20
 pusha BP
 push -2
 add
