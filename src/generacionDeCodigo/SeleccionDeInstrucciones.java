@@ -317,13 +317,14 @@ public class SeleccionDeInstrucciones extends DefaultVisitor {
 	//	class IfElse { Expresion condicion;  List<Sentencia> cierto;  List<Sentencia> falso; }
 	public Object visit(IfElse node, Object param) {
 		contadorIfs++;
+		int conAux = contadorIfs;
 		node.getCondicion().accept(this, Funcion.VALOR);
-		genera("jz else"+ contadorIfs);
+		genera("jz else"+ conAux);
 		visitChildren(node.getCierto(), param);
-		genera("jmp finIf"+contadorIfs);
-		genera("else"+contadorIfs+":");
+		genera("jmp finIf"+conAux);
+		genera("else"+conAux+":");
 		visitChildren(node.getFalso(), param);
-		genera("finIf"+contadorIfs+":");
+		genera("finIf"+conAux+":");
 		return null;
 	}
 	

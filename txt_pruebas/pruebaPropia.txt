@@ -1,23 +1,9 @@
-
-
-f():int {
-	return 2;
-}
-
-
-g(paramReal:int, paramInt:int):int{
-	paramInt = paramInt - 1;
-	if(paramInt <= 0){
-	}
-	return paramReal + paramInt;
-}
-
 main(){
-  var i:int;
+  var a:char;
+   
+  a = 'c';
   
-  i = g(3,f()); 
-  
-  print i;
+  println a + 'b';
   
 }
 
