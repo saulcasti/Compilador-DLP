@@ -1,23 +1,15 @@
+struct Pareja { 
+  entero:int;
+  caracter:char;
+};
 
-
-f():int {
-	return 2;
-}
-
-
-g(paramReal:int, paramInt:int):int{
-	paramInt = paramInt - 1;
-	if(paramInt <= 0){
-	}
-	return paramReal + paramInt;
-}
-
+var pareja:[2]int;
+var pareja2:[2]int;
 main(){
-  var i:int;
+	
+	pareja[0] = 2;
   
-  i = g(3,f()); 
-  
-  print 'a' + 'b';
+  print  pareja[0];
   
 }
 

@@ -1,0 +1,11 @@
+recursiva(i:int):int {
+	if (i==0){
+		return i;
+	} else {
+		return recursiva(i-1);
+	}
+}
+
+main(){
+	print recursiva(5);
+}

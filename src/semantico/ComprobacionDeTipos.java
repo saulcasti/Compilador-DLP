@@ -24,7 +24,7 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 			super.visit(node, param);
 			predicado(mismoTipo(node.getLeft(), node.getRight()), "Error. Asignación - Los operandos deben ser del mismo tipo", node.getStart());
 			predicado(node.getLeft().isModificable(), "Error. Asignación - Se requiere expresión modificable", node.getLeft().getStart());
-			predicado(node.getLeft().getTipo().getClass() != IdentType.class, "Error. Asignación - El valor de la izquierda debe ser simple", node.getLeft().getStart());
+			predicado(node.getLeft().getTipo().getClass() != IdentType.class && node.getLeft().getTipo().getClass() != ArrayType.class, "Error. Asignación - El valor de la izquierda debe ser simple", node.getLeft().getStart());
 
 			return null;
 		}
