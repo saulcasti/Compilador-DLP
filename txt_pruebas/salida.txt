@@ -1,275 +1,32 @@
-#source "Test Generacion de Código 3.txt"
+#source "concatenacion.txt"
 call main
 halt
-#TYPE Piloto:{
-	inicial:char
-	crono:3 * float
+#TYPE Persona:{
+	edad:int
+	meses:12 * int
 }
-#GLOBAL F1:3 * Piloto
-#FUNC inicia
-#PARAM i:int
-#PARAM inicial:char
-#PARAM q1:float
-#PARAM q2:float
-#PARAM q3:float
-#RET VOID
-inicia:
-enter 0
-#line 28
-pusha 0
-pusha BP
-push 17
-add
-loadi
-push 13
-mul
-add
-push 0
-add
-pusha BP
-push 16
-add
-loadb
-storeb
-#line 29
-pusha 0
-pusha BP
-push 17
-add
-loadi
-push 13
-mul
-add
-push 1
-add
-push 0
-push 4
-mul
-add
-pusha BP
-push 12
-add
-loadf
-storef
-#line 30
-pusha 0
-pusha BP
-push 17
-add
-loadi
-push 13
-mul
-add
-push 1
-add
-push 1
-push 4
-mul
-add
-pusha BP
-push 8
-add
-loadf
-storef
-#line 31
-pusha 0
-pusha BP
-push 17
-add
-loadi
-push 13
-mul
-add
-push 1
-add
-push 2
-push 4
-mul
-add
-pusha BP
-push 4
-add
-loadf
-storef
-ret 0,0,15
-#FUNC imprimeElMejor
-#RET VOID
-#LOCAL mejorPiloto:int
-#LOCAL menorCrono:float
-#LOCAL ultimaCrono:float
-#LOCAL i:int
-imprimeElMejor:
-enter 12
-#line 40
-pusha BP
-push -6
-add
-pushf 1000.0
-storef
-#line 41
-pusha BP
-push -12
-add
-push 0
-storei
-while1:
-pusha BP
-push -12
-add
-loadi
-push 3
-lti
-jz finWhile1
-#line 43
-pusha BP
-push -10
-add
-pusha 0
-pusha BP
-push -12
-add
-loadi
-push 13
-mul
-add
-push 1
-add
-push 2
-push 4
-mul
-add
-loadf
-storef
-pusha BP
-push -10
-add
-loadf
-pusha BP
-push -6
-add
-loadf
-ltf
-jz else1
-#line 45
-pusha BP
-push -6
-add
-pusha BP
-push -10
-add
-loadf
-storef
-#line 46
-pusha BP
-push -2
-add
-pusha BP
-push -12
-add
-loadi
-storei
-jmp finIf1
-else1:
-finIf1:
-#line 48
-pusha BP
-push -12
-add
-pusha BP
-push -12
-add
-loadi
-push 1
-addi
-storei
-jmp while1
-finWhile1:
-#line 51
-pusha 0
-pusha BP
-push -2
-add
-loadi
-push 13
-mul
-add
-push 0
-add
-loadb
-outb
-#line 52
-pusha BP
-push -12
-add
-push 0
-storei
-while2:
-pusha BP
-push -12
-add
-loadi
-push 3
-lti
-jz finWhile2
-#line 54
-pusha 0
-pusha BP
-push -2
-add
-loadi
-push 13
-mul
-add
-push 1
-add
-pusha BP
-push -12
-add
-loadi
-push 4
-mul
-add
-loadf
-outf
-#line 55
-pusha BP
-push -12
-add
-pusha BP
-push -12
-add
-loadi
-push 1
-addi
-storei
-jmp while2
-finWhile2:
-ret 0,12,0
+#TYPE Perro:{
+	owner:Persona
+	edad:int
+}
+#GLOBAL juan:Persona
+#GLOBAL tobi:Perro
 #FUNC main
 #RET VOID
 main:
 enter 0
-push 0
-pushb 65
-pushf 1.50
-pushf 1.49
-pushf 1.48
-#line 60
-call inicia
+#line 35
+pusha 26
+push 26
+add
 push 1
-pushb 72
-pushf 1.52
-pushf 1.51
-pushf 1.50
-#line 61
-call inicia
-push 2
-pushb 86
-pushf 1.54
-pushf 1.52
-pushf 1.51
-#line 62
-call inicia
-#line 64
-call imprimeElMejor
+storei
+#line 36
+pusha 26
+push 0
+add
+push 0
+add
+loadi
+outi
 ret 0,0,0
