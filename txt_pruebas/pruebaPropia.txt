@@ -1,9 +1,8 @@
-struct Pareja { 
-  entero:int;
-  caracter:char;
-};
+main(){
+  var i:int;
+  var j:int;
 
-var pareja:[2]int;
-var pareja2:[2]int;
-
-
+  i = -1;
+ 
+  print i;
+  }
