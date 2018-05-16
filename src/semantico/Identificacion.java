@@ -14,17 +14,17 @@ import visitor.*;
 public class Identificacion extends DefaultVisitor {
 
 	private GestorErrores gestorErrores;
-	
+
 	//Conjuntos auxiliares
 	private Map<String, DefFuncion> funciones = new HashMap<String, DefFuncion>();
 	private ContextMap<String, DefVariable> variables = new ContextMap<String, DefVariable>();
 	private Map<String, DefEstructura> estructuras = new HashMap<String, DefEstructura>();
-	
+
 	public Identificacion(GestorErrores gestor) {
 		this.gestorErrores = gestor;
 	}
 
-	
+
 	/**
 	 * Nodo DefVariable
 	 * 
@@ -35,14 +35,14 @@ public class Identificacion extends DefaultVisitor {
 	 * class DefVariable { Tipo tipo;  String nombre; }
 	 */
 	public Object visit(DefVariable node, Object param) {
-		
+
 		DefVariable definicion = variables.getFromTop(node.getNombre());
 		predicado(definicion == null, "Variable ya definida: " + node.getNombre(), node.getStart());
 		variables.put(node.getNombre(), node);
 		return super.visit(node, param);
 	}
 
-	
+
 	/**
 	 * Nodo DefFuncion
 	 * 
@@ -59,19 +59,19 @@ public class Identificacion extends DefaultVisitor {
 	 * 
 	 * class DefFuncion { String nombre;  List<DefParametro> parametros;  Retorno retorno;  Cuerpo cuerpo; }
 	 */
-public Object visit(DefFuncion node, Object param) {
+	public Object visit(DefFuncion node, Object param) {
 		DefFuncion definicion = funciones.get(node.getNombre());
 		predicado(definicion == null, "Función ya definida: " + node.getNombre(), node.getStart());
 		funciones.put(node.getNombre(), node);
-		
+
 		variables.set();
 		super.visit(node, funciones.get(node.getNombre()));
 		variables.reset();
-		
+
 		return null;
 	}
-	
-	
+
+
 
 	/**
 	 * Nodo DefEstructura
@@ -88,23 +88,23 @@ public Object visit(DefFuncion node, Object param) {
 	public Object visit(DefEstructura node, Object param) {
 		DefEstructura definicion = estructuras.get(node.getNombre());
 		predicado(definicion == null, "Estructura ya definida: " + node.getNombre(), node.getStart());
-		
-	
+
+
 		// DefCampo--> Predicado: campos[nombre] == null | Reglas Semánticas: campos[nombre] = defCamp
 		Map<String, DefCampo> campos = new HashMap<String, DefCampo>();
 		for(DefCampo campo:node.getDefcampo()) {
 			DefCampo defCampo = campos.get(campo.getNombre());
 			predicado(defCampo == null, "Campo ya definido: " + campo.getNombre(), campo.getStart());
-			
+
 			campos.put(campo.getNombre(), campo);
 		}
-		
+
 		estructuras.put(node.getNombre(), node);
-		
+
 		return super.visit(node, param);
 	}
-	
-	
+
+
 	/**
 	 * Nodo IdentType
 	 * 
@@ -117,11 +117,11 @@ public Object visit(DefFuncion node, Object param) {
 	public Object visit(IdentType node, Object param) {
 		DefEstructura definicion = estructuras.get(node.getNombre());
 		predicado(definicion != null,"Estructura no definida: " + node.getNombre(), node.getStart());
-		
+
 		node.setDefinicion(definicion);
 		return super.visit(node, param);
 	}
-	
+
 	/**
 	 * Nodo Return
 	 * 
@@ -134,8 +134,8 @@ public Object visit(DefFuncion node, Object param) {
 		node.setFuncion((DefFuncion) param);
 		return super.visit(node, param);
 	}
-	
-	
+
+
 	/**
 	 * Nodo LlamadaFuncionSentencia
 	 * 
@@ -152,7 +152,7 @@ public Object visit(DefFuncion node, Object param) {
 		node.setDefFuncion(definicion); 
 		return super.visit(node, param);
 	}
-	
+
 
 	/**
 	 * Nodo Invocacion
@@ -166,13 +166,13 @@ public Object visit(DefFuncion node, Object param) {
 	public Object visit(Invocacion node, Object param) {
 		DefFuncion definicion = funciones.get(node.getNombre());
 		predicado(definicion != null,"Funcion no definida: " + node.getNombre(), node.getStart());
-		
+
 		node.setDefFuncion(definicion); // Enlazar referencia con definición
 
 		return super.visit(node, param);
 	}
-	
-	
+
+
 	/**
 	 * Nodo Variable
 	 * 
@@ -189,8 +189,8 @@ public Object visit(DefFuncion node, Object param) {
 		return null;
 	}
 
-	
-	
+
+
 	/**
 	 * Método auxiliar opcional para ayudar a implementar los predicados de la Gramática Atribuida.
 	 * 
