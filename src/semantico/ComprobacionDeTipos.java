@@ -146,7 +146,7 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 		
 		// class DefFuncion { String nombre;  List<DefParametro> parametros;  Retorno retorno;  Cuerpo cuerpo; }
 		public Object visit(DefFuncion node, Object param) {
-			super.visit(node, node.getRetorno().getTipo());
+			super.visit(node, param);
 			return null;
 		}
 
@@ -170,14 +170,17 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 		//	class Return { Expresion expresion; }
 		public Object visit(Return node, Object param) {
 			super.visit(node, param);
-			if(param != null && node.getExpresion() !=null)
-				predicado(node.getExpresion().getTipo().getClass() == param.getClass(), 
+			
+			if(node.getFuncion().getRetorno().getTipo() != null && node.getExpresion() !=null)
+				predicado(node.getExpresion().getTipo().getClass() == node.getFuncion().getRetorno().getTipo().getClass(), 
 					"Error. Return - Retorno de la función no es igual que retorno de cuerpo",node.getStart());
-			else if(param == null )
+			
+			else if(node.getFuncion().getRetorno().getTipo() == null )
 				predicado(node.getExpresion() == null, 
 					"Error. Return - No debe tener expresión en funciones void",node.getStart());
+			
 			else if(node.getExpresion() == null) 
-				predicado(param ==null, 
+				predicado(node.getFuncion().getRetorno().getTipo() ==null, 
 					"Error. Return - Debería retornar algún valor",node.getStart());
 			
 
