@@ -153,7 +153,8 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 		//class Retorno { Tipo tipo; }
 		public Object visit(Retorno node, Object param) {
 			if(node.getTipo() != null) {
-				predicado(node.getTipo().getClass() != IdentType.class, "Error. Retorno - No es de tipo simple",node.getStart());
+				predicado(node.getTipo().getClass() != IdentType.class 
+						&& node.getTipo().getClass() != ArrayType.class, "Error. Retorno - No es de tipo simple",node.getStart());
 
 			}
 			return null;
