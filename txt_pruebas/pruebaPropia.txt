@@ -5,11 +5,5 @@ struct Pareja {
 
 var pareja:[2]int;
 var pareja2:[2]int;
-main(){
-	
-	pareja[0] = 2;
-  
-  print  pareja[0];
-  
-}
+
 
